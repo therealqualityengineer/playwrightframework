@@ -28,7 +28,7 @@ export default defineConfig({
 
         trace: 'on-first-retry',
 
-        baseURL: process.env.BASE_URL,
+        baseURL: process.env.BASE_URL || 'https://ctmsqa.contingenttalentmanagement.com/wfportal/',
     },
 
     projects: [
