@@ -1,0 +1,4 @@
+Created Temp ID:  258122
+Client name used for client creation: REIZIXKDER
+Created Client ID:  56152
+Created Order ID from API: 61174

@@ -1,0 +1,2 @@
+Client name used for client creation: HKSCVDK
+Created Client ID:  56148
