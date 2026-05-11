@@ -10,7 +10,9 @@
     "test:stage": "NODE_ENV=stage npm run test",
     "smoke": "playwright test --grep @smoke",
     "regression": "playwright test --grep @regression",
-    "api": "playwright test --grep @api"
+    "api": "playwright test --grep @api",
+    "allure": "allure serve allure-results",
+    "allure:clear": "rm -rf allure-report allure-results"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +21,8 @@
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.2",
-    "allure-playwright": "^3.7.2"
+    "allure-playwright": "^3.7.2",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
     "dotenv": "^17.4.2"

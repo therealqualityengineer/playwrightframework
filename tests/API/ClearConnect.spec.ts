@@ -23,18 +23,10 @@ test('@api Verify API method getTemps ', async ({ loginPage, tempPage, page, cle
     expect(tempId).toBe(sharedData.tempId);
 });
 
-test('@api Verify API method insertOrder', async ({ request, loginPage, tempPage, page, clientPage, clearConnectAPI }) =>
+test('@api Verify API method insertOrder', async ({ loginPage, clientPage, clearConnectAPI }) =>
 {
     await loginPage.login(users.validUser4.username, users.validUser4.password);
     await loginPage.verifySuccessfulLogin();
-    await loginPage.navigateToPage('tempManagerClassicView.cfm');
-    await page.locator('a[href="/wfportal/tempview.cfm?newtemp=yes"]').click();
-    await expect(page).toHaveURL('tempview.cfm?newtemp=yes');
-    await tempPage.createNewTemp
-    ({
-        firstname : RandomUtil.generateRandomString(7),
-        lastname : RandomUtil.generateRandomString(7),
-    });
     await loginPage.navigateToPage('clientmanager.cfm');
     await clientPage.createNewClient({
         clientname: RandomUtil.generateRandomString(10),
@@ -55,6 +47,7 @@ test('@api Verify API method insertOrder', async ({ request, loginPage, tempPage
         shiftNum: '1',
         resultType: 'json'
     });
+    console.log('API Response for insertOrder:', responseBody);
     expect(responseBody[0]?.orderId).toBeTruthy();
     sharedData.orderId = responseBody[0]?.orderId;
     console.log('Created Order ID from API:', sharedData.orderId);

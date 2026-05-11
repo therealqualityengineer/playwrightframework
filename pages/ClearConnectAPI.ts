@@ -14,6 +14,7 @@ type insertOrderPayload =
         shiftEndTime? : string; 
         shiftType? : string;
         shiftNum? : string;
+        filledBy? : string;
         resultType? : string;
     };
 
@@ -70,6 +71,7 @@ export class ClearConnectAPI
                 shiftEndTime: insertOrderData.shiftEndTime ?? '15:00',
                 shiftType: insertOrderData.shiftType ?? 'Regular',
                 shiftNum: insertOrderData.shiftNum ?? '1',
+                filledBy: insertOrderData.filledBy ?? '',
                 resultType: insertOrderData.resultType ?? 'json'
             }
         });
