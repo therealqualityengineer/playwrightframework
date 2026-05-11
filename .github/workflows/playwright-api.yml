@@ -2,7 +2,8 @@ name: API Tests
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 5:30 AM IST
+    # Daily 5:30 AM IST
+    - cron: '0 0 * * *'
 
   workflow_dispatch:
 
@@ -11,6 +12,9 @@ jobs:
   api:
 
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     steps:
 
@@ -29,15 +33,24 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - name: Clean Old Allure Results
+        run: rm -rf allure-results allure-results-api allure-history-api
+
       - name: Run API Tests
         run: npm run api
         continue-on-error: true
+
+      - name: Prepare API Allure Results
+        if: always()
+        run: |
+          mkdir -p allure-results-api
+          cp -r allure-results/* allure-results-api/ || true
 
       - name: Generate API Allure Report
         if: always()
         uses: simple-elf/allure-report-action@master
         with:
-          allure_results: allure-results
+          allure_results: allure-results-api
           allure_history: allure-history-api
           keep_reports: 20
 
