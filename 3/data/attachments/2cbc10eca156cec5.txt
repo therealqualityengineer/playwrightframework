@@ -1,5 +1,0 @@
-Created Temp ID:  258037
-Client name used for client creation: ZJOZQSYSUJ
-Created Client ID:  56065
-Client name used for order creation: ZJOZQSYSUJ
-Created order number: 61130

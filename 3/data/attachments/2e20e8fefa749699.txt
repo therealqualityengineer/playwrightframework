@@ -1,2 +1,0 @@
-Client name used for client creation: ULSWNJX
-Created Client ID:  56067
