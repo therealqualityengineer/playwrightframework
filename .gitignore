@@ -46,8 +46,9 @@ jspm_packages/
 # Optional eslint cache
 .eslintcache
 
-# Microbundle cache
-.rpt2_cache/
+# Environment variables
+.env*
+!.env.example
 .rts2_cache_cjs/
 .rts2_cache_es/
 .rts2_cache_umd/

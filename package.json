@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "test:qa": "NODE_ENV=qa npm run test",
+    "test:uat": "NODE_ENV=uat npm run test",
+    "test:stage": "NODE_ENV=stage npm run test",
     "smoke": "playwright test --grep @smoke",
     "regression": "playwright test --grep @regression",
     "api": "playwright test --grep @api"
@@ -17,5 +20,8 @@
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.2",
     "allure-playwright": "^3.7.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }

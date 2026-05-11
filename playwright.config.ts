@@ -1,4 +1,7 @@
 import { defineConfig } from '@playwright/test';
+import { config } from 'dotenv';
+
+config({ path: `.env.${process.env.NODE_ENV || 'qa'}` });
 
 export default defineConfig({
 
@@ -25,7 +28,7 @@ export default defineConfig({
 
         trace: 'on-first-retry',
 
-        baseURL: 'https://ctmsqa.contingenttalentmanagement.com/wfportal/'
+        baseURL: process.env.BASE_URL,
     },
 
     projects: [
