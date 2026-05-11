@@ -1,0 +1,22 @@
+{
+    "defaultUser": {
+        "username": "qaengineer",
+        "password": "Therealqaengineer@99"
+    },
+    "validUser1": {
+        "username": "testuser_01",
+        "password": "Therealqaengineer@99"
+    },
+    "validUser2": {
+        "username": "testuser_02",
+        "password": "Therealqaengineer@99"
+    },
+    "validUser3": {
+        "username": "testuser_03",
+        "password": "Therealqaengineer@99"
+    },
+    "validUser4": {
+        "username": "testuser_04",
+        "password": "Therealqaengineer@99"
+    }
+}
