@@ -4,7 +4,7 @@ const users = require('../../../test-data/users.json');
 
 test.setTimeout(180_000);
 
-test('create a new order', async ({ page, loginPage, tempPage, clientPage, orderPage }) =>
+test('@regression Create a new order', async ({ page, loginPage, tempPage, clientPage, orderPage }) =>
 {
     await loginPage.login(users.validUser3.username, users.validUser3.password);
     await loginPage.verifySuccessfulLogin();

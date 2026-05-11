@@ -1,7 +1,7 @@
 import { test, expect } from '../../../fixtures/testFixture';
 import { RandomUtil } from '../../../utils/RandomUtil';
 
-test('create default new temp', async ({ page, loginPage, tempPage }) =>
+test('@smoke Create default new temp', async ({ page, loginPage, tempPage }) =>
 {
     await loginPage.defaultLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');
@@ -14,7 +14,7 @@ test('create default new temp', async ({ page, loginPage, tempPage }) =>
     });
 });
 
-test('create new temp with custom address', async ({ page, loginPage, tempPage }) =>
+test('@regression Create new temp with custom address', async ({ page, loginPage, tempPage }) =>
 {
     await loginPage.defaultLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');
@@ -31,7 +31,7 @@ test('create new temp with custom address', async ({ page, loginPage, tempPage }
     });
 });
 
-test('Enable temp flat pay and bill', async ({ page, loginPage, tempPage }) =>
+test('@regression Enable temp flat pay and bill', async ({ page, loginPage, tempPage }) =>
 {
     await loginPage.defaultLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');

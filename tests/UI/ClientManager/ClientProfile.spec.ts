@@ -5,7 +5,7 @@ import { multipleClientData } from '../../../test-data/MultipleClientData';
 
 test.setTimeout(120_000);
 
-test('Create new client with mandatory fields', async ({ loginPage, clientPage }) => {
+test('@smoke Create new client with mandatory fields', async ({ loginPage, clientPage }) => {
     await loginPage.login(users.validUser2.username, users.validUser2.password);
     await loginPage.verifySuccessfulLogin();
     await loginPage.navigateToPage('clientmanager.cfm');
@@ -16,7 +16,7 @@ test('Create new client with mandatory fields', async ({ loginPage, clientPage }
 });
 
 multipleClientData.forEach((data) => {
-    test(`Create new client with multiple data for ${data.city}, ${data.state}`, async ({ loginPage, clientPage }) => {
+    test(`@regression Create new client with multiple data for ${data.city}, ${data.state}`, async ({ loginPage, clientPage }) => {
         await loginPage.login(users.validUser2.username, users.validUser2.password);
         await loginPage.verifySuccessfulLogin();
         await loginPage.navigateToPage('clientmanager.cfm');

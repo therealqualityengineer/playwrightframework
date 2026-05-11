@@ -5,7 +5,7 @@ const users = require('../../test-data/users.json');
 
 test.setTimeout(120_000);
 
-test('Verify API method getTemps ', async ({ loginPage, tempPage, page, clearConnectAPI }) =>
+test('@api Verify API method getTemps ', async ({ loginPage, tempPage, page, clearConnectAPI }) =>
 {
     await loginPage.login(users.validUser4.username, users.validUser4.password);
     await loginPage.verifySuccessfulLogin();
@@ -23,7 +23,7 @@ test('Verify API method getTemps ', async ({ loginPage, tempPage, page, clearCon
     expect(tempId).toBe(sharedData.tempId);
 });
 
-test('Verify API method insertOrder', async ({ request, loginPage, tempPage, page, clientPage, clearConnectAPI }) =>
+test('@api Verify API method insertOrder', async ({ request, loginPage, tempPage, page, clientPage, clearConnectAPI }) =>
 {
     await loginPage.login(users.validUser4.username, users.validUser4.password);
     await loginPage.verifySuccessfulLogin();

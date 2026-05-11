@@ -1,7 +1,7 @@
 import { test, expect } from '../../../fixtures/testFixture';
 const users = require('../../../test-data/users.json');
 
-test('Verify user able to login successfully parallel', async ({ page }) => {
+test('@smoke Verify user able to login successfully parallel', async ({ page }) => {
 
     await page.goto('login.cfm');
     await page.locator('#loginusername').fill(users.validUser1.username);
