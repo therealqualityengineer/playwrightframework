@@ -4,6 +4,7 @@ import { LoginPage } from '../pages/LoginPage';
 import { TempPage } from '../pages/TempPage';
 import { ClientPage } from '../pages/ClientPage';
 import { OrderPage } from '../pages/OrderPage';
+import { ClearConnectAPI } from '../pages/ClearConnectAPI';
 
 type MyFixtures = {
 
@@ -14,6 +15,8 @@ type MyFixtures = {
     clientPage: ClientPage;
 
     orderPage: OrderPage;
+
+    clearConnectAPI: ClearConnectAPI;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -36,6 +39,10 @@ export const test = base.extend<MyFixtures>({
     orderPage: async ({ page }, use) => {
 
         await use(new OrderPage(page));
+    },
+
+    clearConnectAPI: async ({ request }, use) => {
+        await use(new ClearConnectAPI(request));
     }
 });
 
