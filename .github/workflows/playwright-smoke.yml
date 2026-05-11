@@ -2,7 +2,8 @@ name: Smoke Tests
 
 on:
   schedule:
-    - cron: '0 3 * * *' # 8:30 AM IST
+    # Daily 8:30 AM IST
+    - cron: '0 3 * * *'
 
   workflow_dispatch:
 
@@ -11,6 +12,9 @@ jobs:
   smoke:
 
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     steps:
 
@@ -29,15 +33,24 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - name: Clean Old Allure Results
+        run: rm -rf allure-results allure-results-smoke allure-history-smoke
+
       - name: Run Smoke Tests
         run: npm run smoke
         continue-on-error: true
+
+      - name: Prepare Smoke Allure Results
+        if: always()
+        run: |
+          mkdir -p allure-results-smoke
+          cp -r allure-results/* allure-results-smoke/ || true
 
       - name: Generate Smoke Allure Report
         if: always()
         uses: simple-elf/allure-report-action@master
         with:
-          allure_results: allure-results
+          allure_results: allure-results-smoke
           allure_history: allure-history-smoke
           keep_reports: 20
 
