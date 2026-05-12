@@ -1,1 +1,0 @@
-{"2b6572d1731e86eb8eeba63478ae8832:5bd835b0d6b1d4ada3b9f0db936e82c8":{"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"items":[{"uid":"a7d7672d9471ad8f","reportUrl":"https://therealqualityengineer.github.io/PlaywrightFramework/2/#testresult/a7d7672d9471ad8f","status":"passed","time":{"start":1778572915528,"stop":1778572926843,"duration":11315}}]}}

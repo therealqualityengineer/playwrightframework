@@ -1,4 +1,0 @@
-Client name used for client creation: DUVBWRMRPI
-Created Client ID:  56208
-Created Order ID from API: 61200
-Retrieved Order ID from API: 61200
