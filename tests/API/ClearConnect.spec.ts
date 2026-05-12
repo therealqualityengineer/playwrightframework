@@ -52,3 +52,19 @@ test('@api Verify API method insertOrder', async ({ loginPage, clientPage, clear
     sharedData.orderId = responseBody[0]?.orderId;
     console.log('Created Order ID from API:', sharedData.orderId);
 });
+
+test('@api Verify API method getClients', async ({ loginPage, clientPage, clearConnectAPI }) =>
+{
+    await loginPage.login(users.validUser4.username, users.validUser4.password);
+    await loginPage.verifySuccessfulLogin();
+    await loginPage.navigateToPage('clientmanager.cfm');
+    await clientPage.createNewClient({
+        clientname: RandomUtil.generateRandomString(10),
+        quickbooksid: RandomUtil.generateRandomAlphaNumeric(10),
+    });
+    expect(sharedData.clientId).toMatch(/^\d+$/);
+    const response = await clearConnectAPI.getClients(sharedData.clientId);
+    const clientId = response[0]?.clientId;
+    console.log('Retrieved Client ID from API:', clientId);
+    expect(clientId).toBe(sharedData.clientId);
+});
