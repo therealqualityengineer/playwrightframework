@@ -1,2 +1,0 @@
-Client name used for client creation: PJRKGUX
-Created Client ID:  56194

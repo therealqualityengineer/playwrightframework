@@ -1,5 +1,0 @@
-Created Temp ID:  258158
-Client name used for client creation: CUEWYEUTBR
-Created Client ID:  56191
-Client name used for order creation: CUEWYEUTBR
-Created order number: 61188

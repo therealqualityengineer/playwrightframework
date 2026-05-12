@@ -1,3 +1,0 @@
-Client name used for client creation: DGIIFOFKMN
-Created Client ID:  56195
-Retrieved Client ID from API: 56195

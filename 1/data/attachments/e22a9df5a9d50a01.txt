@@ -1,2 +1,0 @@
-Created Temp ID:  258159
-Retrieved Temp ID from API: 258159

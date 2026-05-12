@@ -1,2 +1,0 @@
-Client name used for client creation: CQHBTAO
-Created Client ID:  56190
