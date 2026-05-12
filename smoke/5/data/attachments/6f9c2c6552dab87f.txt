@@ -1,2 +1,0 @@
-Client name used for client creation: TOKDDAW
-Created Client ID:  56162
