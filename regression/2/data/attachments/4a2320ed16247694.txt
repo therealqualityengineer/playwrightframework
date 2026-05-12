@@ -1,5 +1,0 @@
-Created Temp ID:  258118
-Client name used for client creation: PDILWSVPQG
-Created Client ID:  56150
-Client name used for order creation: PDILWSVPQG
-Created order number: 61173

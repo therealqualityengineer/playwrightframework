@@ -1,2 +1,0 @@
-Client name used for client creation: HCTPDBE
-Created Client ID:  56093

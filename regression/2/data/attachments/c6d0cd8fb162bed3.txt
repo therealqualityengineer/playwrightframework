@@ -1,2 +1,0 @@
-Client name used for client creation: LLUXEGN
-Created Client ID:  56147

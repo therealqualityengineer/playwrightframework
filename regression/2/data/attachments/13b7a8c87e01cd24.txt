@@ -1,4 +1,0 @@
-Created Temp ID:  258123
-Client name used for client creation: NOHCODLQCD
-Created Client ID:  56153
-Created Order ID from API: 61175

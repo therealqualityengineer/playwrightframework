@@ -1,2 +1,0 @@
-Client name used for client creation: BNIHGYC
-Created Client ID:  56151

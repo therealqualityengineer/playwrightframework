@@ -1,4 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","5454","@smoke Create new client with mandatory fields","chromium","Mon May 11 17:54:07 UTC 2026","passed","Mon May 11 17:54:13 UTC 2026","","UI/ClientManager/ClientProfile.spec.ts","",""
-"","10744","@smoke Create default new temp","chromium","Mon May 11 17:54:07 UTC 2026","passed","Mon May 11 17:54:18 UTC 2026","","UI/TempManager/TempProfile.spec.ts","",""
-"","2326","@smoke Verify user able to login successfully parallel","chromium","Mon May 11 17:54:07 UTC 2026","passed","Mon May 11 17:54:10 UTC 2026","","UI/Login/Login.spec.ts","",""
