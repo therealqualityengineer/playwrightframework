@@ -1,1 +1,0 @@
-[{"uid":"8a85ef98656aaf96","name":"@api Verify API method getTemps","time":{"start":1778557613875,"stop":1778557640351,"duration":26476},"status":"passed","severity":"normal"},{"uid":"54d2f50c899b94c2","name":"@api Verify API method insertOrder","time":{"start":1778557640552,"stop":1778557651615,"duration":11063},"status":"passed","severity":"normal"}]
