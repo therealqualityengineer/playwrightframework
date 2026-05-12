@@ -1,5 +1,6 @@
 import { BasePage } from './BasePage';
 import { sharedData } from '../test-data/sharedData';
+import { expect } from '@playwright/test';
 
 type TempData = {
     firstname? : string;
@@ -26,7 +27,13 @@ export class TempPage extends BasePage
     private speciality = "#specstxt";
     private editButton = "input[name='edit'][value='edit']";
     private adjustmentLink = "a[href*='temp.adjustments.view']";
-    private payLink = "a[text()='Pay']";
+    private payLink = "[href*='/wfportal/temppay.cfm?tempid']";
+    private temppayedit = "[name='temppayedit']";
+    private flatRadioButton = "[name='howpay'][value='flat']";
+    private payflat = "[name='payflat']";
+    private billflat = "[name='billflat']";
+    private temppayupdate = "[name='temppayupdate']";
+    private flatPayBillEnabled = "//b[contains(text(),'Flat Pay')]/ancestor::td/following-sibling::td//b[contains(text(),'Enabled')]";
 
     private certificationSelect(certification: string) 
     {
@@ -66,9 +73,16 @@ export class TempPage extends BasePage
         sharedData.tempId = tempId;
     }
 
-    async enableFlatPayBill()
+    async enableFlatPayBill(flatPay : number, flatBill : number)
     {
         await this.Click(this.payLink, 'locator');
+        await this.Click(this.temppayedit, 'locator');
+        await this.Click(this.flatRadioButton, 'locator');
+        await this.TypeText(this.payflat, flatPay.toString(), 'locator');
+        await this.TypeText(this.billflat, flatBill.toString(), 'locator');
+        await this.Click(this.temppayupdate, 'locator');
+        const flatPayEnabled = await this.page.locator(this.flatPayBillEnabled);
+        await expect(flatPayEnabled).toBeVisible();
     }
 }
 

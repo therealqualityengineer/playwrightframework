@@ -53,7 +53,7 @@ test('@api Verify API method insertOrder', async ({ loginPage, clientPage, clear
     console.log('Created Order ID from API:', sharedData.orderId);
 });
 
-test.only('@api Verify API method getOrders', async ({ loginPage, clientPage, clearConnectAPI }) =>
+test('@api Verify API method getOrders', async ({ loginPage, clientPage, clearConnectAPI }) =>
 {
     await loginPage.login(users.validUser4.username, users.validUser4.password);
     await loginPage.verifySuccessfulLogin();

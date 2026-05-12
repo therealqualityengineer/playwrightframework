@@ -1,6 +1,8 @@
 import { test, expect } from '../../../fixtures/testFixture';
 import { RandomUtil } from '../../../utils/RandomUtil';
 
+test.setTimeout(120_000);
+
 test('@smoke Create default new temp', async ({ page, loginPage, tempPage }) =>
 {
     await loginPage.defaultLogin();
@@ -42,4 +44,5 @@ test('@regression Enable temp flat pay and bill', async ({ page, loginPage, temp
         firstname : RandomUtil.generateRandomString(7),
         lastname : RandomUtil.generateRandomString(7),
     });
+    await tempPage.enableFlatPayBill(55,125);
 });
