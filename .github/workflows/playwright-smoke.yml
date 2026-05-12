@@ -53,7 +53,6 @@ jobs:
           allure_results: allure-results-smoke
           allure_history: allure-history-smoke
           keep_reports: 20
-          subfolder: smoke
 
       - name: Deploy Smoke Report
         if: always()
@@ -62,3 +61,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./allure-history-smoke
+          destination_dir: smoke
