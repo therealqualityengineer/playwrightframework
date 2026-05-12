@@ -63,6 +63,19 @@ export class ClearConnectAPI
         return await response.json();
     }
 
+    async getOrders(OrderId: string)
+    {
+        const response = await this.request.get(
+            `${this.BASE_URL}?action=getOrders&OrderId=${OrderId}&resultType=json`,
+        {
+        headers: {
+            ...this.headers(),
+        },
+        });
+        expect(response.status()).toBe(200);
+        return await response.json();
+    }
+
     async insertOrder(insertOrderData : insertOrderPayload)
     {
         const response = await this.request.get(

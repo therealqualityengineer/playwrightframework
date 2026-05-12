@@ -53,6 +53,40 @@ test('@api Verify API method insertOrder', async ({ loginPage, clientPage, clear
     console.log('Created Order ID from API:', sharedData.orderId);
 });
 
+test.only('@api Verify API method getOrders', async ({ loginPage, clientPage, clearConnectAPI }) =>
+{
+    await loginPage.login(users.validUser4.username, users.validUser4.password);
+    await loginPage.verifySuccessfulLogin();
+    await loginPage.navigateToPage('clientmanager.cfm');
+    await clientPage.createNewClient({
+        clientname: RandomUtil.generateRandomString(10),
+        quickbooksid: RandomUtil.generateRandomAlphaNumeric(10),
+    });
+    expect(sharedData.clientId).toMatch(/^\d+$/);
+    const insertResponse = await clearConnectAPI.insertOrder({
+        customerID: sharedData.clientId,
+        status: 'Open',
+        userId: '1',
+        nursetype: 'RN',
+        specialty: 'ER',
+        jobDateStart: RandomUtil.getDate(0),
+        jobDateEnd: RandomUtil.getDate(0),
+        shiftStartTime: '07:00',
+        shiftEndTime: '15:00',
+        shiftType: 'Regular',
+        shiftNum: '1',
+        resultType: 'json'
+    });
+    expect(insertResponse[0]?.orderId).toBeTruthy();
+    sharedData.orderId = insertResponse[0]?.orderId;
+    console.log('Created Order ID from API:', sharedData.orderId);
+
+    const orderResponse = await clearConnectAPI.getOrders(sharedData.orderId);
+    const orderId = orderResponse[0]?.orderId;
+    console.log('Retrieved Order ID from API:', orderId);
+    expect(orderId).toBe(sharedData.orderId);
+});
+
 test('@api Verify API method getClients', async ({ loginPage, clientPage, clearConnectAPI }) =>
 {
     await loginPage.login(users.validUser4.username, users.validUser4.password);
