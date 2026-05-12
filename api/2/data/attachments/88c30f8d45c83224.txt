@@ -1,0 +1,11 @@
+Client name used for client creation: HLRGWMGQRT
+Created Client ID:  56164
+API Response for insertOrder: [
+  {
+    success: '1',
+    orderId: '61176',
+    message: 'New order record inserted successfully.',
+    integrationOrderId: ''
+  }
+]
+Created Order ID from API: 61176

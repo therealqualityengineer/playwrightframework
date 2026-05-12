@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","26476","@api Verify API method getTemps","chromium","Tue May 12 03:46:53 UTC 2026","passed","Tue May 12 03:47:20 UTC 2026","","API/ClearConnect.spec.ts","",""
+"","11063","@api Verify API method insertOrder","chromium","Tue May 12 03:47:20 UTC 2026","passed","Tue May 12 03:47:31 UTC 2026","","API/ClearConnect.spec.ts","",""
