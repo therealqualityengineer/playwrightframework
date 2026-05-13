@@ -10,7 +10,7 @@ test('@api Verify API method getTemps ', async ({ loginPage, tempPage, page, cle
     await loginPage.login(users.validUser4.username, users.validUser4.password);
     await loginPage.verifySuccessfulLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');
-    await page.locator('a[href="/wfportal/tempview.cfm?newtemp=yes"]').click();
+    await tempPage.navigateToCreateTemp();
     await expect(page).toHaveURL('tempview.cfm?newtemp=yes');
     await tempPage.createNewTemp
     ({
