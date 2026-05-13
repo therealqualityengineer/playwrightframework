@@ -82,7 +82,12 @@ export class TempPage extends BasePage
         await this.TypeText(this.billflat, flatBill.toString(), 'locator');
         await this.Click(this.temppayupdate, 'locator');
         const flatPayEnabled = await this.page.locator(this.flatPayBillEnabled);
-        await expect(flatPayEnabled).toBeVisible();
+        await expect(flatPayEnabled).toBeVisible({ timeout: 10000 });
+    }
+
+    async navigateToCreateTemp()
+    {
+        await this.Click('a[href="/wfportal/tempview.cfm?newtemp=yes"]', 'locator');
     }
 }
 

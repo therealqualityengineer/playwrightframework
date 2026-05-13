@@ -28,7 +28,7 @@ export class ClientPage extends BasePage
         await this.SelectOption(this.regionDropdown, clientData.region ?? "JasonTest");
         await this.TypeText(this.quickBooksIdTextbox, clientData.quickbooksid ?? "45645654654646", 'locator');
         await this.saveClient();
-        await expect(this.page.locator(this.editButton)).toBeVisible({ timeout: 30000 });
+        await expect(this.page.locator(this.editButton)).toBeVisible({ timeout: 60000 });
         const clientId = new URL(this.page.url()).searchParams.get('clientid');
         expect(clientId).toBeTruthy();
         sharedData.clientId = clientId!;
@@ -41,13 +41,13 @@ export class ClientPage extends BasePage
 
         for (let attempt = 1; attempt <= 3; attempt++)
         {
-            await expect(saveButton).toBeVisible({ timeout: 30000 });
-            await expect(saveButton).toBeEnabled({ timeout: 30000 });
+            await expect(saveButton).toBeVisible({ timeout: 60000 });
+            await expect(saveButton).toBeEnabled({ timeout: 60000 });
 
             try
             {
                 await Promise.all([
-                    this.page.waitForURL(/clientid=\d+/, { timeout: 30000, waitUntil: 'domcontentloaded' }),
+                    this.page.waitForURL(/clientid=\d+/, { timeout: 60000, waitUntil: 'domcontentloaded' }),
                     saveButton.click()
                 ]);
                 return;

@@ -10,7 +10,7 @@ test('@regression Reconcile filled order', async ({ page, loginPage, tempPage, c
     await loginPage.login(users.validUser5.username, users.validUser5.password);
     await loginPage.verifySuccessfulLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');
-    await page.locator('a[href="/wfportal/tempview.cfm?newtemp=yes"]').click();
+    await tempPage.navigateToCreateTemp();
     await expect(page).toHaveURL('tempview.cfm?newtemp=yes');
     await tempPage.createNewTemp
     ({

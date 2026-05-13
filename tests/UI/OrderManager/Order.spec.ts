@@ -10,7 +10,7 @@ test('@regression Create a new order', async ({ page, loginPage, tempPage, clien
     await loginPage.login(users.validUser3.username, users.validUser3.password);
     await loginPage.verifySuccessfulLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');
-    await page.locator('a[href="/wfportal/tempview.cfm?newtemp=yes"]').click();
+    await tempPage.navigateToCreateTemp();
     await expect(page).toHaveURL('tempview.cfm?newtemp=yes');
     await tempPage.createNewTemp
     ({
@@ -32,7 +32,7 @@ test('@regression Create a filled order', async ({ page, loginPage, tempPage, cl
     await loginPage.login(users.validUser3.username, users.validUser3.password);
     await loginPage.verifySuccessfulLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');
-    await page.locator('a[href="/wfportal/tempview.cfm?newtemp=yes"]').click();
+    await tempPage.navigateToCreateTemp();
     await expect(page).toHaveURL('tempview.cfm?newtemp=yes');
     await tempPage.createNewTemp
     ({
@@ -70,7 +70,7 @@ test('@regression Reconcile filled order', async ({ page, loginPage, tempPage, c
     await loginPage.login(users.validUser3.username, users.validUser3.password);
     await loginPage.verifySuccessfulLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');
-    await page.locator('a[href="/wfportal/tempview.cfm?newtemp=yes"]').click();
+    await tempPage.navigateToCreateTemp();
     await expect(page).toHaveURL('tempview.cfm?newtemp=yes');
     await tempPage.createNewTemp
     ({

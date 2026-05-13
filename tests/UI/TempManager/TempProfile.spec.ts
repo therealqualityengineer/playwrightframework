@@ -7,7 +7,7 @@ test('@smoke Create default new temp', async ({ page, loginPage, tempPage }) =>
 {
     await loginPage.defaultLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');
-    await page.locator('a[href="/wfportal/tempview.cfm?newtemp=yes"]').click();
+    await tempPage.navigateToCreateTemp();
     await expect(page).toHaveURL('tempview.cfm?newtemp=yes');
     await tempPage.createNewTemp
     ({
@@ -20,7 +20,7 @@ test('@regression Create new temp with custom address', async ({ page, loginPage
 {
     await loginPage.defaultLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');
-    await page.locator('a[href="/wfportal/tempview.cfm?newtemp=yes"]').click();
+    await tempPage.navigateToCreateTemp();
     await expect(page).toHaveURL('tempview.cfm?newtemp=yes');
     await tempPage.createNewTemp
     ({
@@ -37,7 +37,7 @@ test('@regression Enable temp flat pay and bill', async ({ page, loginPage, temp
 {
     await loginPage.defaultLogin();
     await loginPage.navigateToPage('tempManagerClassicView.cfm');
-    await page.locator('a[href="/wfportal/tempview.cfm?newtemp=yes"]').click();
+    await tempPage.navigateToCreateTemp();
     await expect(page).toHaveURL('tempview.cfm?newtemp=yes');
     await tempPage.createNewTemp
     ({
