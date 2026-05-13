@@ -1,4 +1,0 @@
-Client name used for client creation: VUGFMOVZGF
-Created Client ID:  56209
-Created Order ID from API: 61201
-Retrieved Order ID from API: 61201
