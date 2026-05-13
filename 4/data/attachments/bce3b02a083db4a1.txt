@@ -1,3 +1,0 @@
-Client name used for client creation: CFIGTPSDEW
-Created Client ID:  56330
-Retrieved Client ID from API: 56330

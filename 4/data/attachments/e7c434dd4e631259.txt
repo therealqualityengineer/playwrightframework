@@ -1,4 +1,0 @@
-Client name used for client creation: ZPTSUJNUGM
-Created Client ID:  56328
-Created Order ID from API: 61258
-Retrieved Order ID from API: 61258

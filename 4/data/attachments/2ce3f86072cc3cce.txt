@@ -1,4 +1,0 @@
-Created Temp ID:  258278
-Client name used for client creation: VVPIYPEULL
-Created Client ID:  56331
-Created Order ID from API: 61260
