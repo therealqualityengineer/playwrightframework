@@ -4,7 +4,6 @@ import users from '../test-data/users.json'
 
 export class LoginPage extends BasePage
 {
-
     async navigateToLoginPage()
     {
         await this.page.goto('login.cfm');
@@ -49,6 +48,11 @@ export class LoginPage extends BasePage
         await this.enterUserName(users.defaultUser.username);
         await this.enterPassword(users.defaultUser.password);
         await this.submitButton();
+    }
+
+    async verifyQuickLinkText(expectedQuickLinkText : any)
+    {
+        await expect(this.page.getByText(expectedQuickLinkText).nth(0)).toBeVisible({ timeout: 10000 });
     }
 
 }
