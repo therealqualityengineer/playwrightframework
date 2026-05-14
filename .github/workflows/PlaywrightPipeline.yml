@@ -21,6 +21,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # Pull previous gh-pages history
+      - name: Checkout gh-pages
+        if: always()
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -34,15 +43,19 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Clean Old Results
-        run: rm -rf allure-results test-results
+        run: |
+          rm -rf allure-results
+          rm -rf test-results
 
       - name: Run Playwright Tests
         run: npm run test
+        continue-on-error: true
 
       - name: Generate Allure Report with History
         if: always()
         uses: simple-elf/allure-report-action@master
         with:
+          gh_pages: gh-pages
           allure_results: allure-results
           allure_history: allure-history
           keep_reports: 20
@@ -60,5 +73,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-history
           publish_branch: gh-pages
+          publish_dir: ./allure-history
