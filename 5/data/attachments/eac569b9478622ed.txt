@@ -1,3 +1,0 @@
-Client name used for client creation: UXKSHEHYMS
-Created Client ID:  56341
-Retrieved Client ID from API: 56341

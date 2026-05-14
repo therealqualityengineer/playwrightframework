@@ -1,4 +1,0 @@
-Client name used for client creation: ESFXPRUPDA
-Created Client ID:  56339
-Created Order ID from API: 61265
-Retrieved Order ID from API: 61265

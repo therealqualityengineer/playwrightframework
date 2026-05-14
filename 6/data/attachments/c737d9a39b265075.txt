@@ -1,0 +1,4 @@
+Client name used for client creation: XWJPXOGATH
+Created Client ID:  56409
+Created Order ID from API: 61368
+Retrieved Order ID from API: 61368

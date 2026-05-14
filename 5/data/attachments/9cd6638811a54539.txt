@@ -1,4 +1,0 @@
-Created Temp ID:  258285
-Client name used for client creation: SPHXNWHCTK
-Created Client ID:  56343
-Created Order ID from API: 61267

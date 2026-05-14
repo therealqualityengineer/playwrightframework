@@ -1,0 +1,11 @@
+Client name used for client creation: LKIJVXWTQX
+Created Client ID:  56406
+API Response for insertOrder: [
+  {
+    success: '1',
+    orderId: '61367',
+    message: 'New order record inserted successfully.',
+    integrationOrderId: ''
+  }
+]
+Created Order ID from API: 61367

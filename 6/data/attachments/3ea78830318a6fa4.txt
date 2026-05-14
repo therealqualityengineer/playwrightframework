@@ -1,0 +1,5 @@
+Created Temp ID:  258349
+Client name used for client creation: ZUEPWCEKIZ
+Created Client ID:  56408
+Client name used for order creation: ZUEPWCEKIZ
+Created order number: 61369

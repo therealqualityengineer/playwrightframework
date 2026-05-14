@@ -1,4 +1,0 @@
-Created Temp ID:  258284
-Client name used for client creation: KABTHMSYPW
-Created Client ID:  56342
-Created Order ID from API: 61266

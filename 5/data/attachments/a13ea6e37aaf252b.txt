@@ -1,5 +1,0 @@
-Created Temp ID:  258282
-Client name used for client creation: NCSBNHNZNA
-Created Client ID:  56336
-Client name used for order creation: NCSBNHNZNA
-Created order number: 61264
