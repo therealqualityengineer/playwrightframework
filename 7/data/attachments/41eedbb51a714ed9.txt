@@ -1,0 +1,5 @@
+Created Temp ID:  258360
+Client name used for client creation: MNLQDJXAMG
+Created Client ID:  56424
+Client name used for order creation: MNLQDJXAMG
+Created order number: 61378

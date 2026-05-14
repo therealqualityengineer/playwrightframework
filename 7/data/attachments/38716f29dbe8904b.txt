@@ -1,0 +1,3 @@
+Client name used for client creation: WORMIEAAEX
+Created Client ID:  56423
+Retrieved Client ID from API: 56423
