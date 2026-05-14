@@ -8,6 +8,13 @@ export class TimecardPage extends BasePage
     private orderIdInput = '#orderid';
     private searchButton = "[name='showtimecard']";
     private viewTimecardImage = '#viewShiftImagesLink';
+    private timecardPopupPagetoPass: TimecardPage | null = null;
+    private timecardSavedMessage = '#cv-userMessage';
+    private selectAllReconcileCheckbox = '#ckbSelectAllDB';
+    private postLink = '#postLink';
+    private postOkButton = '#button-1009-btnEl';
+    private saveTimecardButton = '#updatetimecard';
+    private imageCountLocator = '#imageCount';
 
     async insertTimecardImage(timecardPopupPage : TimecardPage)
     {
@@ -27,7 +34,7 @@ export class TimecardPage extends BasePage
         await timecardPopupPage.page.bringToFront();
     }
 
-    async reconcileTimecard(orderId : string)
+    async reconcileTimecard(orderId : string, imageOption : 'withImage' | 'withoutImage' = 'withoutImage')
     {
         await this.page.goto(this.timecardUrl);
         await this.TypeText(this.orderIdInput, orderId, 'locator');
@@ -37,9 +44,22 @@ export class TimecardPage extends BasePage
         await timecardPage.waitForLoadState('domcontentloaded');
         const timecardPopupPage = new TimecardPage(timecardPage);
         await expect(timecardPopupPage.page).toHaveTitle('Timecards');
-        await this.insertTimecardImage(timecardPopupPage);
-        await expect(timecardPopupPage.page.locator('#imageCount')).toHaveText('1');
-        await timecardPopupPage.Click('#updatetimecard', 'locator');
-        await expect(timecardPopupPage.page.locator('#cv-userMessage')).toContainText('Timecard saved.');
+        if (imageOption === 'withImage') {
+            await this.insertTimecardImage(timecardPopupPage);
+            await expect(timecardPopupPage.page.locator(this.imageCountLocator)).toHaveText('1');
+        }
+        await timecardPopupPage.Click(this.saveTimecardButton, 'locator');
+        await expect(timecardPopupPage.page.locator(this.timecardSavedMessage)).toContainText('Timecard saved.');
+        this.timecardPopupPagetoPass = timecardPopupPage;
+    }
+
+    async postTimecard(orderId : string, timecardPopupPagetoPass : TimecardPage = this.timecardPopupPagetoPass!)
+    {
+        await expect(timecardPopupPagetoPass.page.locator(this.timecardSavedMessage)).toContainText('Timecard saved.');
+        await timecardPopupPagetoPass.Click(this.selectAllReconcileCheckbox, 'locator');
+        await timecardPopupPagetoPass.Click(this.postLink, 'locator');
+        await timecardPopupPagetoPass.ElementVisible('Timecard Batch(es) posted.', 'text');
+        await timecardPopupPagetoPass.Click(this.postOkButton, 'locator');
+        await expect(timecardPopupPagetoPass.page.getByText('Posted').nth(1)).toBeVisible();
     }
 }

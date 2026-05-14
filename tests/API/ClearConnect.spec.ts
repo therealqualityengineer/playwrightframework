@@ -78,9 +78,6 @@ test('@api Verify API method getOrders', async ({ loginPage, clientPage, clearCo
         resultType: 'json'
     });
     expect(insertResponse[0]?.orderId).toBeTruthy();
-    sharedData.orderId = insertResponse[0]?.orderId;
-    console.log('Created Order ID from API:', sharedData.orderId);
-
     const orderResponse = await clearConnectAPI.getOrders(sharedData.orderId);
     const orderId = orderResponse[0]?.orderId;
     console.log('Retrieved Order ID from API:', orderId);
