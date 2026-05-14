@@ -1,57 +1,50 @@
-import { test as base } from '@playwright/test';
+import { test as base } from "@playwright/test";
 
-import { LoginPage } from '../pages/LoginPage';
-import { TempPage } from '../pages/TempPage';
-import { ClientPage } from '../pages/ClientPage';
-import { OrderPage } from '../pages/OrderPage';
-import { ClearConnectAPI } from '../pages/ClearConnectAPI';
-import { TimecardPage } from '../pages/TimecardPage';
+import { LoginPage } from "../pages/LoginPage";
+import { TempPage } from "../pages/TempPage";
+import { ClientPage } from "../pages/ClientPage";
+import { OrderPage } from "../pages/OrderPage";
+import { ClearConnectAPI } from "../pages/ClearConnectAPI";
+import { TimecardPage } from "../pages/TimecardPage";
 
 type MyFixtures = {
+  loginPage: LoginPage;
 
-    loginPage: LoginPage;
+  tempPage: TempPage;
 
-    tempPage: TempPage;
+  clientPage: ClientPage;
 
-    clientPage: ClientPage;
+  orderPage: OrderPage;
 
-    orderPage: OrderPage;
+  clearConnectAPI: ClearConnectAPI;
 
-    clearConnectAPI: ClearConnectAPI;
-
-    timecardPage: TimecardPage;
+  timecardPage: TimecardPage;
 };
 
 export const test = base.extend<MyFixtures>({
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
+  },
 
-    loginPage: async ({ page }, use) => {
+  tempPage: async ({ page }, use) => {
+    await use(new TempPage(page));
+  },
 
-        await use(new LoginPage(page));
-    },
+  clientPage: async ({ page }, use) => {
+    await use(new ClientPage(page));
+  },
 
-    tempPage: async ({ page }, use) => {
+  orderPage: async ({ page }, use) => {
+    await use(new OrderPage(page));
+  },
 
-        await use(new TempPage(page));
-    },
+  clearConnectAPI: async ({ request }, use) => {
+    await use(new ClearConnectAPI(request));
+  },
 
-    clientPage: async ({ page }, use) => {
-
-        await use(new ClientPage(page));
-    },
-
-    orderPage: async ({ page }, use) => {
-
-        await use(new OrderPage(page));
-    },
-
-    clearConnectAPI: async ({ request }, use) => {
-        await use(new ClearConnectAPI(request));
-    },
-
-    timecardPage: async ({ page }, use) => {
-
-        await use(new TimecardPage(page));
-    }
+  timecardPage: async ({ page }, use) => {
+    await use(new TimecardPage(page));
+  },
 });
 
-export { expect } from '@playwright/test';
+export { expect } from "@playwright/test";

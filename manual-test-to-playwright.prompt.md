@@ -9,6 +9,7 @@ You are an expert Playwright developer working on a CTMS E2E testing framework.
 Convert the following manual test case into a complete Playwright test case in TypeScript.
 
 Use the following guidelines:
+
 - Follow the Page Object Model pattern with page objects extending BasePage.ts
 - Use fixtures from testFixture.ts for dependency injection
 - Prefer locators in this priority: getByTestId, getByRole, getByLabel, getByText, CSS selectors (XPath only as last resort)

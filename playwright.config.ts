@@ -1,43 +1,39 @@
-import { defineConfig } from '@playwright/test';
-import { config } from 'dotenv';
+import { defineConfig } from "@playwright/test";
+import { config } from "dotenv";
 
-config({ path: `.env.${process.env.NODE_ENV || 'qa'}` });
+config({ path: `.env.${process.env.NODE_ENV || "qa"}` });
 
 export default defineConfig({
+  testDir: "./tests",
 
-    testDir: './tests',
+  fullyParallel: false,
 
-    fullyParallel: false,
+  workers: 4,
 
-    workers: 4,
+  retries: 1,
 
-    retries: 1,
+  reporter: [["list"], ["html", { open: "never" }], ["allure-playwright"]],
+  use: {
+    headless: true,
 
-    reporter: [
-        ['list'],
-        ['html', { open: 'never' }],
-        ['allure-playwright']
-    ],
-    use: {
+    screenshot: "only-on-failure",
 
-        headless: true,
+    video: "retain-on-failure",
 
-        screenshot: 'only-on-failure',
+    trace: "on-first-retry",
 
-        video: 'retain-on-failure',
+    baseURL:
+      process.env.BASE_URL ||
+      "https://ctmsqa.contingenttalentmanagement.com/wfportal/",
+  },
 
-        trace: 'on-first-retry',
+  projects: [
+    {
+      name: "chromium",
 
-        baseURL: process.env.BASE_URL || 'https://ctmsqa.contingenttalentmanagement.com/wfportal/',
+      use: {
+        browserName: "chromium",
+      },
     },
-
-    projects: [
-        {
-            name: 'chromium',
-
-            use: {
-                browserName: 'chromium'
-            }
-        }
-    ]
+  ],
 });
