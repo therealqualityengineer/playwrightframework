@@ -1,8 +1,12 @@
+import type { TestState } from "../fixtures/testFixture";
 import { BasePage } from "./BasePage";
-import { sharedData } from "../test-data/sharedData";
-import { expect } from "../fixtures/testFixture";
+import { expect, type Page } from "@playwright/test";
 
 export class OrderPage extends BasePage {
+  constructor(page: Page, private testState: TestState) {
+    super(page);
+  }
+
   private newOrderLink = "a[href*='orderdetail_new.cfm']";
   private clientNameTextbox = "#clientname";
   private tempNameTextbox = "#tempSelector";
@@ -37,20 +41,20 @@ export class OrderPage extends BasePage {
     await expect(orderPage.locator(this.clientNameTextbox)).toBeVisible({
       timeout: 15000,
     });
-    const orderPopupPage = new OrderPage(orderPage);
+    const orderPopupPage = new OrderPage(orderPage, this.testState);
     console.log(
-      "Client name used for order creation: " + sharedData.clientName,
+      "Client name used for order creation: " + this.testState.clientName,
     );
     await orderPopupPage.selectLookupValue(
       orderPopupPage.clientNameTextbox,
-      sharedData.clientName,
-      `[href*='clientview.cfm?newwindow=yes&clientid=${sharedData.clientId}']`,
+      this.testState.clientName ?? "",
+      `[href*='clientview.cfm?newwindow=yes&clientid=${this.testState.clientId}']`,
       0,
     );
     await orderPopupPage.selectLookupValue(
       orderPopupPage.tempNameTextbox,
-      sharedData.temp_firstName,
-      `[href*='tempview.cfm?newwindow=yes&tempid=${sharedData.tempId}']`,
+      this.testState.temp_firstName ?? "",
+      `[href*='tempview.cfm?newwindow=yes&tempid=${this.testState.tempId}']`,
       1,
     );
     await orderPopupPage.TypeText(
@@ -81,7 +85,7 @@ export class OrderPage extends BasePage {
       .locator(this.orderNumberLocator)
       .nth(0)
       .innerText();
-    sharedData.orderId = orderNumber;
+    this.testState.orderId = orderNumber;
     console.log("Created order number: " + orderNumber);
   }
 

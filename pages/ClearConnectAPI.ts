@@ -1,6 +1,6 @@
 import { APIRequestContext, expect } from "@playwright/test";
 import { RandomUtil } from "../utils/RandomUtil";
-import { sharedData } from "../test-data/sharedData";
+import type { TestState } from "../fixtures/testFixture";
 
 type insertOrderPayload = {
   customerID?: string;
@@ -44,7 +44,10 @@ type insertClientsPayload = {
 };
 
 export class ClearConnectAPI {
-  constructor(private request: APIRequestContext) {}
+  constructor(
+    private request: APIRequestContext,
+    private testState: TestState,
+  ) {}
 
   private authHeader() {
     return {
@@ -133,8 +136,8 @@ export class ClearConnectAPI {
         `insertOrder response was not valid JSON: ${String(error)}\n${bodyText}`,
       );
     }
-    sharedData.orderId = responseBody[0]?.orderId;
-    console.log("Created Order ID from API:", sharedData.orderId);
+    this.testState.orderId = responseBody[0]?.orderId;
+    console.log("Created Order ID from API:", this.testState.orderId);
     return responseBody;
   }
 
@@ -176,8 +179,8 @@ export class ClearConnectAPI {
         `insertTempRecords response was not valid JSON: ${String(error)}\n${bodyText}`,
       );
     }
-    sharedData.tempId = responseBody[0]?.tempId;
-    console.log("Created Temp ID from API:", sharedData.tempId);
+    this.testState.tempId = responseBody[0]?.tempId;
+    console.log("Created Temp ID from API:", this.testState.tempId);
     return responseBody;
   }
 
@@ -216,13 +219,13 @@ export class ClearConnectAPI {
         `insertClients response was not valid JSON: ${String(error)}\n${bodyText}`,
       );
     }
-    sharedData.clientId = responseBody[0]?.clientId;
-    sharedData.clientName =
+    this.testState.clientId = responseBody[0]?.clientId;
+    this.testState.clientName =
       insertClientData.clientName ??
       responseBody[0]?.clientname ??
-      sharedData.clientName;
-    console.log("Created Client ID from API:", sharedData.clientId);
-    console.log("Client name used for API insert:", sharedData.clientName);
+      this.testState.clientName;
+    console.log("Created Client ID from API:", this.testState.clientId);
+    console.log("Client name used for API insert:", this.testState.clientName);
     return responseBody;
   }
 }
