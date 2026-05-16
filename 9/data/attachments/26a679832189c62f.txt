@@ -1,0 +1,4 @@
+Client name used for client creation: SITOGKODDP
+Created Client ID:  56511
+Created Order ID from API: 61420
+Retrieved Order ID from API: 61420

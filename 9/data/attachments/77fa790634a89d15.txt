@@ -1,0 +1,3 @@
+Client name used for client creation: FPDHWNIGAC
+Created Client ID:  56512
+Retrieved Client ID from API: 56512

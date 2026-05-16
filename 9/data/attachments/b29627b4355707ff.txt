@@ -1,0 +1,5 @@
+Created Temp ID:  258444
+Client name used for client creation: FTBQPRZAYV
+Created Client ID:  56504
+Client name used for order creation: FTBQPRZAYV
+Created order number: 61416

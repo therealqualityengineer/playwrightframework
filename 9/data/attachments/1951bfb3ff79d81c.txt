@@ -1,0 +1,4 @@
+Created Temp ID from API: 258451
+Created Client ID from API: 0
+Client name used for API insert: KNVUFHE
+Created Order ID from API: 0

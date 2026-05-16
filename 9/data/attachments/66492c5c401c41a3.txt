@@ -1,0 +1,5 @@
+Created Temp ID:  258449
+Client name used for client creation: NDRXPRWGWO
+Created Client ID:  56508
+Created Order ID from API: 61417
+Created Order ID from API: 61417
