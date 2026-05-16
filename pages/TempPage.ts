@@ -1,5 +1,5 @@
+import type { TestState } from "../fixtures/testFixture";
 import { BasePage } from "./BasePage";
-import { sharedData } from "../test-data/sharedData";
 import { expect } from "@playwright/test";
 
 type TempData = {
@@ -17,6 +17,10 @@ type TempData = {
 };
 
 export class TempPage extends BasePage {
+  constructor(page: import("@playwright/test").Page, private testState: TestState) {
+    super(page);
+  }
+
   private temp_firstNameTextbox = "[name='firstname']";
   private temp_lastNameTextBox = "[name='lastname']";
   private homeRegionDropdown = "[id='HomeRegion']";
@@ -48,13 +52,13 @@ export class TempPage extends BasePage {
       tempData.firstname,
       "locator",
     );
-    sharedData.temp_firstName = tempData.firstname ?? "";
+    this.testState.temp_firstName = tempData.firstname ?? "";
     await this.TypeText(
       this.temp_lastNameTextBox,
       tempData.lastname,
       "locator",
     );
-    sharedData.temp_lastName = tempData.lastname ?? "";
+    this.testState.temp_lastName = tempData.lastname ?? "";
     await this.TypeText(
       this.addressTextbox,
       tempData.address ?? "16801 Addison Road",
@@ -106,7 +110,7 @@ export class TempPage extends BasePage {
       .textContent();
     const tempId = tempIdLocator?.split(" ")[1] ?? "";
     console.log("Created Temp ID: ", tempId);
-    sharedData.tempId = tempId;
+    this.testState.tempId = tempId;
   }
 
   async enableFlatPayBill(flatPay: number, flatBill: number) {

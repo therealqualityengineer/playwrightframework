@@ -1,9 +1,13 @@
 import { ClientData } from "../interfaces/ClientData";
-import { sharedData } from "../test-data/sharedData";
+import type { TestState } from "../fixtures/testFixture";
 import { BasePage } from "./BasePage";
 import { expect } from "@playwright/test";
 
 export class ClientPage extends BasePage {
+  constructor(page: import("@playwright/test").Page, private testState: TestState) {
+    super(page);
+  }
+
   private newTempLink = 'a[href="/wfportal/clientview.cfm?newclient=yes"]';
   private clientNameTextbox = "[id='clientname']";
   private regionDropdown = "#region";
@@ -18,9 +22,9 @@ export class ClientPage extends BasePage {
       clientData.clientname,
       "locator",
     );
-    sharedData.clientName = clientData.clientname ?? "";
+    this.testState.clientName = clientData.clientname ?? "";
     console.log(
-      "Client name used for client creation: " + sharedData.clientName,
+      "Client name used for client creation: " + this.testState.clientName,
     );
     await this.TypeText(
       this.addressTextbox,
@@ -50,7 +54,7 @@ export class ClientPage extends BasePage {
     });
     const clientId = new URL(this.page.url()).searchParams.get("clientid");
     expect(clientId).toBeTruthy();
-    sharedData.clientId = clientId!;
+    this.testState.clientId = clientId!;
     console.log("Created Client ID: ", clientId);
   }
 

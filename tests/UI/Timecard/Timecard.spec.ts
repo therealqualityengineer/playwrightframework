@@ -1,7 +1,6 @@
 import { test, expect } from "../../../fixtures/testFixture";
 import { RandomUtil } from "../../../utils/RandomUtil";
 const users = require("../../../test-data/users.json");
-import { sharedData } from "../../../test-data/sharedData";
 
 test.setTimeout(180_000);
 
@@ -12,6 +11,7 @@ test("@regression Reconcile filled order", async ({
   clientPage,
   clearConnectAPI,
   timecardPage,
+  testState,
 }) => {
   await loginPage.login(users.validUser5.username, users.validUser5.password);
   await loginPage.verifySuccessfulLogin();
@@ -27,9 +27,9 @@ test("@regression Reconcile filled order", async ({
     clientname: RandomUtil.generateRandomString(10),
     quickbooksid: RandomUtil.generateRandomAlphaNumeric(10),
   });
-  expect(sharedData.clientId).toMatch(/^\d+$/);
+  expect(testState.clientId).toMatch(/^\d+$/);
   const responseBody = await clearConnectAPI.insertOrder({
-    customerID: sharedData.clientId,
+    customerID: testState.clientId,
     status: "Filled",
     userId: "1",
     nursetype: "RN",
@@ -40,13 +40,13 @@ test("@regression Reconcile filled order", async ({
     shiftEndTime: "15:00",
     shiftType: "Regular",
     shiftNum: "1",
-    filledBy: sharedData.tempId,
+    filledBy: testState.tempId,
     resultType: "json",
   });
   expect(responseBody[0]?.orderId).toBeTruthy();
-  sharedData.orderId = responseBody[0]?.orderId;
-  console.log("Created Order ID from API:", sharedData.orderId);
-  await timecardPage.reconcileTimecard(sharedData.orderId, "withoutImage");
+  testState.orderId = responseBody[0]?.orderId;
+  console.log("Created Order ID from API:", testState.orderId);
+  await timecardPage.reconcileTimecard(testState.orderId ?? "", "withoutImage");
 });
 
 test("@regression Reconcile filled order with timecard image", async ({
@@ -56,6 +56,7 @@ test("@regression Reconcile filled order with timecard image", async ({
   clientPage,
   clearConnectAPI,
   timecardPage,
+  testState,
 }) => {
   await loginPage.login(users.validUser5.username, users.validUser5.password);
   await loginPage.verifySuccessfulLogin();
@@ -71,9 +72,9 @@ test("@regression Reconcile filled order with timecard image", async ({
     clientname: RandomUtil.generateRandomString(10),
     quickbooksid: RandomUtil.generateRandomAlphaNumeric(10),
   });
-  expect(sharedData.clientId).toMatch(/^\d+$/);
+  expect(testState.clientId).toMatch(/^\d+$/);
   const responseBody = await clearConnectAPI.insertOrder({
-    customerID: sharedData.clientId,
+    customerID: testState.clientId,
     status: "Filled",
     userId: "1",
     nursetype: "RN",
@@ -84,13 +85,13 @@ test("@regression Reconcile filled order with timecard image", async ({
     shiftEndTime: "15:00",
     shiftType: "Regular",
     shiftNum: "1",
-    filledBy: sharedData.tempId,
+    filledBy: testState.tempId,
     resultType: "json",
   });
   expect(responseBody[0]?.orderId).toBeTruthy();
-  sharedData.orderId = responseBody[0]?.orderId;
-  console.log("Created Order ID from API:", sharedData.orderId);
-  await timecardPage.reconcileTimecard(sharedData.orderId, "withImage");
+  testState.orderId = responseBody[0]?.orderId;
+  console.log("Created Order ID from API:", testState.orderId);
+  await timecardPage.reconcileTimecard(testState.orderId ?? "", "withImage");
 });
 
 test("@regression Reconcile and Post Timecard", async ({
@@ -100,6 +101,7 @@ test("@regression Reconcile and Post Timecard", async ({
   clientPage,
   clearConnectAPI,
   timecardPage,
+  testState,
 }) => {
   await loginPage.login(users.validUser5.username, users.validUser5.password);
   await loginPage.verifySuccessfulLogin();
@@ -111,7 +113,7 @@ test("@regression Reconcile and Post Timecard", async ({
     clientName: RandomUtil.generateRandomString(7),
   });
   await clearConnectAPI.insertOrder({
-    customerID: sharedData.clientId,
+    customerID: testState.clientId,
     status: "Filled",
     userId: "1",
     nursetype: "RN",
@@ -122,9 +124,9 @@ test("@regression Reconcile and Post Timecard", async ({
     shiftEndTime: "15:00",
     shiftType: "Regular",
     shiftNum: "1",
-    filledBy: sharedData.tempId,
+    filledBy: testState.tempId,
     resultType: "json",
   });
-  await timecardPage.reconcileTimecard(sharedData.orderId, "withoutImage");
-  await timecardPage.postTimecard(sharedData.orderId);
+  await timecardPage.reconcileTimecard(testState.orderId ?? "", "withoutImage");
+  await timecardPage.postTimecard(testState.orderId ?? "");
 });

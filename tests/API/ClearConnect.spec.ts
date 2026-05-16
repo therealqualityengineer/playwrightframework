@@ -1,6 +1,5 @@
 import { test, expect } from "../../fixtures/testFixture";
 import { RandomUtil } from "../../utils/RandomUtil";
-import { sharedData } from "../../test-data/sharedData";
 const users = require("../../test-data/users.json");
 
 test.setTimeout(120_000);
@@ -10,6 +9,7 @@ test("@api Verify API method getTemps ", async ({
   tempPage,
   page,
   clearConnectAPI,
+  testState,
 }) => {
   await loginPage.login(users.validUser4.username, users.validUser4.password);
   await loginPage.verifySuccessfulLogin();
@@ -20,16 +20,17 @@ test("@api Verify API method getTemps ", async ({
     firstname: RandomUtil.generateRandomString(7),
     lastname: RandomUtil.generateRandomString(7),
   });
-  const response = await clearConnectAPI.getTemps(sharedData.tempId);
+  const response = await clearConnectAPI.getTemps(testState.tempId ?? "");
   const tempId = response[0]?.tempId;
   console.log("Retrieved Temp ID from API:", tempId);
-  expect(tempId).toBe(sharedData.tempId);
+  expect(tempId).toBe(testState.tempId);
 });
 
 test("@api Verify API method insertOrder", async ({
   loginPage,
   clientPage,
   clearConnectAPI,
+  testState,
 }) => {
   await loginPage.login(users.validUser4.username, users.validUser4.password);
   await loginPage.verifySuccessfulLogin();
@@ -38,9 +39,9 @@ test("@api Verify API method insertOrder", async ({
     clientname: RandomUtil.generateRandomString(10),
     quickbooksid: RandomUtil.generateRandomAlphaNumeric(10),
   });
-  expect(sharedData.clientId).toMatch(/^\d+$/);
+  expect(testState.clientId).toMatch(/^\d+$/);
   const responseBody = await clearConnectAPI.insertOrder({
-    customerID: sharedData.clientId,
+    customerID: testState.clientId,
     status: "Open",
     userId: "1",
     nursetype: "RN",
@@ -55,14 +56,15 @@ test("@api Verify API method insertOrder", async ({
   });
   console.log("API Response for insertOrder:", responseBody);
   expect(responseBody[0]?.orderId).toBeTruthy();
-  sharedData.orderId = responseBody[0]?.orderId;
-  console.log("Created Order ID from API:", sharedData.orderId);
+  testState.orderId = responseBody[0]?.orderId;
+  console.log("Created Order ID from API:", testState.orderId);
 });
 
 test("@api Verify API method getOrders", async ({
   loginPage,
   clientPage,
   clearConnectAPI,
+  testState,
 }) => {
   await loginPage.login(users.validUser4.username, users.validUser4.password);
   await loginPage.verifySuccessfulLogin();
@@ -71,9 +73,9 @@ test("@api Verify API method getOrders", async ({
     clientname: RandomUtil.generateRandomString(10),
     quickbooksid: RandomUtil.generateRandomAlphaNumeric(10),
   });
-  expect(sharedData.clientId).toMatch(/^\d+$/);
+  expect(testState.clientId).toMatch(/^\d+$/);
   const insertResponse = await clearConnectAPI.insertOrder({
-    customerID: sharedData.clientId,
+    customerID: testState.clientId,
     status: "Open",
     userId: "1",
     nursetype: "RN",
@@ -87,16 +89,17 @@ test("@api Verify API method getOrders", async ({
     resultType: "json",
   });
   expect(insertResponse[0]?.orderId).toBeTruthy();
-  const orderResponse = await clearConnectAPI.getOrders(sharedData.orderId);
+  const orderResponse = await clearConnectAPI.getOrders(testState.orderId ?? "");
   const orderId = orderResponse[0]?.orderId;
   console.log("Retrieved Order ID from API:", orderId);
-  expect(orderId).toBe(sharedData.orderId);
+  expect(orderId).toBe(testState.orderId);
 });
 
 test("@api Verify API method getClients", async ({
   loginPage,
   clientPage,
   clearConnectAPI,
+  testState,
 }) => {
   await loginPage.login(users.validUser4.username, users.validUser4.password);
   await loginPage.verifySuccessfulLogin();
@@ -105,9 +108,9 @@ test("@api Verify API method getClients", async ({
     clientname: RandomUtil.generateRandomString(10),
     quickbooksid: RandomUtil.generateRandomAlphaNumeric(10),
   });
-  expect(sharedData.clientId).toMatch(/^\d+$/);
-  const response = await clearConnectAPI.getClients(sharedData.clientId);
+  expect(testState.clientId).toMatch(/^\d+$/);
+  const response = await clearConnectAPI.getClients(testState.clientId ?? "");
   const clientId = response[0]?.clientId;
   console.log("Retrieved Client ID from API:", clientId);
-  expect(clientId).toBe(sharedData.clientId);
+  expect(clientId).toBe(testState.clientId);
 });
