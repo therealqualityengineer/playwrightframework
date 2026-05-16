@@ -1,47 +1,7 @@
 import { APIRequestContext, expect } from "@playwright/test";
 import { RandomUtil } from "../utils/RandomUtil";
 import type { TestState } from "../fixtures/testFixture";
-
-type insertOrderPayload = {
-  customerID?: string;
-  status?: string;
-  userId?: string;
-  nursetype?: string;
-  specialty?: string;
-  jobDateStart?: string;
-  jobDateEnd?: string;
-  shiftStartTime?: string;
-  shiftEndTime?: string;
-  shiftType?: string;
-  shiftNum?: string;
-  filledBy?: string;
-  resultType?: string;
-};
-
-type insertTempRecordsPayload = {
-  firstName?: string;
-  lastName?: string;
-  homeRegion?: string;
-  Status?: string;
-  Certification?: string;
-  Specialty?: string;
-  Address?: string;
-  City?: string;
-  State?: string;
-  Zip?: string;
-  resultType?: string;
-};
-
-type insertClientsPayload = {
-  clientName?: string;
-  Address?: string;
-  City?: string;
-  State?: string;
-  Zip?: string;
-  Status?: string;
-  regionId?: string;
-  resultType?: string;
-};
+import { SessionManager } from "./SessionManager";
 
 export class ClearConnectAPI {
   constructor(
@@ -49,15 +9,15 @@ export class ClearConnectAPI {
     private testState: TestState,
   ) {}
 
-  private authHeader() {
+  private async authHeader() {
     return {
-      Authorization: `Basic ${Buffer.from("testuser_04:Therealqaengineer@99").toString("base64")}`,
+      Authorization: `Bearer ${await SessionManager.getSessionKey()}`,
     };
   }
 
-  private headers() {
+  private async headers() {
     return {
-      ...this.authHeader(),
+      ...await this.authHeader(),
       "Content-Type": "application/json",
     };
   }
@@ -70,7 +30,7 @@ export class ClearConnectAPI {
       `${this.BASE_URL}?action=getTemps&tempIdIn=${tempIdIn}&resultType=json`,
       {
         headers: {
-          ...this.headers(),
+          ...await  this.headers(),
         },
       },
     );
@@ -83,7 +43,7 @@ export class ClearConnectAPI {
       `${this.BASE_URL}?action=getClients&clientIdIn=${clientIdIn}&resultType=json`,
       {
         headers: {
-          ...this.headers(),
+          ...await this.headers(),
         },
       },
     );
@@ -96,7 +56,7 @@ export class ClearConnectAPI {
       `${this.BASE_URL}?action=getOrders&OrderId=${OrderId}&resultType=json`,
       {
         headers: {
-          ...this.headers(),
+          ...await this.headers(),
         },
       },
     );
@@ -107,7 +67,7 @@ export class ClearConnectAPI {
   async insertOrder(insertOrderData: insertOrderPayload) {
     const response = await this.request.post(this.BASE_URL, {
       headers: {
-        ...this.headers(),
+        ...await this.headers(),
       },
       params: {
         action: "insertOrder",
@@ -161,7 +121,7 @@ export class ClearConnectAPI {
 
     const response = await this.request.post(this.BASE_URL, {
       headers: {
-        ...this.headers(),
+        ...await this.headers(),
       },
       params: {
         action: "insertTempRecords",
@@ -191,7 +151,6 @@ export class ClearConnectAPI {
           <clientName>${insertClientData.clientName ?? RandomUtil.generateRandomString(10)}</clientName>
           <Address>${insertClientData.Address ?? "16801 Addison Road"}</Address>
           <City>${insertClientData.City ?? "Addison"}</City>
-          <State>${insertClientData.State ?? "TX"}</State>
           <Zip>${insertClientData.Zip ?? "75001"}</Zip>
           <Status>${insertClientData.Status ?? "Active"}</Status>
           <regionId>${insertClientData.regionId ?? "1"}</regionId>
@@ -201,7 +160,7 @@ export class ClearConnectAPI {
 
     const response = await this.request.post(this.BASE_URL, {
       headers: {
-        ...this.headers(),
+        ...await this.headers(),
       },
       params: {
         action: "insertClients",

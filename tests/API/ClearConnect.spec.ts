@@ -54,7 +54,6 @@ test("@api Verify API method insertOrder", async ({
     shiftNum: "1",
     resultType: "json",
   });
-  console.log("API Response for insertOrder:", responseBody);
   expect(responseBody[0]?.orderId).toBeTruthy();
   testState.orderId = responseBody[0]?.orderId;
   console.log("Created Order ID from API:", testState.orderId);

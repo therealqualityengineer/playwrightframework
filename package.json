@@ -13,7 +13,8 @@
     "api": "playwright test --grep @api",
     "allure": "allure serve allure-results",
     "allure:clear": "rm -rf allure-report allure-results",
-    "html": "npx playwright show-report"
+    "html": "npx playwright show-report",
+    "debug": "npx playwright test --debug"
   },
   "keywords": [],
   "author": "",
