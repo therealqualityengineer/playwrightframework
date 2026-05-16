@@ -75,3 +75,33 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./allure-history
+
+      # 🔗 Print Report URL
+      - name: Print Report URL
+        if: always()
+        run: |
+          echo "🔗 Report URL:"
+          echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+
+      # 🔔 Slack Notification
+      - name: Send Slack Notification
+        if: always()
+        run: |
+          STATUS="SUCCESS"
+
+          if [ "${{ job.status }}" != "success" ]; then
+            STATUS="FAILED"
+          fi
+
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+
+          MESSAGE="🚀 *Playwright Test Run ${STATUS}*
+          🔹 Repo: ${{ github.repository }}
+          🔹 Run #: ${{ github.run_number }}
+          🔹 Branch: ${{ github.ref_name }}
+          🔹 Triggered By: ${{ github.actor }}
+          🔗 Report: ${REPORT_URL}"
+
+          curl -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"$MESSAGE\"}" \
+          ${{ secrets.SLACK_WEBHOOK }}
