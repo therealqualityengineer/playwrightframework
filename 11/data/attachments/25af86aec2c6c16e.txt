@@ -1,0 +1,6 @@
+Client name used for client creation: QBDFASYWTY
+Created Client ID:  56570
+Exiting session key: ywqtoqm2
+Created Order ID from API: 61450
+Exiting session key: ywqtoqm2
+Retrieved Order ID from API: 61450

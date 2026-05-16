@@ -1,0 +1,5 @@
+Created Temp ID:  258512
+Client name used for client creation: IGYQAIORVM
+Created Client ID:  56567
+Client name used for order creation: IGYQAIORVM
+Created order number: 61451

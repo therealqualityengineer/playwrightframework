@@ -1,0 +1,6 @@
+Created Temp ID:  258519
+Client name used for client creation: BQUOMJRPSD
+Created Client ID:  56575
+Exiting session key: ywqtoqm2
+Created Order ID from API: 61454
+Created Order ID from API: 61454

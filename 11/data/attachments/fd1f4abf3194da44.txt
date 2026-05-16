@@ -1,0 +1,7 @@
+Exiting session key: ywqtoqm2
+Created Temp ID from API: 258516
+Exiting session key: ywqtoqm2
+Created Client ID from API: 56572
+Client name used for API insert: IDQJVXN
+Exiting session key: ywqtoqm2
+Created Order ID from API: 61452

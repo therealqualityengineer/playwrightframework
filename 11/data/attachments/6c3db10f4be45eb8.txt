@@ -1,0 +1,5 @@
+Client name used for client creation: IJZQCJVSOX
+Created Client ID:  56569
+Exiting session key: ywqtoqm2
+Created Order ID from API: 61449
+Created Order ID from API: 61449

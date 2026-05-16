@@ -1,0 +1,8 @@
+Exiting session key: ywqtoqm2
+Created Temp ID from API: 258514
+Exiting session key: ywqtoqm2
+Created Client ID from API: 56566
+Client name used for API insert: JBUHLVM
+Exiting session key: ywqtoqm2
+Created Order ID from API: 61448
+Created Order ID from API: 61448
