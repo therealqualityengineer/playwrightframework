@@ -1,0 +1,3 @@
+Client name used for client creation: JHPWZSTJUX
+Created Client ID:  56540
+Retrieved Client ID from API: 56540

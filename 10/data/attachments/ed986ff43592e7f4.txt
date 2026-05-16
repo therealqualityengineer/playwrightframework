@@ -1,0 +1,4 @@
+Client name used for client creation: RDJWCKYJCB
+Created Client ID:  56538
+Created Order ID from API: 61430
+Retrieved Order ID from API: 61430

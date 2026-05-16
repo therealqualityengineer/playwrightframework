@@ -1,0 +1,5 @@
+Created Temp ID:  258485
+Client name used for client creation: PIGQHKXZWC
+Created Client ID:  56534
+Created Order ID from API: 61428
+Created Order ID from API: 61428

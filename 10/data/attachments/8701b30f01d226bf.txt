@@ -1,0 +1,5 @@
+Created Temp ID:  258492
+Client name used for client creation: BWDJPHPVDD
+Created Client ID:  56542
+Created Order ID from API: 61433
+Created Order ID from API: 61433

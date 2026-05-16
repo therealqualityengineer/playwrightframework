@@ -1,0 +1,12 @@
+Client name used for client creation: NDNYQRSMHA
+Created Client ID:  56537
+Created Order ID from API: 61429
+API Response for insertOrder: [
+  {
+    success: '1',
+    orderId: '61429',
+    message: 'New order record inserted successfully.',
+    integrationOrderId: ''
+  }
+]
+Created Order ID from API: 61429

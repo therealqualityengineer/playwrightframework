@@ -1,0 +1,5 @@
+Created Temp ID:  258486
+Client name used for client creation: PUJGRIKRMZ
+Created Client ID:  56535
+Client name used for order creation: PUJGRIKRMZ
+Created order number: 61431
