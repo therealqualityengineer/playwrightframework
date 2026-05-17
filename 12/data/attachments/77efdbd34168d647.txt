@@ -1,0 +1,8 @@
+Exiting session key: vwd1bc0k
+Created Temp ID from API: 258533
+Exiting session key: vwd1bc0k
+Created Client ID from API: 56589
+Client name used for API insert: VJKVCTG
+Exiting session key: vwd1bc0k
+Created Order ID from API: 61464
+Created Order ID from API: 61464

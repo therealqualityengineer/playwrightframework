@@ -1,0 +1,5 @@
+Client name used for client creation: PYAMSVERVF
+Created Client ID:  56590
+Exiting session key: vwd1bc0k
+Created Order ID from API: 61465
+Created Order ID from API: 61465

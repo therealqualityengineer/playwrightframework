@@ -1,0 +1,7 @@
+Created Temp ID:  258537
+Client name used for client creation: TYPCDQZTRS
+Created Client ID:  56594
+Exiting session key: undefined
+Generated session key: vwd1bc0k
+Created Order ID from API: 61468
+Created Order ID from API: 61468

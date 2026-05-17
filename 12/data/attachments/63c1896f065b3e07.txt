@@ -1,0 +1,6 @@
+Created Temp ID:  258539
+Client name used for client creation: NOBPOQERAI
+Created Client ID:  56596
+Exiting session key: vwd1bc0k
+Created Order ID from API: 61470
+Created Order ID from API: 61470
