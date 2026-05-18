@@ -1,0 +1,5 @@
+Client name used for client creation: GFCVXGYALG
+Created Client ID:  56643
+Exiting session key: 5fsb5xme
+Created Order ID from API: 61490
+Created Order ID from API: 61490

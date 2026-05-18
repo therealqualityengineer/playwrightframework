@@ -1,0 +1,7 @@
+Exiting session key: 5fsb5xme
+Created Temp ID from API: 258581
+Exiting session key: 5fsb5xme
+Created Client ID from API: 56645
+Client name used for API insert: KOMLMBY
+Exiting session key: 5fsb5xme
+Created Order ID from API: 61493

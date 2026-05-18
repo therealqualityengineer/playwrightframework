@@ -1,0 +1,6 @@
+Client name used for client creation: AIXWAAFKMJ
+Created Client ID:  56644
+Exiting session key: 5fsb5xme
+Created Order ID from API: 61492
+Exiting session key: 5fsb5xme
+Retrieved Order ID from API: 61492

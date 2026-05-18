@@ -1,0 +1,6 @@
+Created Temp ID:  258585
+Client name used for client creation: ALLAJHJXBC
+Created Client ID:  56649
+Exiting session key: 5fsb5xme
+Created Order ID from API: 61495
+Created Order ID from API: 61495

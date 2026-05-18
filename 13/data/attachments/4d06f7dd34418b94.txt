@@ -1,0 +1,4 @@
+Created Temp ID:  258578
+Exiting session key: undefined
+Generated session key: 5fsb5xme
+Retrieved Temp ID from API: 258578

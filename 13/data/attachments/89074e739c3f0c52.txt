@@ -1,0 +1,9 @@
+Exiting session key: undefined
+Generated session key: 5fsb5xme
+Created Temp ID from API: 258576
+Exiting session key: 5fsb5xme
+Created Client ID from API: 56637
+Client name used for API insert: ZCOKIRM
+Exiting session key: 5fsb5xme
+Created Order ID from API: 61488
+Created Order ID from API: 61488

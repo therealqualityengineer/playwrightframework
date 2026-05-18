@@ -1,0 +1,7 @@
+Created Temp ID:  258583
+Client name used for client creation: CWTXSSPBAX
+Created Client ID:  56648
+Exiting session key: undefined
+Generated session key: 5fsb5xme
+Created Order ID from API: 61494
+Created Order ID from API: 61494

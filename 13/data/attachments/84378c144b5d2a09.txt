@@ -1,0 +1,5 @@
+Created Temp ID:  258577
+Client name used for client creation: DAIUMXGIDH
+Created Client ID:  56641
+Client name used for order creation: DAIUMXGIDH
+Created order number: 61491

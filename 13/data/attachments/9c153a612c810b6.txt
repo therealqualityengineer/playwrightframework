@@ -1,0 +1,8 @@
+Exiting session key: 5fsb5xme
+Created Temp ID from API: 258580
+Exiting session key: 5fsb5xme
+Created Client ID from API: 56640
+Client name used for API insert: MNAZJJL
+Exiting session key: 5fsb5xme
+Created Order ID from API: 61489
+Created Order ID from API: 61489

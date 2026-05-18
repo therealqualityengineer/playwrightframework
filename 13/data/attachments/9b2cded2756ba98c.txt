@@ -1,0 +1,4 @@
+Client name used for client creation: WIPUVIZETW
+Created Client ID:  56647
+Exiting session key: 5fsb5xme
+Retrieved Client ID from API: 56647
