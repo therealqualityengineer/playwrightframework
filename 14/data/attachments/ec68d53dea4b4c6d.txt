@@ -1,0 +1,7 @@
+Exiting session key: undefined
+Generated session key: 090to9nt
+Created Temp ID from API: 258643
+Exiting session key: 090to9nt
+Created Client ID from API: 56713
+Exiting session key: 090to9nt
+Created Order ID from API: 61542

@@ -1,0 +1,8 @@
+Created Temp ID:  258646
+Client name used for client creation: TZAYKCUGOG
+Created Client ID:  56715
+Exiting session key: undefined
+Generated session key: 090to9nt
+Created Order ID from API: 61544
+Created Order ID from API: 61544
+Downloads folder cleaned up

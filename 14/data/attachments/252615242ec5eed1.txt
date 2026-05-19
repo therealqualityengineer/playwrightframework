@@ -1,0 +1,6 @@
+Created Temp ID:  258639
+Client name used for client creation: CGNVHPTPGG
+Created Client ID:  56707
+Client name used for order creation: CGNVHPTPGG
+Created order number: 61541
+Downloads folder cleaned up

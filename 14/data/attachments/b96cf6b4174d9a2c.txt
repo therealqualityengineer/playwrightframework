@@ -1,0 +1,7 @@
+Exiting session key: 090to9nt
+Created Temp ID from API: 258641
+Exiting session key: 090to9nt
+Created Client ID from API: 56706
+Exiting session key: 090to9nt
+Created Order ID from API: 61538
+Downloads folder cleaned up

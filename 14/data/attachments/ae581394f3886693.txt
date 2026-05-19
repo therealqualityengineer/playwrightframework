@@ -1,0 +1,5 @@
+Client name used for client creation: MUQMCMHORU
+Created Client ID:  56709
+Exiting session key: 090to9nt
+Created Order ID from API: 61539
+Created Order ID from API: 61539

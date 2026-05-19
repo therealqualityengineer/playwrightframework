@@ -1,0 +1,6 @@
+Client name used for client creation: WFCYDAGOKJ
+Created Client ID:  56710
+Exiting session key: 090to9nt
+Created Order ID from API: 61540
+Exiting session key: 090to9nt
+Retrieved Order ID from API: 61540

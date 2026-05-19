@@ -1,0 +1,4 @@
+Created Temp ID:  258638
+Exiting session key: undefined
+Generated session key: 090to9nt
+Retrieved Temp ID from API: 258638

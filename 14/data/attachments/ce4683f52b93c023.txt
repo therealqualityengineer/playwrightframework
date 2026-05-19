@@ -1,0 +1,9 @@
+Downloads folder cleaned up
+Exiting session key: 090to9nt
+Created Temp ID from API: 258647
+Exiting session key: 090to9nt
+Created Client ID from API: 56716
+Exiting session key: 090to9nt
+Created Order ID from API: 61545
+profitability_20260519.xls
+Downloads folder cleaned up

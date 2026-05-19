@@ -1,0 +1,4 @@
+Client name used for client creation: YOWOUDRMVV
+Created Client ID:  56712
+Exiting session key: 090to9nt
+Retrieved Client ID from API: 56712

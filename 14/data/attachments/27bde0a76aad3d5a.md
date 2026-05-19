@@ -1,0 +1,754 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: UI/OrderManager/Order.spec.ts >> @regression Create a filled order
+- Location: tests/UI/OrderManager/Order.spec.ts:41:5
+
+# Error details
+
+```
+Test timeout of 60000ms exceeded.
+```
+
+```
+Error: expect.toBeVisible: Target page, context or browser has been closed
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - heading "Client Information" [level=1] [ref=e5]
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - link "User Alerts" [ref=e8] [cursor=pointer]:
+            - /url: /wfportal/index2.cfm?action=eventNotification.shiftAlert
+          - text: "|"
+          - link "Log Out" [ref=e9] [cursor=pointer]:
+            - /url: /wfportal/index2.cfm?action=logout&Logoff=yes
+          - text: "|"
+          - link "Preferences" [ref=e10] [cursor=pointer]:
+            - /url: /wfportal/UserPreference.cfm
+          - text: "|"
+          - link "Region" [ref=e11] [cursor=pointer]:
+            - /url: /wfportal/Region_Select.cfm
+          - text: "|"
+          - link "Tasks" [ref=e12] [cursor=pointer]:
+            - /url: /wfportal/pu_taskmanager_v2.cfm
+          - text: "|"
+          - link "Support" [ref=e13] [cursor=pointer]:
+            - /url: /wfportal/index2.cfm?action=Info.DefaultHelp
+        - generic [ref=e14]: Test User_03 , CTM QA - WFPortal
+      - generic [ref=e16]:
+        - link "Main" [ref=e17] [cursor=pointer]:
+          - /url: /wfportal/
+          - generic [ref=e18]: Main
+        - link "Orders" [ref=e19] [cursor=pointer]:
+          - /url: /wfportal/ordermanager.cfm
+          - generic [ref=e20]: Orders
+        - link "Long Term" [ref=e21] [cursor=pointer]:
+          - /url: /wfportal/travel_order_manager.cfm
+          - generic [ref=e22]: Long Term
+        - link "Travel" [ref=e23] [cursor=pointer]:
+          - /url: /wfportal/travel_assignment_manager.cfm
+          - generic [ref=e24]: Travel
+        - link "Temp" [ref=e25] [cursor=pointer]:
+          - /url: /wfportal/tempmanager.cfm
+          - generic [ref=e26]: Temp
+        - link "Sub" [ref=e27] [cursor=pointer]:
+          - /url: /wfportal/index2.cfm?action=subcontractors.list
+          - generic [ref=e28]: Sub
+        - link "Client" [ref=e29] [cursor=pointer]:
+          - /url: /wfportal/clientmanager.cfm
+          - generic [ref=e30]: Client
+        - link "Reports" [ref=e31] [cursor=pointer]:
+          - /url: /wfportal/reports/default.cfm
+          - generic [ref=e32]: Reports
+        - link "Accounting" [ref=e33] [cursor=pointer]:
+          - /url: /wfportal/index2.cfm?action=accounting.default
+          - generic [ref=e34]: Accounting
+        - link "Admin" [ref=e35] [cursor=pointer]:
+          - /url: /wfportal/index2.cfm?action=admin.default
+          - generic [ref=e36]: Admin
+    - generic [ref=e37]:
+      - textbox [ref=e39] [cursor=pointer]: Search All
+      - link "New" [ref=e40] [cursor=pointer]:
+        - /url: /wfportal/clientview.cfm?newclient=yes
+      - text: "|"
+      - link "All" [ref=e41] [cursor=pointer]:
+        - /url: /wfportal/clientmanager.cfm
+    - generic [ref=e42]:
+      - link "Saved Searches" [ref=e43] [cursor=pointer]:
+        - /url: javascript:void(0);
+        - img [ref=e44]
+        - text: Saved Searches
+      - generic [ref=e45]:
+        - text: "Client Name:"
+        - link "A" [ref=e46] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=a&temp_status=Active
+        - link "B" [ref=e47] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=b&temp_status=Active
+        - link "C" [ref=e48] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=c&temp_status=Active
+        - link "D" [ref=e49] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=d&temp_status=Active
+        - link "E" [ref=e50] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=e&temp_status=Active
+        - link "F" [ref=e51] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=f&temp_status=Active
+        - link "G" [ref=e52] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=g&temp_status=Active
+        - link "H" [ref=e53] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=h&temp_status=Active
+        - link "I" [ref=e54] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=i&temp_status=Active
+        - link "J" [ref=e55] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=j&temp_status=Active
+        - link "K" [ref=e56] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=k&temp_status=Active
+        - link "L" [ref=e57] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=l&temp_status=Active
+        - link "M" [ref=e58] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=m&temp_status=Active
+        - link "N" [ref=e59] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=n&temp_status=Active
+        - link "O" [ref=e60] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=o&temp_status=Active
+        - link "P" [ref=e61] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=p&temp_status=Active
+        - link "Q" [ref=e62] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=q&temp_status=Active
+        - link "R" [ref=e63] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=r&temp_status=Active
+        - link "S" [ref=e64] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=s&temp_status=Active
+        - link "T" [ref=e65] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=t&temp_status=Active
+        - link "U" [ref=e66] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=u&temp_status=Active
+        - link "V" [ref=e67] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=v&temp_status=Active
+        - link "W" [ref=e68] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=w&temp_status=Active
+        - link "X" [ref=e69] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=x&temp_status=Active
+        - link "Y" [ref=e70] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=y&temp_status=Active
+        - link "Z" [ref=e71] [cursor=pointer]:
+          - /url: clientmanager.cfm?clientname=z&temp_status=Active
+  - generic [ref=e72]:
+    - generic [ref=e73]: Please review and correct the entries noted in red below.
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - button "Save" [ref=e76] [cursor=pointer]
+        - button "Cancel" [ref=e77] [cursor=pointer]
+      - generic [ref=e78]:
+        - group "Contact" [ref=e79]:
+          - generic [ref=e80]: Contact
+          - table [ref=e81]:
+            - rowgroup [ref=e82]:
+              - row "Name HEYHOXGSPOTX" [ref=e83]:
+                - cell "Name" [ref=e84]
+                - cell "HEYHOXGSPOTX" [ref=e85]:
+                  - textbox [ref=e86]: HEYHOXGSPOTX
+              - row "Address 16801 Addison Road You must enter a valid full address (Address, City, State, Zip) for Active Clients." [ref=e87]:
+                - cell "Address" [ref=e88]
+                - cell "16801 Addison Road You must enter a valid full address (Address, City, State, Zip) for Active Clients." [ref=e89]:
+                  - textbox [ref=e90]: 16801 Addison Road
+                  - generic [ref=e91]: You must enter a valid full address (Address, City, State, Zip) for Active Clients.
+              - row "Address Line 2" [ref=e92]:
+                - cell "Address Line 2" [ref=e93]
+                - cell [ref=e94]:
+                  - textbox [ref=e95]
+              - row "City Addison You must enter a valid full address (Address, City, State, Zip) for Active Clients." [ref=e96]:
+                - cell "City" [ref=e97]: City
+                - cell "Addison You must enter a valid full address (Address, City, State, Zip) for Active Clients." [ref=e98]:
+                  - textbox [ref=e99]: Addison
+                  - generic [ref=e100]: You must enter a valid full address (Address, City, State, Zip) for Active Clients.
+              - row "State You must enter a valid full address (Address, City, State, Zip) for Active Clients." [ref=e101]:
+                - cell "State" [ref=e102]
+                - cell "You must enter a valid full address (Address, City, State, Zip) for Active Clients." [ref=e103]:
+                  - textbox [ref=e104]
+                  - combobox [ref=e105]:
+                    - option [selected]
+                    - option "Alabama"
+                    - option "Alaska"
+                    - option "American Samoa"
+                    - option "Arizona"
+                    - option "Arkansas"
+                    - option "California"
+                    - option "Colorado"
+                    - option "Connecticut"
+                    - option "Delaware"
+                    - option "Florida"
+                    - option "Georgia"
+                    - option "Guam"
+                    - option "Hawaii"
+                    - option "Idaho"
+                    - option "Illinois"
+                    - option "Indiana"
+                    - option "Iowa"
+                    - option "Kansas"
+                    - option "Kentucky"
+                    - option "Louisiana"
+                    - option "Maine"
+                    - option "Maryland"
+                    - option "Massachusetts"
+                    - option "Michigan"
+                    - option "Minnesota"
+                    - option "Mississippi"
+                    - option "Missouri"
+                    - option "Montana"
+                    - option "Nebraska"
+                    - option "Nevada"
+                    - option "New Hampshire"
+                    - option "New Jersey"
+                    - option "New Mexico"
+                    - option "New York"
+                    - option "North Carolina"
+                    - option "North Dakota"
+                    - option "Northern Mariana Islands"
+                    - option "Ohio"
+                    - option "Oklahoma"
+                    - option "Oregon"
+                    - option "Pennsylvania"
+                    - option "Puerto Rico"
+                    - option "Rhode Island"
+                    - option "South Carolina"
+                    - option "South Dakota"
+                    - option "Tennessee"
+                    - option "Texas"
+                    - option "Utah"
+                    - option "Vermont"
+                    - option "Virgin Islands"
+                    - option "Virginia"
+                    - option "Washington"
+                    - option "Washington DC"
+                    - option "West Virginia"
+                    - option "Wisconsin"
+                    - option "Wyoming"
+                    - option "Alberta"
+                    - option "British Columbia"
+                    - option "Manitoba"
+                    - option "New Brunswick"
+                    - option "Newfoundland"
+                    - option "Northwest Territories"
+                    - option "Nova Scotia"
+                    - option "Nunavut"
+                    - option "Ontario"
+                    - option "Prince Edward Island"
+                    - option "Quebec"
+                    - option "Saskatchewan"
+                    - option "Yukon Territory"
+                    - option "Australian Capital Territory"
+                    - option "Jervis Bay Territory"
+                    - option "New South Wales"
+                    - option "Northern Territory"
+                    - option "Queensland"
+                    - option "South Australia"
+                    - option "Tasmania"
+                    - option "Victoria"
+                    - option "Western Australia"
+                  - generic [ref=e106]: You must enter a valid full address (Address, City, State, Zip) for Active Clients.
+              - row "Zip 75001 You must enter a valid full address (Address, City, State, Zip) for Active Clients." [ref=e107]:
+                - cell "Zip" [ref=e108]
+                - cell "75001 You must enter a valid full address (Address, City, State, Zip) for Active Clients." [ref=e109]:
+                  - textbox [ref=e110]: "75001"
+                  - generic [ref=e111]: You must enter a valid full address (Address, City, State, Zip) for Active Clients.
+              - row "County" [ref=e112]:
+                - cell "County" [ref=e113]
+                - cell [ref=e114]:
+                  - textbox [ref=e115]
+              - row "Country" [ref=e116]:
+                - cell "Country" [ref=e117]: Country
+                - cell [ref=e118]:
+                  - textbox [ref=e119]
+              - row "Valid Tax Address? Validated on Save" [ref=e120]:
+                - cell "Valid Tax Address?" [ref=e121]
+                - cell "Validated on Save" [ref=e122]:
+                  - generic [ref=e123]:
+                    - img [ref=e124]
+                    - generic [ref=e125]: Validated on Save
+              - row "Main Phone" [ref=e126]:
+                - cell "Main Phone" [ref=e127]
+                - cell [ref=e128]:
+                  - textbox [ref=e129]
+              - row "Main Fax" [ref=e130]:
+                - cell "Main Fax" [ref=e131]
+                - cell [ref=e132]:
+                  - textbox [ref=e133]
+              - row "Website" [ref=e134]:
+                - cell "Website" [ref=e135]
+                - cell [ref=e136]:
+                  - textbox [ref=e137]
+              - row "Beds" [ref=e138]:
+                - cell "Beds" [ref=e139]
+                - cell [ref=e140]:
+                  - textbox [ref=e141]
+              - row "Teaching Hospital" [ref=e142]:
+                - cell "Teaching Hospital" [ref=e143]
+                - cell [ref=e144]:
+                  - checkbox [ref=e145]
+        - group "Client Management" [ref=e146]:
+          - generic [ref=e147]: Client Management
+          - table [ref=e148]:
+            - rowgroup [ref=e149]:
+              - row "Staffing Specialist Clear Field" [ref=e150]:
+                - cell "Staffing Specialist" [ref=e151]
+                - cell "Clear Field" [ref=e152]:
+                  - generic [ref=e153]:
+                    - textbox [ref=e154]
+                    - img "Clear Field" [ref=e155] [cursor=pointer]
+              - row "Sales Rep/Acct Manager Clear Field" [ref=e156]:
+                - cell "Sales Rep/Acct Manager" [ref=e157]
+                - cell "Clear Field" [ref=e158]:
+                  - generic [ref=e159]:
+                    - textbox [ref=e160]
+                    - img "Clear Field" [ref=e161] [cursor=pointer]
+              - row "Billing Specialist Clear Field" [ref=e162]:
+                - cell "Billing Specialist" [ref=e163]
+                - cell "Clear Field" [ref=e164]:
+                  - generic [ref=e165]:
+                    - textbox [ref=e166]
+                    - img "Clear Field" [ref=e167] [cursor=pointer]
+              - row "Contract Date Subtract a day Add a dayView calendarSet today's date" [ref=e168]:
+                - cell "Contract Date" [ref=e169]
+                - cell "Subtract a day Add a dayView calendarSet today's date" [ref=e170]:
+                  - generic [ref=e171]:
+                    - img "Subtract a day" [ref=e172] [cursor=pointer]
+                    - textbox [ref=e173]
+                    - img "Add a day" [ref=e174] [cursor=pointer]
+                    - img "View calendar" [ref=e175] [cursor=pointer]
+                    - img "Set today's date" [ref=e176] [cursor=pointer]
+              - row "New Contract Date Subtract a day Add a dayView calendarSet today's date" [ref=e177]:
+                - cell "New Contract Date" [ref=e178]
+                - cell "Subtract a day Add a dayView calendarSet today's date" [ref=e179]:
+                  - generic [ref=e180]:
+                    - img "Subtract a day" [ref=e181] [cursor=pointer]
+                    - textbox [ref=e182]
+                    - img "Add a day" [ref=e183] [cursor=pointer]
+                    - img "View calendar" [ref=e184] [cursor=pointer]
+                    - img "Set today's date" [ref=e185] [cursor=pointer]
+              - row "Requirements Client Requirement Report" [ref=e186]:
+                - cell "Requirements" [ref=e187]
+                - cell "Client Requirement Report" [ref=e188]
+        - group "Facility | Master Client" [ref=e189]:
+          - generic [ref=e190]: Facility | Master Client
+          - table [ref=e191]:
+            - rowgroup [ref=e192]:
+              - row "Number Associate with Master Client" [ref=e193]:
+                - cell [ref=e194]
+                - cell "Number" [ref=e195]
+                - cell "Associate with Master Client" [ref=e196]
+              - row "Facility Client Clear Field" [ref=e197]:
+                - cell "Facility Client" [ref=e198]:
+                  - radio [checked] [ref=e199]
+                  - text: Facility Client
+                - cell [ref=e200]:
+                  - textbox [ref=e201]
+                - cell "Clear Field" [ref=e202]:
+                  - generic [ref=e203]:
+                    - textbox [ref=e204]
+                    - img "Clear Field" [ref=e205] [cursor=pointer]
+              - row "Master Client" [ref=e206]:
+                - cell "Master Client" [ref=e207]:
+                  - radio [ref=e208]
+                  - text: Master Client
+                - cell [ref=e209]:
+                  - textbox [ref=e210]
+                - cell [ref=e211]
+        - group "Housing" [ref=e212]:
+          - generic [ref=e213]: Housing
+          - table [ref=e214]:
+            - rowgroup [ref=e215]:
+              - row "Housing Cost Low Est. $" [ref=e216]:
+                - cell "Housing Cost Low Est." [ref=e217]
+                - cell "$" [ref=e218]:
+                  - text: $
+                  - textbox [ref=e219]
+              - row "Housing Cost High Est. $" [ref=e220]:
+                - cell "Housing Cost High Est." [ref=e221]
+                - cell "$" [ref=e222]:
+                  - text: $
+                  - textbox [ref=e223]
+      - generic [ref=e224]:
+        - group "Status | Region" [ref=e225]:
+          - generic [ref=e226]: Status | Region
+          - table [ref=e227]:
+            - rowgroup [ref=e228]:
+              - row "Status Active" [ref=e229]:
+                - cell "Status" [ref=e230]
+                - cell "Active" [ref=e231]:
+                  - combobox [ref=e232]:
+                    - option "Pending"
+                    - option "Active" [selected]
+                    - option "SAN Status"
+              - row "VMS Client" [ref=e233]:
+                - cell "VMS Client" [ref=e234]
+                - cell [ref=e235]:
+                  - checkbox [ref=e236]
+              - row "Auto-Publish VMS Orders" [ref=e237]:
+                - cell "Auto-Publish VMS Orders" [ref=e238]
+                - cell [ref=e239]:
+                  - checkbox [disabled] [ref=e240]
+              - row "Region * JasonTest" [ref=e241]:
+                - cell "Region *" [ref=e242]
+                - cell "JasonTest" [ref=e243]:
+                  - combobox [ref=e244]:
+                    - option "No Selection"
+                    - option "region yy"
+                    - option "456099 Region"
+                    - option "465089 Retgion"
+                    - option "A - Test 23"
+                    - option "A34"
+                    - option "Anything Specific"
+                    - option "Arun 877 Region"
+                    - option "Arun Region"
+                    - option "Arun Zip Region"
+                    - option "Arun34"
+                    - option "Arun877931 Region"
+                    - option "Autoclock Region"
+                    - option "Bangalore region"
+                    - option "Chicago"
+                    - option "Clerical/Non-Clinical"
+                    - option "Dougs Region"
+                    - option "East Region"
+                    - option "HTML"
+                    - option "JasonTest" [selected]
+                    - option "Kala Region"
+                    - option "KalaNBR1"
+                    - option "kalatest2"
+                    - option "KM Region1"
+                    - option "KM REgion2"
+                    - option "MDE Region"
+                    - option "North Region"
+                    - option "Region 2-1"
+                    - option "Region 3"
+                    - option "region test"
+                    - option "Region X"
+                    - option "Region12534"
+                    - option "regionname"
+                    - option "RST23"
+                    - option "rst3"
+                    - option "San Region"
+                    - option "San's Region"
+                    - option "shreyas region"
+                    - option "SI REGION_1"
+                    - option "South Region"
+                    - option "Test 1-1"
+                    - option "test Add Region - 1238697"
+                    - option "User Region"
+                    - option "visible"
+                    - option "XSS Arun"
+              - row "Client Type No Selection or" [ref=e245]:
+                - cell "Client Type" [ref=e246]
+                - cell "No Selection or" [ref=e247]:
+                  - combobox [ref=e248]:
+                    - option "Custom"
+                    - option "No Selection" [selected]
+                    - 'option "}_+|"'
+                    - option "326"
+                    - option "801813"
+                    - option "888"
+                    - option "918-258-7133"
+                    - option "A"
+                    - option "Arun"
+                    - option "Automation Task Test"
+                    - option "B"
+                    - option "ClientTYpe-41087"
+                    - option "COVID"
+                    - option "Facility"
+                    - option "google"
+                    - option "Hospital"
+                    - option "LTC"
+                    - option "Master"
+                    - option "Spark1"
+                    - option "Surgery Center"
+                    - option "Test Type"
+                    - option "TestA"
+                    - option "Type-41172"
+                  - text: or
+                  - textbox [ref=e249]
+        - group "External Sources" [ref=e250]:
+          - generic [ref=e251]: External Sources
+          - table [ref=e252]:
+            - rowgroup [ref=e253]:
+              - row "Order Management" [ref=e254]:
+                - cell "Order Management" [ref=e255]
+                - cell [ref=e256]
+              - row "Invoice Management" [ref=e257]:
+                - cell "Invoice Management" [ref=e258]
+                - cell [ref=e259]
+              - row "Time Capture Method" [ref=e260]:
+                - cell "Time Capture Method" [ref=e261]
+                - cell [ref=e262]
+              - row "MSP Program" [ref=e263]:
+                - cell "MSP Program" [ref=e264]
+                - cell [ref=e265]
+              - row "VMS Fees Rate" [ref=e266]:
+                - cell "VMS Fees Rate" [ref=e267]
+                - cell [ref=e268]
+        - group "Rate Groups" [ref=e269]:
+          - generic [ref=e270]: Rate Groups
+          - table [ref=e271]:
+            - rowgroup [ref=e272]:
+              - row [ref=e273]:
+                - cell [ref=e274]
+              - row [ref=e275]:
+                - cell [ref=e276]
+        - group "Referral" [ref=e277]:
+          - generic [ref=e278]: Referral
+          - table [ref=e279]:
+            - rowgroup [ref=e280]:
+              - row "Referral Source" [ref=e281]:
+                - cell "Referral Source" [ref=e282]
+                - cell [ref=e283]:
+                  - combobox [ref=e284]:
+                    - option [selected]
+                    - option "Other"
+                    - option "Not specified"
+                    - option "Test Client Ref"
+              - row "Referred By No Selection or" [ref=e285]:
+                - cell "Referred By" [ref=e286]
+                - cell "No Selection or" [ref=e287]:
+                  - combobox [ref=e288]:
+                    - option "Custom"
+                    - option "No Selection" [selected]
+                    - option "asaaaaaaaaaaaaaaaaaa"
+                    - option "ZipRecruiter"
+                  - text: or
+                  - textbox [ref=e289]
+              - row "ABCReferral No Selection" [ref=e290]:
+                - cell "ABCReferral" [ref=e291]
+                - cell "No Selection" [ref=e292]:
+                  - combobox [ref=e293]:
+                    - option "No Selection" [selected]
+                    - option "t2 t1"
+        - group "Integrations" [ref=e294]:
+          - generic [ref=e295]: Integrations
+          - table [ref=e296]:
+            - rowgroup [ref=e297]:
+              - row "Quickbooks ID * eVCpe7k7XR" [ref=e298]:
+                - cell "Quickbooks ID *" [ref=e299]
+                - cell "eVCpe7k7XR" [ref=e300]:
+                  - textbox [ref=e301]: eVCpe7k7XR
+              - row "MAS 90 ID" [ref=e302]:
+                - cell "MAS 90 ID" [ref=e303]
+                - cell [ref=e304]:
+                  - textbox [ref=e305]
+              - row "Intacct Line of Business" [ref=e306]:
+                - cell "Intacct Line of Business" [ref=e307]
+                - cell [ref=e308]:
+                  - textbox [ref=e309]
+              - row "WellsFargoID" [ref=e310]:
+                - cell "WellsFargoID" [ref=e311]
+                - cell [ref=e312]:
+                  - textbox [ref=e313]
+              - row "WorkLocation" [ref=e314]:
+                - cell "WorkLocation" [ref=e315]
+                - cell [ref=e316]:
+                  - textbox [ref=e317]
+              - row "Client3sanLa" [ref=e318]:
+                - cell "Client3sanLa" [ref=e319]
+                - cell [ref=e320]:
+                  - textbox [ref=e321]
+              - row "QuickBooksID1" [ref=e322]:
+                - cell "QuickBooksID1" [ref=e323]
+                - cell [ref=e324]:
+                  - textbox [ref=e325]
+              - row "QBsBurden" [ref=e326]:
+                - cell "QBsBurden" [ref=e327]
+                - cell [ref=e328]:
+                  - textbox [ref=e329]
+              - row "QuickBooksID3" [ref=e330]:
+                - cell "QuickBooksID3" [ref=e331]
+                - cell [ref=e332]:
+                  - textbox [ref=e333]
+              - row "QuickBooksID4" [ref=e334]:
+                - cell "QuickBooksID4" [ref=e335]
+                - cell [ref=e336]:
+                  - textbox [ref=e337]
+              - row "StaffWizardID" [ref=e338]:
+                - cell "StaffWizardID" [ref=e339]
+                - cell [ref=e340]:
+                  - textbox [ref=e341]
+              - row "PostLocationID" [ref=e342]:
+                - cell "PostLocationID" [ref=e343]
+                - cell [ref=e344]:
+                  - spinbutton [ref=e345]
+              - row "Sage100ID" [ref=e346]:
+                - cell "Sage100ID" [ref=e347]
+                - cell [ref=e348]:
+                  - textbox [ref=e349]
+        - group "Client Notes (max size 8000)" [ref=e350]:
+          - generic [ref=e351]: Client Notes (max size 8000)
+          - generic [ref=e353]:
+            - generic [ref=e355]:
+              - generic [ref=e356]:
+                - button "Headings" [ref=e357] [cursor=pointer]
+                - button "Bold" [ref=e358] [cursor=pointer]
+                - button "Italic" [ref=e359] [cursor=pointer]
+                - button "Strike" [ref=e360] [cursor=pointer]
+              - generic [ref=e362]:
+                - button "Line" [ref=e363] [cursor=pointer]
+                - button "Blockquote" [ref=e364] [cursor=pointer]
+              - generic [ref=e366]:
+                - button "Unordered list" [ref=e367] [cursor=pointer]
+                - button "Ordered list" [ref=e368] [cursor=pointer]
+                - button "Task" [ref=e369] [cursor=pointer]
+                - button "Indent" [ref=e370] [cursor=pointer]
+                - button "Outdent" [ref=e371] [cursor=pointer]
+              - generic [ref=e373]:
+                - button "Insert table" [ref=e374] [cursor=pointer]
+                - button "Insert link" [ref=e375] [cursor=pointer]
+            - paragraph [ref=e381]
+        - group "Staffing Notes (max size 8000)" [ref=e382]:
+          - generic [ref=e383]: Staffing Notes (max size 8000)
+          - generic [ref=e385]:
+            - generic [ref=e387]:
+              - generic [ref=e388]:
+                - button "Headings" [ref=e389] [cursor=pointer]
+                - button "Bold" [ref=e390] [cursor=pointer]
+                - button "Italic" [ref=e391] [cursor=pointer]
+                - button "Strike" [ref=e392] [cursor=pointer]
+              - generic [ref=e394]:
+                - button "Line" [ref=e395] [cursor=pointer]
+                - button "Blockquote" [ref=e396] [cursor=pointer]
+              - generic [ref=e398]:
+                - button "Unordered list" [ref=e399] [cursor=pointer]
+                - button "Ordered list" [ref=e400] [cursor=pointer]
+                - button "Task" [ref=e401] [cursor=pointer]
+                - button "Indent" [ref=e402] [cursor=pointer]
+                - button "Outdent" [ref=e403] [cursor=pointer]
+              - generic [ref=e405]:
+                - button "Insert table" [ref=e406] [cursor=pointer]
+                - button "Insert link" [ref=e407] [cursor=pointer]
+            - paragraph [ref=e413]
+        - group "Billing Notes (max size 8000)" [ref=e414]:
+          - generic [ref=e415]: Billing Notes (max size 8000)
+          - generic [ref=e417]:
+            - generic [ref=e419]:
+              - generic [ref=e420]:
+                - button "Headings" [ref=e421] [cursor=pointer]
+                - button "Bold" [ref=e422] [cursor=pointer]
+                - button "Italic" [ref=e423] [cursor=pointer]
+                - button "Strike" [ref=e424] [cursor=pointer]
+              - generic [ref=e426]:
+                - button "Line" [ref=e427] [cursor=pointer]
+                - button "Blockquote" [ref=e428] [cursor=pointer]
+              - generic [ref=e430]:
+                - button "Unordered list" [ref=e431] [cursor=pointer]
+                - button "Ordered list" [ref=e432] [cursor=pointer]
+                - button "Task" [ref=e433] [cursor=pointer]
+                - button "Indent" [ref=e434] [cursor=pointer]
+                - button "Outdent" [ref=e435] [cursor=pointer]
+              - generic [ref=e437]:
+                - button "Insert table" [ref=e438] [cursor=pointer]
+                - button "Insert link" [ref=e439] [cursor=pointer]
+            - paragraph [ref=e445]
+      - generic [ref=e446]:
+        - button "Save" [ref=e447] [cursor=pointer]
+        - button "Cancel" [ref=e448] [cursor=pointer]
+```
+
+# Test source
+
+```ts
+  1  | import { ClientData } from "../interfaces/ClientData";
+  2  | import type { TestState } from "../fixtures/testFixture";
+  3  | import { BasePage } from "./BasePage";
+  4  | import { expect } from "@playwright/test";
+  5  | 
+  6  | export class ClientPage extends BasePage {
+  7  |   constructor(page: import("@playwright/test").Page, private testState: TestState) {
+  8  |     super(page);
+  9  |   }
+  10 | 
+  11 |   private newTempLink = 'a[href="/wfportal/clientview.cfm?newclient=yes"]';
+  12 |   private clientNameTextbox = "[id='clientname']";
+  13 |   private regionDropdown = "#region";
+  14 |   private quickBooksIdTextbox = "#quickbooksid";
+  15 |   private editButton = "input[name='back']";
+  16 | 
+  17 |   async createNewClient(clientData: ClientData) {
+  18 |     await this.Click(this.newTempLink, "locator");
+  19 |     await expect(this.page).toHaveURL("clientview.cfm?newclient=yes");
+  20 |     await this.TypeText(
+  21 |       this.clientNameTextbox,
+  22 |       clientData.clientname,
+  23 |       "locator",
+  24 |     );
+  25 |     this.testState.clientName = clientData.clientname ?? "";
+  26 |     console.log(
+  27 |       "Client name used for client creation: " + this.testState.clientName,
+  28 |     );
+  29 |     await this.TypeText(
+  30 |       this.addressTextbox,
+  31 |       clientData.address ?? "16801 Addison Road",
+  32 |       "locator",
+  33 |     );
+  34 |     await this.TypeText(
+  35 |       this.cityTextbox,
+  36 |       clientData.city ?? "Addison",
+  37 |       "locator",
+  38 |     );
+  39 |     await this.TypeText(this.stateTextbox, clientData.state ?? "TX", "locator");
+  40 |     await this.TypeText(this.zipTextbox, clientData.zip ?? "75001", "locator");
+  41 |     await this.SelectOption(this.statusDropdown, clientData.status ?? "Active");
+  42 |     await this.SelectOption(
+  43 |       this.regionDropdown,
+  44 |       clientData.region ?? "JasonTest",
+  45 |     );
+  46 |     await this.TypeText(
+  47 |       this.quickBooksIdTextbox,
+  48 |       clientData.quickbooksid ?? "45645654654646",
+  49 |       "locator",
+  50 |     );
+  51 |     await this.saveClient();
+  52 |     await expect(this.page.locator(this.editButton)).toBeVisible({
+  53 |       timeout: 60000,
+  54 |     });
+  55 |     const clientId = new URL(this.page.url()).searchParams.get("clientid");
+  56 |     expect(clientId).toBeTruthy();
+  57 |     this.testState.clientId = clientId!;
+  58 |     console.log("Created Client ID: ", clientId);
+  59 |   }
+  60 | 
+  61 |   private async saveClient() {
+  62 |     const saveButton = this.page.locator(this.saveButton);
+  63 | 
+  64 |     for (let attempt = 1; attempt <= 3; attempt++) {
+> 65 |       await expect(saveButton).toBeVisible({ timeout: 60000 });
+     |                                ^ Error: expect.toBeVisible: Target page, context or browser has been closed
+  66 |       await expect(saveButton).toBeEnabled({ timeout: 60000 });
+  67 | 
+  68 |       try {
+  69 |         await Promise.all([
+  70 |           this.page.waitForURL(/clientid=\d+/, {
+  71 |             timeout: 60000,
+  72 |             waitUntil: "domcontentloaded",
+  73 |           }),
+  74 |           saveButton.click(),
+  75 |         ]);
+  76 |         return;
+  77 |       } catch (error) {
+  78 |         if (this.page.url().match(/clientid=\d+/)) {
+  79 |           return;
+  80 |         }
+  81 | 
+  82 |         if (attempt === 3) {
+  83 |           throw error;
+  84 |         }
+  85 |       }
+  86 |     }
+  87 |   }
+  88 | }
+  89 | 
+```
