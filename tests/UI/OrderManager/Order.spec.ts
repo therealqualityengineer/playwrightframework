@@ -154,3 +154,39 @@ test("@regression Download Profitability Report", async ({
     await reportPage.navigateToReportPage();
     await reportPage.downloadProfitabilityReport(testState.temp_firstName);
 });
+
+test.only("@regression verify the data in downloaded Profitability Report", async ({
+  clearConnectAPI,
+  testState,
+  timecardPage,
+  reportPage,
+  cleanupDownloads
+}) => {
+    await clearConnectAPI.insertTempRecords({
+        firstName: RandomUtil.generateRandomString(7),
+        lastName: RandomUtil.generateRandomString(7),
+      });
+    await clearConnectAPI.insertClients({
+        clientName: RandomUtil.generateRandomString(7),
+      });
+    await clearConnectAPI.insertOrder({
+        customerID: testState.clientId,
+        status: "Filled",
+        userId: "1",
+        nursetype: "RN",
+        specialty: "ER",
+        jobDateStart: RandomUtil.getDate(0),
+        jobDateEnd: RandomUtil.getDate(0),
+        shiftStartTime: "07:00",
+        shiftEndTime: "15:00",
+        shiftType: "Regular",
+        shiftNum: "1",
+        filledBy: testState.tempId,
+        resultType: "json",
+      });
+    await timecardPage.reconcileTimecard(testState.orderId ?? "", "withoutImage");
+    await timecardPage.closeTimecardPopup();
+    await reportPage.navigateToReportPage();
+    await reportPage.downloadProfitabilityReport(testState.temp_firstName);
+    await reportPage.verifyDataInExcel(testState.fileName ?? "", testState.temp_firstName ?? "");
+});

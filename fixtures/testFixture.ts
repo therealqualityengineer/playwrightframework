@@ -17,6 +17,7 @@ export type TestState = {
   clientId?: string;
   clientName?: string;
   orderId?: string;
+  fileName?: string;
 };
 
 type MyFixtures = {
@@ -70,8 +71,8 @@ export const test = base.extend<MyFixtures>({
     await use(new TimecardPage(page));
   },
 
-  reportPage: async ({ page }, use) => {
-    await use(new ReportPage(page));
+  reportPage: async ({ page, testState }, use) => {
+    await use(new ReportPage(page, testState));
   },
 
   cleanupDownloads: async ({}, use) => {

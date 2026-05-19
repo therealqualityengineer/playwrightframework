@@ -1,7 +1,14 @@
-import { expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
+import { expect, TestState } from "../fixtures/testFixture";
+import * as XLSX from "xlsx";
 
 export class ReportPage extends BasePage {
+
+  constructor(page: import("@playwright/test").Page, private testState: TestState) {
+    super(page);
+
+  }
+
   private reportUrl = "reports/default.cfm";
   private profitabilityReportUrl = "reports/rw_profitability2.cfm";
 
@@ -27,7 +34,17 @@ export class ReportPage extends BasePage {
     const fileName = await downloadPage.suggestedFilename();
     await downloadPage.saveAs(`downloads/${fileName}`);
     console.log(fileName);
+    this.testState.fileName = fileName;
     await this.verifyFileDownloaded(fileName.split("_")[0] + "_");
-  } 
+  }
+
+  async verifyDataInExcel(fileName: string, expectedData: string) {
+    console.log("Verifying data in Excel file: " + fileName);
+    const workbook =XLSX.readFile(`downloads/${fileName}`);
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    const data =XLSX.utils.sheet_to_json(worksheet);
+    expect(JSON.stringify(data)).toContain(expectedData);
+  }
 
 }
