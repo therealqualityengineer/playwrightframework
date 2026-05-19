@@ -2,20 +2,6 @@ import type { TestState } from "../fixtures/testFixture";
 import { BasePage } from "./BasePage";
 import { expect } from "@playwright/test";
 
-type TempData = {
-  firstname?: string;
-  lastname?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-  status?: string;
-  homeRegion?: string;
-  contract_or_ee?: string;
-  certification?: string;
-  speciality?: string;
-};
-
 export class TempPage extends BasePage {
   constructor(page: import("@playwright/test").Page, private testState: TestState) {
     super(page);
@@ -126,5 +112,20 @@ export class TempPage extends BasePage {
 
   async navigateToCreateTemp() {
     await this.Click('a[href="/wfportal/tempview.cfm?newtemp=yes"]', "locator");
+  }
+
+  async updateTemp(tempUpdateData: TempUpdateData) {
+    this.page.goto(`/wfportal/tempview.cfm?tempid=${this.testState.tempId}`);
+    this.Click(this.editButton, "locator");
+    if(tempUpdateData.EligibleForDailyPay === "Yes") {
+      this.Click("[name='eligibleForDailyPay'][value='1']", "locator");
+    }else if(tempUpdateData.EligibleForDailyPay === "No") {
+      this.Click("[name='eligibleForDailyPay'][value='0']", "locator");
+    }
+    if(tempUpdateData.DailyPayAdvancePercentage) {
+      this.TypeText("[name='dailyPayAdvancePercentage']", tempUpdateData.DailyPayAdvancePercentage, "locator");
+    }
+    await this.Click(this.saveButton, "locator");
+    await this.ElementVisible(this.editButton, "locator");
   }
 }

@@ -2,6 +2,7 @@ import { APIRequestContext, expect } from "@playwright/test";
 import { RandomUtil } from "../utils/RandomUtil";
 import type { TestState } from "../fixtures/testFixture";
 import { SessionManager } from "./SessionManager";
+import { paySchedule } from "../test-data/AllverificationData";
 
 export class ClearConnectAPI {
   constructor(
@@ -102,6 +103,21 @@ export class ClearConnectAPI {
   }
 
   async insertTempRecords(insertTempData: insertTempRecordsPayload) {
+    let payScheduleValue = null;
+    switch (insertTempData.paySchedule) {
+      case "Daily":
+        payScheduleValue = paySchedule.Daily;
+        break;
+      case "Weekly":
+        payScheduleValue = paySchedule.Weekly;
+        break;
+      case "Biweekly":
+        payScheduleValue = paySchedule.Biweekly;
+        break;
+      case "Monthly":
+        payScheduleValue = paySchedule.Monthly;
+        break;
+    }
     const tempRecordsXml = `
       <tempRecords>
         <tempRecord>
@@ -115,6 +131,8 @@ export class ClearConnectAPI {
           <status>${insertTempData.Status ?? "Active"}</status>
           <certification>${insertTempData.Certification ?? "RN"}</certification>
           <specialty>${insertTempData.Specialty ?? "ER"}</specialty>
+          <paySchedule>${payScheduleValue ?? paySchedule.Daily}</paySchedule>
+          <TempType>${insertTempData.TempType ?? "NewTest_001"}</TempType>
         </tempRecord>
       </tempRecords>
     `;
@@ -140,6 +158,8 @@ export class ClearConnectAPI {
       );
     }
     this.testState.tempId = responseBody[0]?.tempId;
+    this.testState.temp_firstName = responseBody[0]?.firstName ?? this.testState.temp_firstName;
+    this.testState.temp_lastName = responseBody[0]?.lastName ?? this.testState.temp_lastName;
     console.log("Created Temp ID from API:", this.testState.tempId);
     return responseBody;
   }
@@ -181,10 +201,8 @@ export class ClearConnectAPI {
     this.testState.clientId = responseBody[0]?.clientId;
     this.testState.clientName =
       insertClientData.clientName ??
-      responseBody[0]?.clientname ??
-      this.testState.clientName;
+      responseBody[0]?.clientname;
     console.log("Created Client ID from API:", this.testState.clientId);
-    console.log("Client name used for API insert:", this.testState.clientName);
     return responseBody;
   }
 }

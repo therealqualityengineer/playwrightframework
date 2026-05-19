@@ -16,3 +16,10 @@ export const adminUserLinkText = {
   UserPermissionReport: "User Permission Report",
   ClearConnectAPIActivityReport: "ClearConnect API Activity Report",
 };
+
+export enum paySchedule {
+  Daily = "0",
+  Weekly = "1",
+  Biweekly = "2",
+  Monthly = "3",
+}

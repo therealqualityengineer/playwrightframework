@@ -10,7 +10,7 @@ export default defineConfig({
 
   workers: 6,
 
-  retries: 1,
+  retries: 0,
 
   reporter: [["list"], ["html", { open: "never" }], ["allure-playwright"]],
   use: {

@@ -28,10 +28,10 @@ export class TimecardPage extends BasePage {
     );
     const imagePopup = await popupPromise;
     await imagePopup.waitForLoadState();
-    const fileChooserPromise = imagePopup.waitForEvent("filechooser");
+    const fileChooserPromise = imagePopup.waitForEvent("filechooser", { timeout: 10000 });
     await imagePopup.locator("#uploadfile").click();
     const fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(filePath);
+    await fileChooser.setFiles(filePath, { timeout: 15000 });
     // wait for UI reaction after upload
     await expect(imagePopup.locator("#add-btn")).toBeVisible({
       timeout: 15000,
@@ -67,7 +67,6 @@ export class TimecardPage extends BasePage {
   }
 
   async postTimecard(
-    orderId: string,
     timecardPopupPagetoPass: TimecardPage = this.timecardPopupPagetoPass!,
   ) {
     await expect(
@@ -86,5 +85,33 @@ export class TimecardPage extends BasePage {
     await expect(
       timecardPopupPagetoPass.page.getByText("Posted").nth(1),
     ).toBeVisible();
+  }
+
+  async dailyPay(timecardPopupPagetoPass: TimecardPage = this.timecardPopupPagetoPass!)
+  {
+    await expect(
+      timecardPopupPagetoPass.page.getByText("Posted").nth(1),
+    ).toBeVisible();
+    await timecardPopupPagetoPass.Click(
+      this.selectAllReconcileCheckbox,
+      "locator",
+    );
+    const popupPromise = timecardPopupPagetoPass.page.waitForEvent("popup", { timeout: 20000 });
+    await timecardPopupPagetoPass.Click("#newDailyPay", "locator");
+    const dailyPayPopup = await popupPromise;
+    await dailyPayPopup.waitForLoadState("domcontentloaded");
+    const dailyPayPopupPage = new TimecardPage(dailyPayPopup);
+    await expect(dailyPayPopupPage.page).toHaveTitle("Daily Pay");
+    await dailyPayPopupPage.SelectOption("#bankAccount", "Dougs Bank");
+    await dailyPayPopupPage.Click("#runDailyPay", "locator", { timeout: 15000 });
+    await dailyPayPopupPage.Click("[value='Print Later']", "locator");
+    await dailyPayPopupPage.Click("//span[text()='OK']", "locator");
+    await timecardPopupPagetoPass.page.bringToFront();
+    await timecardPopupPagetoPass.page.reload();
+    await timecardPopupPagetoPass.ElementVisible("Paid", "text");
+  }
+
+  async closeTimecardPopup(timecardPopupPagetoPass: TimecardPage = this.timecardPopupPagetoPass!) {
+    await timecardPopupPagetoPass.page.close();
   }
 }

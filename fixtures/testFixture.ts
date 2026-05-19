@@ -1,11 +1,14 @@
 import { test as base } from "@playwright/test";
-
+import fs from "fs";
+import path from "path";
 import { LoginPage } from "../pages/LoginPage";
 import { TempPage } from "../pages/TempPage";
 import { ClientPage } from "../pages/ClientPage";
 import { OrderPage } from "../pages/OrderPage";
 import { ClearConnectAPI } from "../pages/ClearConnectAPI";
 import { TimecardPage } from "../pages/TimecardPage";
+import { ReportPage } from "../pages/ReportPage";
+import { CommonPage } from "../pages/CommonPage";
 
 export type TestState = {
   tempId?: string;
@@ -30,6 +33,12 @@ type MyFixtures = {
   timecardPage: TimecardPage;
 
   testState: TestState;
+
+  reportPage: ReportPage;
+
+  cleanupDownloads: void;
+
+  commonPage: CommonPage;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -60,6 +69,28 @@ export const test = base.extend<MyFixtures>({
   timecardPage: async ({ page }, use) => {
     await use(new TimecardPage(page));
   },
+
+  reportPage: async ({ page }, use) => {
+    await use(new ReportPage(page));
+  },
+
+  cleanupDownloads: async ({}, use) => {
+    const downloadPath = "downloads";
+   if (fs.existsSync(downloadPath)) {
+      fs.readdirSync(downloadPath)
+         .forEach(file => {
+            fs.unlinkSync(
+               path.join(downloadPath, file)
+            );
+         });
+   }
+   console.log("Downloads folder cleaned up");
+   await use();
+  },
+
+  commonPage: async ({ page }, use) => {
+    await use(new CommonPage(page));
+  }
 });
 
 export { expect } from "@playwright/test";

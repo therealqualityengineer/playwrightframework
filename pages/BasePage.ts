@@ -1,4 +1,6 @@
 import { Page, expect } from "@playwright/test";
+import fs from "fs";
+import path from "path";
 
 export class BasePage {
   protected saveButton = "#saveBtn";
@@ -106,5 +108,22 @@ export class BasePage {
         await this.page.keyboard.press("Enter");
         break;
     }
+  }
+
+  async navigateToPage(url: string) {
+    await this.page.goto(url);
+  }
+
+  async verifyFileDownloaded(fileName: string, downloadPath: string = "downloads") {
+    const files = fs.readdirSync(downloadPath);
+    const downloadedFile = files.find(file => file.startsWith(fileName));
+    expect(downloadedFile).toBeTruthy();
+  }
+
+  async deleteFilesInDownloadFolder(downloadPath: string = "downloads") {
+    if (fs.existsSync(downloadPath)) {
+      fs.readdirSync(downloadPath).forEach(file => {fs.unlinkSync(path.join(downloadPath, file));});
+   }
+   console.log("Downloads folder cleaned up");
   }
 }
