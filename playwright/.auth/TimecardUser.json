@@ -1,0 +1,121 @@
+{
+  "cookies": [
+    {
+      "name": "cf_clearance",
+      "value": "fPGqNUt5fMRywNIL2OyspjlDnxg9H_0WUbZKZasUZMY-1779200331-1.2.1.1-AIHPTZimPoacK3POet14diyWRzBwvged_aWYtXJUCsz7S6KCjd3t7qT1HSwqCqQ3_jJMcMX9frXI4oAShCRn53K9AH6XstJUG9ze0tvzgeuMmKQCPQwZwB4ukwQTewYR5lgpTzaJkLPeiW3xsx3j9.p92htVsVpB2u6SGmQmH5xHVxOG89Ejpw_vDP1xjulXJNgzA_sSQAP29SV8c7PRX_bkH6.9PvbQ5sKWZl9pQpjxvYaBr3.MqU.JYxyVUwGGlLWQz_aI8pVAAndfW4VAzfJuYsEHOCp651NSIXMHFsaz7fpXrd1oFk632VKzT6dSq.M9guQLtDwb5JRwYQJXYA",
+      "domain": ".contingenttalentmanagement.com",
+      "path": "/",
+      "expires": 1810736331.869073,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://contingenttalentmanagement.com",
+      "_crHasCrossSiteAncestor": false
+    },
+    {
+      "name": "__cf_bm",
+      "value": "sZQHYTBWnq6TB1zDZr9UIG3nGt39SDaQ.Wx8qNumSD8-1779200331.8539352-1.0.1.1-ugrrEDNi8yFuYOEsf6CSzNFrtiBeydIu_A_73Zyk1IfSCo7wzVUmiwzZigakoCNo3e7KbmZtc0a03qVkgkX25VZJFqoVLSwTcXPmietIhyvfVYRjW3iS0eakPDy7u8T1",
+      "domain": ".contingenttalentmanagement.com",
+      "path": "/",
+      "expires": 1779202131.869145,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SITENAME",
+      "value": "wfportal",
+      "domain": "ctmsqa.contingenttalentmanagement.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "USERNAME",
+      "value": "TESTUSER%5F05",
+      "domain": "ctmsqa.contingenttalentmanagement.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "LOGINPAGEINDEX_1",
+      "value": "1",
+      "domain": "ctmsqa.contingenttalentmanagement.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SESSIONHASH_1",
+      "value": "E13907CAC030AEAAE466B6412C01645B",
+      "domain": "ctmsqa.contingenttalentmanagement.com",
+      "path": "/",
+      "expires": 1779206254.536069,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SESSIONSTATE_1",
+      "value": "E13907CAC030AEAAE466B6412C01645B",
+      "domain": "ctmsqa.contingenttalentmanagement.com",
+      "path": "/",
+      "expires": 1779206254.536109,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SESSIONHASH_1_LASTACTIVITY",
+      "value": "%7Bts%20%272026%2D05%2D19%2010%3A27%3A34%27%7D",
+      "domain": "ctmsqa.contingenttalentmanagement.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://ctmsqa.contingenttalentmanagement.com",
+      "localStorage": [
+        {
+          "name": "_pendo_oldVisitorId.0170d4b5-f626-4e83-5732-81f9d648de45",
+          "value": "{\"ttl\":1787840452121,\"value\":\"CTM_WFP_QA__anonymous\"}"
+        },
+        {
+          "name": "_pendo_guides_blocked.0170d4b5-f626-4e83-5732-81f9d648de45",
+          "value": "{\"ttl\":1779214732444,\"value\":\"0\"}"
+        },
+        {
+          "name": "_pendo_utm.0170d4b5-f626-4e83-5732-81f9d648de45",
+          "value": "{\"channel\":\"Direct\"}"
+        },
+        {
+          "name": "_pendo_meta.0170d4b5-f626-4e83-5732-81f9d648de45",
+          "value": "{\"ttl\":1787840452123,\"value\":1044173042}"
+        },
+        {
+          "name": "_pendo_visitorId.0170d4b5-f626-4e83-5732-81f9d648de45",
+          "value": "{\"ttl\":1787840853600,\"value\":\"CTM_WFP_QA_wfportal_testuser_05\"}"
+        },
+        {
+          "name": "_pendo_sessionId.0170d4b5-f626-4e83-5732-81f9d648de45",
+          "value": "{\"sessionId\":\"NgPjeeUWxHsF11q3\",\"timestamp\":1779200853667}"
+        },
+        {
+          "name": "_pendo_accountId.0170d4b5-f626-4e83-5732-81f9d648de45",
+          "value": "{\"ttl\":1787840853600,\"value\":\"WFP_QA_wfportal\"}"
+        }
+      ]
+    }
+  ]
+}

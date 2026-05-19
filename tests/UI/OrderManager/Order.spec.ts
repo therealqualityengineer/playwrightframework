@@ -1,12 +1,25 @@
 import { test, expect } from "../../../fixtures/testFixture";
+import { LoginPage } from "../../../pages/LoginPage";
 import { RandomUtil } from "../../../utils/RandomUtil";
 const users = require("../../../test-data/users.json");
 
 test.setTimeout(60_000);
 
-test.beforeEach(async ({ loginPage, clearConnectAPI }) => {
-  await loginPage.login(users.validUser3.username, users.validUser3.password);
-  await loginPage.verifySuccessfulLogin();
+test.beforeAll(async ({ browser }) => {
+   const page = await browser.newPage();
+   const loginPage = new LoginPage(page);
+   await loginPage.login(users.validUser3.username, users.validUser3.password);
+   await loginPage.verifySuccessfulLogin();
+   await page.context().storageState({
+      path:
+      'playwright/.auth/orderUser.json'
+   });
+   await page.close();
+});
+
+test.use({
+   storageState:
+      'playwright/.auth/orderUser.json'
 });
 
 test.afterEach(async ({ commonPage}) => {
@@ -155,7 +168,7 @@ test("@regression Download Profitability Report", async ({
     await reportPage.downloadProfitabilityReport(testState.temp_firstName);
 });
 
-test.only("@regression verify the data in downloaded Profitability Report", async ({
+test("@regression verify the data in downloaded Profitability Report", async ({
   clearConnectAPI,
   testState,
   timecardPage,

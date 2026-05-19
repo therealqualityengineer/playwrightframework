@@ -1,20 +1,36 @@
 import { test, expect } from "../../../fixtures/testFixture";
+import { LoginPage } from "../../../pages/LoginPage";
 import { RandomUtil } from "../../../utils/RandomUtil";
 const users = require("../../../test-data/users.json");
 
-test.setTimeout(120_000);
+test.setTimeout(60_000);
+
+test.beforeAll(async ({ browser }) => {
+   const page = await browser.newPage();
+   const loginPage = new LoginPage(page);
+   await loginPage.login(users.validUser5.username, users.validUser5.password);
+   await loginPage.verifySuccessfulLogin();
+   await page.context().storageState({
+      path:
+      'playwright/.auth/TimecardUser.json'
+   });
+   await page.close();
+});
+
+test.use({
+   storageState:
+      'playwright/.auth/TimecardUser.json'
+});
 
 test.describe("Timecard Reconciliation and Posting Using UI", () => {
-  test.beforeEach(async ({ loginPage, clearConnectAPI }) => {
-    await loginPage.login(users.validUser5.username, users.validUser5.password);
-    await loginPage.verifySuccessfulLogin();
+  test.beforeEach(async ({ clearConnectAPI }) => {
     await clearConnectAPI.insertTempRecords({
         firstName: RandomUtil.generateRandomString(7),
         lastName: RandomUtil.generateRandomString(7),
     });
     await clearConnectAPI.insertClients({
         clientName: RandomUtil.generateRandomString(7),
-      });
+      }); 
   });
 
   test.afterEach(async ({ commonPage}) => {
@@ -66,9 +82,7 @@ test.describe("Timecard Reconciliation and Posting Using UI", () => {
 });
 
 test.describe("Timecard Posting Using UI", () => {
-    test.beforeEach(async ({ loginPage, clearConnectAPI}) => {
-      await loginPage.login(users.validUser5.username, users.validUser5.password);
-      await loginPage.verifySuccessfulLogin();
+    test.beforeEach(async ({ clearConnectAPI}) => {
       await clearConnectAPI.insertTempRecords({
         firstName: RandomUtil.generateRandomString(7),
         lastName: RandomUtil.generateRandomString(7),
