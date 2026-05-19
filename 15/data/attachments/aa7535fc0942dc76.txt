@@ -1,0 +1,7 @@
+Created Temp ID:  258695
+Client name used for client creation: SAXAGSXFXM
+Created Client ID:  56772
+Exiting session key: miq5304p
+Created Order ID from API: 61586
+Created Order ID from API: 61586
+Downloads folder cleaned up

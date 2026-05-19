@@ -1,0 +1,6 @@
+Client name used for client creation: UGUZHMCFES
+Created Client ID:  56767
+Exiting session key: miq5304p
+Created Order ID from API: 61582
+Exiting session key: miq5304p
+Retrieved Order ID from API: 61582

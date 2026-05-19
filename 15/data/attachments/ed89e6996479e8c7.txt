@@ -1,0 +1,6 @@
+Exiting session key: miq5304p
+Created Temp ID from API: 258691
+Exiting session key: miq5304p
+Created Client ID from API: 56768
+Exiting session key: miq5304p
+Created Order ID from API: 61583

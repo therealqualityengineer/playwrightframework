@@ -1,0 +1,7 @@
+Exiting session key: undefined
+Generated session key: miq5304p
+Created Temp ID from API: 258697
+Exiting session key: miq5304p
+Created Client ID from API: 56774
+Exiting session key: miq5304p
+Created Order ID from API: 61588

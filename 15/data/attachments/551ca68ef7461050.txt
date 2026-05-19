@@ -1,0 +1,5 @@
+Client name used for client creation: BLPLTNYQGW
+Created Client ID:  56765
+Exiting session key: miq5304p
+Created Order ID from API: 61580
+Created Order ID from API: 61580

@@ -1,0 +1,4 @@
+Client name used for client creation: QDDIVXIQBB
+Created Client ID:  56769
+Exiting session key: miq5304p
+Retrieved Client ID from API: 56769

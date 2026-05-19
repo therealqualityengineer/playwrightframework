@@ -1,0 +1,8 @@
+Created Temp ID:  258693
+Client name used for client creation: PQMRBAAROT
+Created Client ID:  56771
+Exiting session key: undefined
+Generated session key: miq5304p
+Created Order ID from API: 61584
+Created Order ID from API: 61584
+Downloads folder cleaned up

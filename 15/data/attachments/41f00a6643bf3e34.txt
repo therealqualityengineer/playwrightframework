@@ -1,0 +1,10 @@
+Downloads folder cleaned up
+Exiting session key: miq5304p
+Created Temp ID from API: 258698
+Exiting session key: miq5304p
+Created Client ID from API: 56775
+Exiting session key: miq5304p
+Created Order ID from API: 61589
+profitability_20260519.xls
+Verifying data in Excel file: profitability_20260519.xls
+Downloads folder cleaned up
