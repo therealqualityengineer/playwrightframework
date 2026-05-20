@@ -1,0 +1,9 @@
+Downloads folder cleaned up
+Exiting session key: 3k73p7ll
+Created Temp ID from API: 258724
+Exiting session key: 3k73p7ll
+Created Client ID from API: 56801
+Exiting session key: 3k73p7ll
+Created Order ID from API: 61601
+profitability_20260520.xls
+Downloads folder cleaned up

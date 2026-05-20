@@ -1,0 +1,6 @@
+Client name used for client creation: MWWOHJOSVU
+Created Client ID:  56803
+Exiting session key: 3k73p7ll
+Created Order ID from API: 61603
+Exiting session key: 3k73p7ll
+Retrieved Order ID from API: 61603

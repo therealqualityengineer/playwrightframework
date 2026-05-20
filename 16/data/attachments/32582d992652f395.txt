@@ -1,0 +1,7 @@
+Exiting session key: 3k73p7ll
+Created Temp ID from API: 258716
+Exiting session key: 3k73p7ll
+Created Client ID from API: 56791
+Exiting session key: 3k73p7ll
+Created Order ID from API: 61593
+Downloads folder cleaned up

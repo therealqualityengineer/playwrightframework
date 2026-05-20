@@ -1,0 +1,7 @@
+Created Temp ID:  258722
+Client name used for client creation: AMQSUBJTBD
+Created Client ID:  56800
+Exiting session key: 3k73p7ll
+Created Order ID from API: 61599
+Created Order ID from API: 61599
+Downloads folder cleaned up

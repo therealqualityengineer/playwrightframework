@@ -1,0 +1,5 @@
+Client name used for client creation: WRTLCPSEDK
+Created Client ID:  56794
+Exiting session key: 3k73p7ll
+Created Order ID from API: 61594
+Created Order ID from API: 61594

@@ -1,0 +1,4 @@
+Client name used for client creation: IGANPKUUKP
+Created Client ID:  56805
+Exiting session key: 3k73p7ll
+Retrieved Client ID from API: 56805
