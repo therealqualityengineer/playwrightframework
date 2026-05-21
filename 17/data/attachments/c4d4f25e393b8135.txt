@@ -1,0 +1,4 @@
+Client name used for client creation: SBSGCFNIDE
+Created Client ID:  56828
+Exiting session key: ztzjsrnb
+Retrieved Client ID from API: 56828

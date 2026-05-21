@@ -1,0 +1,6 @@
+Created Temp ID:  258742
+Client name used for client creation: INXBJFAZLK
+Created Client ID:  56822
+Client name used for order creation: INXBJFAZLK
+Created order number: 61610
+Downloads folder cleaned up

@@ -1,0 +1,6 @@
+Exiting session key: ztzjsrnb
+Created Temp ID from API: 258751
+Exiting session key: ztzjsrnb
+Created Client ID from API: 56831
+Exiting session key: ztzjsrnb
+Created Order ID from API: 61617

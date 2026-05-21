@@ -1,0 +1,9 @@
+Exiting session key: undefined
+Generated session key: ztzjsrnb
+Created Temp ID from API: 258740
+Exiting session key: ztzjsrnb
+Created Client ID from API: 56819
+Exiting session key: ztzjsrnb
+Created Order ID from API: 61608
+Created Order ID from API: 61608
+Downloads folder cleaned up

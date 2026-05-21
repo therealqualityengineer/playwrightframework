@@ -1,0 +1,7 @@
+Created Temp ID:  258750
+Client name used for client creation: JCSSMTNRMI
+Created Client ID:  56832
+Exiting session key: ztzjsrnb
+Created Order ID from API: 61616
+Created Order ID from API: 61616
+Downloads folder cleaned up

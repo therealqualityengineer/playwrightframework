@@ -1,0 +1,6 @@
+Client name used for client creation: KZZASPQDLY
+Created Client ID:  56827
+Exiting session key: ztzjsrnb
+Created Order ID from API: 61613
+Exiting session key: ztzjsrnb
+Retrieved Order ID from API: 61613
