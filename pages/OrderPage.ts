@@ -42,9 +42,6 @@ export class OrderPage extends BasePage {
       timeout: 15000,
     });
     const orderPopupPage = new OrderPage(orderPage, this.testState);
-    console.log(
-      "Client name used for order creation: " + this.testState.clientName,
-    );
     await orderPopupPage.selectLookupValue(
       orderPopupPage.clientNameTextbox,
       this.testState.clientName ?? "",
@@ -86,7 +83,6 @@ export class OrderPage extends BasePage {
       .nth(0)
       .innerText();
     this.testState.orderId = orderNumber;
-    console.log("Created order number: " + orderNumber);
   }
 
   private async selectLookupValue(
@@ -115,7 +111,6 @@ export class OrderPage extends BasePage {
           throw error;
         }
 
-        await this.page.waitForTimeout(5000);
       }
     }
   }

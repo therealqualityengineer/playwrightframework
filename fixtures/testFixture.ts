@@ -85,7 +85,6 @@ export const test = base.extend<MyFixtures>({
             );
          });
    }
-   console.log("Downloads folder cleaned up");
    await use();
   },
 

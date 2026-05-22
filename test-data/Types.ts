@@ -18,25 +18,25 @@ type insertTempRecordsPayload = {
   firstName?: string;
   lastName?: string;
   homeRegion?: string;
-  Status?: string;
-  Certification?: string;
-  Specialty?: string;
-  Address?: string;
-  City?: string;
-  State?: string;
-  Zip?: string;
+  status?: string;
+  certification?: string;
+  specialty?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
   paySchedule?: string;
-  TempType?: string;
+  tempType?: string;
   resultType?: string;
 };
 
 type insertClientsPayload = {
   clientName?: string;
-  Address?: string;
-  City?: string;
-  State?: string;
-  Zip?: string;
-  Status?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  status?: string;
   regionId?: string;
   resultType?: string;
 };
@@ -58,4 +58,9 @@ type TempData = {
 type TempUpdateData = {
   EligibleForDailyPay?: string;
   DailyPayAdvancePercentage?: string;
+};
+
+type getCertsPayload = {
+  certNameLike?: string;
+  resultType?: string;
 };

@@ -89,7 +89,6 @@ test("@regression Create a filled order", async ({
   });
   expect(responseBody[0]?.orderId).toBeTruthy();
   testState.orderId = responseBody[0]?.orderId;
-  console.log("Created Order ID from API:", testState.orderId);
 });
 
 test("@regression Reconcile filled order", async ({
@@ -130,7 +129,6 @@ test("@regression Reconcile filled order", async ({
   });
   expect(responseBody[0]?.orderId).toBeTruthy();
   testState.orderId = responseBody[0]?.orderId;
-  console.log("Created Order ID from API:", testState.orderId);
 });
 
 test("@regression Download Profitability Report", async ({

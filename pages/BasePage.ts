@@ -124,6 +124,5 @@ export class BasePage {
     if (fs.existsSync(downloadPath)) {
       fs.readdirSync(downloadPath).forEach(file => {fs.unlinkSync(path.join(downloadPath, file));});
    }
-   console.log("Downloads folder cleaned up");
   }
 }

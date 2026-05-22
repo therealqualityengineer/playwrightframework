@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npx playwright *)",
+      "Bash(cat ~/.claude/settings.json 2>/dev/null || echo \"File not found\")",
+      "Read(//Users/arunramalingam/.claude/**)"
+    ]
+  }
+}

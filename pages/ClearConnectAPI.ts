@@ -65,6 +65,19 @@ export class ClearConnectAPI {
     return await response.json();
   }
 
+  async getCerts(getCertsData: getCertsPayload) {
+    const response = await this.request.get(
+      `${this.BASE_URL}?action=getCerts&certNameLike=${getCertsData.certNameLike}&resultType=${getCertsData.resultType ?? "json"}`,
+      {
+        headers: {
+          ...await this.headers(),
+        },
+      },
+    );
+    expect(response.status()).toBe(200);
+    return await response.json();
+  }
+
   async insertOrder(insertOrderData: insertOrderPayload) {
     const response = await this.request.post(this.BASE_URL, {
       headers: {
@@ -98,7 +111,6 @@ export class ClearConnectAPI {
       );
     }
     this.testState.orderId = responseBody[0]?.orderId;
-    console.log("Created Order ID from API:", this.testState.orderId);
     return responseBody;
   }
 
@@ -123,16 +135,16 @@ export class ClearConnectAPI {
         <tempRecord>
           <firstName>${insertTempData.firstName ?? RandomUtil.generateRandomString(7)}</firstName>
           <lastName>${insertTempData.lastName ?? RandomUtil.generateRandomString(5)}</lastName>
-          <address>${insertTempData.Address ?? "16801 Addison Road"}</address>
-          <city>${insertTempData.City ?? "Addison"}</city>
-          <state>${insertTempData.State ?? "TX"}</state>
-          <zip>${insertTempData.Zip ?? "75001"}</zip>
+          <address>${insertTempData.address ?? "16801 Addison Road"}</address>
+          <city>${insertTempData.city ?? "Addison"}</city>
+          <state>${insertTempData.state ?? "TX"}</state>
+          <zip>${insertTempData.zip ?? "75001"}</zip>
           <homeRegion>${insertTempData.homeRegion ?? "1"}</homeRegion>
-          <status>${insertTempData.Status ?? "Active"}</status>
-          <certification>${insertTempData.Certification ?? "RN"}</certification>
-          <specialty>${insertTempData.Specialty ?? "ER"}</specialty>
+          <status>${insertTempData.status ?? "Active"}</status>
+          <certification>${insertTempData.certification ?? "RN"}</certification>
+          <specialty>${insertTempData.specialty ?? "ER"}</specialty>
           <paySchedule>${payScheduleValue ?? paySchedule.Daily}</paySchedule>
-          <TempType>${insertTempData.TempType ?? "NewTest_001"}</TempType>
+          <TempType>${insertTempData.tempType ?? "NewTest_001"}</TempType>
         </tempRecord>
       </tempRecords>
     `;
@@ -160,7 +172,6 @@ export class ClearConnectAPI {
     this.testState.tempId = responseBody[0]?.tempId;
     this.testState.temp_firstName = responseBody[0]?.firstName ?? this.testState.temp_firstName;
     this.testState.temp_lastName = responseBody[0]?.lastName ?? this.testState.temp_lastName;
-    console.log("Created Temp ID from API:", this.testState.tempId);
     return responseBody;
   }
 
@@ -169,10 +180,10 @@ export class ClearConnectAPI {
       <clientRecords>
         <record>
           <clientName>${insertClientData.clientName ?? RandomUtil.generateRandomString(10)}</clientName>
-          <Address>${insertClientData.Address ?? "16801 Addison Road"}</Address>
-          <City>${insertClientData.City ?? "Addison"}</City>
-          <Zip>${insertClientData.Zip ?? "75001"}</Zip>
-          <Status>${insertClientData.Status ?? "Active"}</Status>
+          <Address>${insertClientData.address ?? "16801 Addison Road"}</Address>
+          <City>${insertClientData.city ?? "Addison"}</City>
+          <Zip>${insertClientData.zip ?? "75001"}</Zip>
+          <Status>${insertClientData.status ?? "Active"}</Status>
           <regionId>${insertClientData.regionId ?? "1"}</regionId>
         </record>
       </clientRecords>
@@ -202,7 +213,6 @@ export class ClearConnectAPI {
     this.testState.clientName =
       insertClientData.clientName ??
       responseBody[0]?.clientname;
-    console.log("Created Client ID from API:", this.testState.clientId);
     return responseBody;
   }
 }

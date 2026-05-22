@@ -88,14 +88,13 @@ export class TempPage extends BasePage {
     await this.ElementVisible(this.editButton, "locator");
     await this.ElementVisible("Credentials", "text");
     await this.Click(this.adjustmentLink, "locator");
-    await this.page.waitForTimeout(1000);
+    await expect(this.page.locator("#workerHeaderNav")).toBeVisible();
     const tempIdLocator = await this.page
       .locator("#workerHeaderNav")
       .locator("small")
       .nth(0)
       .textContent();
     const tempId = tempIdLocator?.split(" ")[1] ?? "";
-    console.log("Created Temp ID: ", tempId);
     this.testState.tempId = tempId;
   }
 

@@ -23,9 +23,6 @@ export class ClientPage extends BasePage {
       "locator",
     );
     this.testState.clientName = clientData.clientname ?? "";
-    console.log(
-      "Client name used for client creation: " + this.testState.clientName,
-    );
     await this.TypeText(
       this.addressTextbox,
       clientData.address ?? "16801 Addison Road",
@@ -55,7 +52,6 @@ export class ClientPage extends BasePage {
     const clientId = new URL(this.page.url()).searchParams.get("clientid");
     expect(clientId).toBeTruthy();
     this.testState.clientId = clientId!;
-    console.log("Created Client ID: ", clientId);
   }
 
   private async saveClient() {

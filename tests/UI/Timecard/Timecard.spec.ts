@@ -55,7 +55,6 @@ test.describe("Timecard Reconciliation and Posting Using UI", () => {
   });
   expect(responseBody[0]?.orderId).toBeTruthy();
   testState.orderId = responseBody[0]?.orderId;
-  console.log("Created Order ID from API:", testState.orderId);
   await timecardPage.reconcileTimecard(testState.orderId ?? "", "withoutImage");
   });
 

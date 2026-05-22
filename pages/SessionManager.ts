@@ -8,8 +8,6 @@ export class SessionManager {
 
     static async getSessionKey() {
 
-        console.log("Exiting session key:", this.sessionKey);
-
         if (!this.sessionKey) {
 
             this.sessionKey =
@@ -17,7 +15,6 @@ export class SessionManager {
         }
         if (!await this.verifySessionKey(this.sessionKey)) {
 
-            console.warn("Session key is invalid or expired. Generating a new one.");
             this.sessionKey = await this.generateSessionKey();
         }
         return this.sessionKey;
@@ -31,19 +28,21 @@ export class SessionManager {
                 await request.newContext();
         }
 
+        const apiUsername = process.env.API_USERNAME;
+        const apiPassword = process.env.API_PASSWORD;
+        if (!apiUsername || !apiPassword) {
+            throw new Error("API_USERNAME and API_PASSWORD must be set in the environment");
+        }
         const response = await this.apiContext.post(
             "https://ctmsqa.contingenttalentmanagement.com/wfportal/clearConnect/2_0/?action=getSessionKey&resultType=json",
             {
                 headers: {
-                    Authorization: `Basic ${Buffer.from(
-                        "testuser_04:Therealqaengineer@99"
-                    ).toString("base64")}`,
+                    Authorization: `Basic ${Buffer.from(`${apiUsername}:${apiPassword}`).toString("base64")}`,
                     "Content-Type": "application/json",
                 },
             }
         );
         const session = await response.json();
-        console.log("Generated session key:", session[0]?.sessionKey);
         return session[0]?.sessionKey;
     }
 
@@ -67,7 +66,6 @@ export class SessionManager {
         const result = await response.text();
        if(result.includes("Invalid session"))
        {
-        console.error("Session key is invalid or expired.");
         return false;
        }
        return true;
