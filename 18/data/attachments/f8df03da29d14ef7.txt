@@ -1,0 +1,10 @@
+Downloads folder cleaned up
+Exiting session key: tdz194or
+Created Temp ID from API: 258796
+Exiting session key: tdz194or
+Created Client ID from API: 56880
+Exiting session key: tdz194or
+Created Order ID from API: 61646
+profitability_20260522.xls
+Verifying data in Excel file: profitability_20260522.xls
+Downloads folder cleaned up

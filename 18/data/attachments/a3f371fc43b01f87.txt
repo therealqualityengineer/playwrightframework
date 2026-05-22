@@ -1,0 +1,6 @@
+Client name used for client creation: UATQYTELAV
+Created Client ID:  56871
+Exiting session key: tdz194or
+Created Order ID from API: 61640
+Exiting session key: tdz194or
+Retrieved Order ID from API: 61640

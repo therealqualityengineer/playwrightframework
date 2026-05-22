@@ -1,0 +1,6 @@
+Created Temp ID:  258785
+Client name used for client creation: TWUYCERRWS
+Created Client ID:  56868
+Client name used for order creation: TWUYCERRWS
+Created order number: 61638
+Downloads folder cleaned up

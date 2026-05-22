@@ -1,0 +1,7 @@
+Created Temp ID:  258793
+Client name used for client creation: NCCEQWRQYE
+Created Client ID:  56875
+Exiting session key: tdz194or
+Created Order ID from API: 61643
+Created Order ID from API: 61643
+Downloads folder cleaned up

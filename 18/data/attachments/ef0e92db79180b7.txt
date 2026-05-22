@@ -1,0 +1,7 @@
+Exiting session key: tdz194or
+Created Temp ID from API: 258786
+Exiting session key: tdz194or
+Created Client ID from API: 56867
+Exiting session key: tdz194or
+Created Order ID from API: 61636
+Downloads folder cleaned up

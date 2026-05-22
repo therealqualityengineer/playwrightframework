@@ -1,0 +1,7 @@
+Exiting session key: undefined
+Generated session key: tdz194or
+Created Temp ID from API: 258794
+Exiting session key: tdz194or
+Created Client ID from API: 56876
+Exiting session key: tdz194or
+Created Order ID from API: 61645
