@@ -120,6 +120,14 @@ Desktop.ini
 test-results/
 allure-results/
 playwright-report/
+playwright/.auth/
+.playwright-mcp/
+
+# Claude local settings
+.claude/settings.local.json
+
+# Local agent files
+agent/
 
 # Temporary folders
 tmp/
