@@ -33,8 +33,8 @@ test.describe("Timecard Reconciliation and Posting Using UI", () => {
       }); 
   });
 
-  test.afterEach(async ({ commonPage}) => {
-  await commonPage.deleteAllFilessInDownloadsFolder();
+  test.afterEach(async ({ cleanupDownloads }) => {
+    void cleanupDownloads;
   });
 
   test("@regression Reconcile filled order", async ({clearConnectAPI, testState, timecardPage}) => {
@@ -91,32 +91,12 @@ test.describe("Timecard Posting Using UI", () => {
       });
     });
 
-    test("@regression Post Timecard", async ({clearConnectAPI, testState, timecardPage}) => {
-      await clearConnectAPI.insertOrder({
-        customerID: testState.clientId,
-        status: "Filled",
-        userId: "1",
-        nursetype: "RN",
-        specialty: "ER",
-        jobDateStart: RandomUtil.getDate(0),
-        jobDateEnd: RandomUtil.getDate(0),
-        shiftStartTime: "07:00",
-        shiftEndTime: "15:00",
-        shiftType: "Regular",
-        shiftNum: "1",
-        filledBy: testState.tempId,
-        resultType: "json",
-  });
-  await timecardPage.reconcileTimecard(testState.orderId ?? "", "withImage");
-  await timecardPage.postTimecard();
+    test.afterEach(async ({ cleanupDownloads }) => {
+      void cleanupDownloads;
     });
 
-  test("@regression Daily Pay", async ({clearConnectAPI, testState, timecardPage, tempPage}) => {
-    await tempPage.updateTemp({
-      EligibleForDailyPay: "Yes",
-      DailyPayAdvancePercentage: "0"
-    });
-      await clearConnectAPI.insertOrder({
+    test("@regression Post Timecard", async ({clearConnectAPI, testState, timecardPage}) => {
+      const orderResponse = await clearConnectAPI.insertOrder({
         customerID: testState.clientId,
         status: "Filled",
         userId: "1",
@@ -131,7 +111,33 @@ test.describe("Timecard Posting Using UI", () => {
         filledBy: testState.tempId,
         resultType: "json",
       });
-    await timecardPage.reconcileTimecard(testState.orderId ?? "", "withoutImage");
+      expect(orderResponse[0]?.orderId).toBeTruthy();
+      await timecardPage.reconcileTimecard(testState.orderId!, "withImage");
+      await timecardPage.postTimecard();
+    });
+
+  test("@regression Daily Pay", async ({clearConnectAPI, testState, timecardPage, tempPage}) => {
+    await tempPage.updateTemp({
+      EligibleForDailyPay: "Yes",
+      DailyPayAdvancePercentage: "0"
+    });
+    const orderResponse = await clearConnectAPI.insertOrder({
+      customerID: testState.clientId,
+      status: "Filled",
+      userId: "1",
+      nursetype: "RN",
+      specialty: "ER",
+      jobDateStart: RandomUtil.getDate(0),
+      jobDateEnd: RandomUtil.getDate(0),
+      shiftStartTime: "07:00",
+      shiftEndTime: "15:00",
+      shiftType: "Regular",
+      shiftNum: "1",
+      filledBy: testState.tempId,
+      resultType: "json",
+    });
+    expect(orderResponse[0]?.orderId).toBeTruthy();
+    await timecardPage.reconcileTimecard(testState.orderId!, "withoutImage");
     await timecardPage.postTimecard();
     await timecardPage.dailyPay();
     });

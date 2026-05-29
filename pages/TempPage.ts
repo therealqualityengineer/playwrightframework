@@ -21,13 +21,10 @@ export class TempPage extends BasePage {
   private payflat = "[name='payflat']";
   private billflat = "[name='billflat']";
   private temppayupdate = "[name='temppayupdate']";
-  private flatPayBillEnabled =
-    "//b[contains(text(),'Flat Pay')]/ancestor::td/following-sibling::td//b[contains(text(),'Enabled')]";
+  private flatPayBillEnabled = "td:has-text('Flat Pay') ~ td:has-text('Enabled')";
   private autoPayRadioButton = "[name='howpay'][value='auto']";
-  private autoPayDisabledText =
-    "//b[contains(text(),'Auto Pay')]/ancestor::td/following-sibling::td[contains(normalize-space(),'Disabled')]";
-  private flatPayDisabledText =
-    "//b[contains(text(),'Flat Pay')]/ancestor::td/following-sibling::td[contains(normalize-space(),'Disabled')]";
+  private autoPayDisabledText = "td:has-text('Auto Pay') ~ td:has-text('Disabled')";
+  private flatPayDisabledText = "td:has-text('Flat Pay') ~ td:has-text('Disabled')";
 
   private certificationSelect(certification: string) {
     return `[title='${certification}']`;
@@ -130,15 +127,15 @@ export class TempPage extends BasePage {
   }
 
   async updateTemp(tempUpdateData: TempUpdateData) {
-    this.page.goto(`/wfportal/tempview.cfm?tempid=${this.testState.tempId}`);
-    this.Click(this.editButton, "locator");
+    await this.page.goto(`/wfportal/tempview.cfm?tempid=${this.testState.tempId}`);
+    await this.Click(this.editButton, "locator");
     if(tempUpdateData.EligibleForDailyPay === "Yes") {
-      this.Click("[name='eligibleForDailyPay'][value='1']", "locator");
+      await this.Click("[name='eligibleForDailyPay'][value='1']", "locator");
     }else if(tempUpdateData.EligibleForDailyPay === "No") {
-      this.Click("[name='eligibleForDailyPay'][value='0']", "locator");
+      await this.Click("[name='eligibleForDailyPay'][value='0']", "locator");
     }
     if(tempUpdateData.DailyPayAdvancePercentage) {
-      this.TypeText("[name='dailyPayAdvancePercentage']", tempUpdateData.DailyPayAdvancePercentage, "locator");
+      await this.TypeText("[name='dailyPayAdvancePercentage']", tempUpdateData.DailyPayAdvancePercentage, "locator");
     }
     await this.Click(this.saveButton, "locator");
     await this.ElementVisible(this.editButton, "locator");

@@ -3,7 +3,15 @@
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp@latest", "--browser", "chrome", "--headless"]
+      "args": [
+        "@playwright/mcp@latest",
+        "--browser",
+        "chrome",
+        "--headless"
+      ]
     }
+  },
+  "enabledPlugins": {
+    "commit-commands@claude-plugins-official": true
   }
 }

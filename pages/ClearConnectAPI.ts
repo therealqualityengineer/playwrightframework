@@ -26,7 +26,7 @@ export class ClearConnectAPI {
   private BASE_URL =
     "https://ctmsqa.contingenttalentmanagement.com/wfportal/clearConnect/2_0/";
 
-  async getTemps(tempIdIn: string) {
+  async getTemps(tempIdIn: string): Promise<TempRecord[]> {
     const response = await this.request.get(
       `${this.BASE_URL}?action=getTemps&tempIdIn=${tempIdIn}&resultType=json`,
       {
@@ -39,7 +39,7 @@ export class ClearConnectAPI {
     return await response.json();
   }
 
-  async getClients(clientIdIn: string) {
+  async getClients(clientIdIn: string): Promise<ClientRecord[]> {
     const response = await this.request.get(
       `${this.BASE_URL}?action=getClients&clientIdIn=${clientIdIn}&resultType=json`,
       {
@@ -52,7 +52,7 @@ export class ClearConnectAPI {
     return await response.json();
   }
 
-  async getOrders(OrderId: string) {
+  async getOrders(OrderId: string): Promise<OrderRecord[]> {
     const response = await this.request.get(
       `${this.BASE_URL}?action=getOrders&OrderId=${OrderId}&resultType=json`,
       {
@@ -65,7 +65,7 @@ export class ClearConnectAPI {
     return await response.json();
   }
 
-  async getCerts(getCertsData: getCertsPayload) {
+  async getCerts(getCertsData: getCertsPayload): Promise<CertRecord[]> {
     const response = await this.request.get(
       `${this.BASE_URL}?action=getCerts&certNameLike=${getCertsData.certNameLike}&resultType=${getCertsData.resultType ?? "json"}`,
       {
@@ -78,7 +78,7 @@ export class ClearConnectAPI {
     return await response.json();
   }
 
-  async insertOrder(insertOrderData: insertOrderPayload) {
+  async insertOrder(insertOrderData: insertOrderPayload): Promise<OrderRecord[]> {
     const response = await this.request.post(this.BASE_URL, {
       headers: {
         ...await this.headers(),
@@ -114,7 +114,7 @@ export class ClearConnectAPI {
     return responseBody;
   }
 
-  async insertTempRecords(insertTempData: insertTempRecordsPayload) {
+  async insertTempRecords(insertTempData: insertTempRecordsPayload): Promise<TempRecord[]> {
     let payScheduleValue = null;
     switch (insertTempData.paySchedule) {
       case "Daily":
@@ -175,7 +175,7 @@ export class ClearConnectAPI {
     return responseBody;
   }
 
-  async insertClients(insertClientData: insertClientsPayload) {
+  async insertClients(insertClientData: insertClientsPayload): Promise<ClientRecord[]> {
     const clientRecordsXml = `
       <clientRecords>
         <record>

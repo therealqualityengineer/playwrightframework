@@ -22,8 +22,8 @@ test.use({
       'playwright/.auth/orderUser.json'
 });
 
-test.afterEach(async ({ commonPage}) => {
-  await commonPage.deleteAllFilessInDownloadsFolder();
+test.afterEach(async ({ cleanupDownloads }) => {
+  void cleanupDownloads;
 });
 
 test("@regression Create a new order", async ({
@@ -52,24 +52,15 @@ test("@regression Create a new order", async ({
 });
 
 test("@regression Create a filled order", async ({
-  page,
-  loginPage,
-  tempPage,
-  clientPage,
   clearConnectAPI,
   testState,
 }) => {
-  await loginPage.navigateToPage("tempManagerClassicView.cfm");
-  await tempPage.navigateToCreateTemp();
-  await expect(page).toHaveURL("tempview.cfm?newtemp=yes");
-  await tempPage.createNewTemp({
-    firstname: RandomUtil.generateRandomString(7),
-    lastname: RandomUtil.generateRandomString(7),
+  await clearConnectAPI.insertTempRecords({
+    firstName: RandomUtil.generateRandomString(7),
+    lastName: RandomUtil.generateRandomString(7),
   });
-  await loginPage.navigateToPage("clientmanager.cfm");
-  await clientPage.createNewClient({
-    clientname: RandomUtil.generateRandomString(10),
-    quickbooksid: RandomUtil.generateRandomAlphaNumeric(10),
+  await clearConnectAPI.insertClients({
+    clientName: RandomUtil.generateRandomString(10),
   });
   expect(testState.clientId).toMatch(/^\d+$/);
   const responseBody = await clearConnectAPI.insertOrder({
@@ -92,24 +83,16 @@ test("@regression Create a filled order", async ({
 });
 
 test("@regression Reconcile filled order", async ({
-  page,
-  loginPage,
-  tempPage,
-  clientPage,
   clearConnectAPI,
   testState,
+  timecardPage,
 }) => {
-  await loginPage.navigateToPage("tempManagerClassicView.cfm");
-  await tempPage.navigateToCreateTemp();
-  await expect(page).toHaveURL("tempview.cfm?newtemp=yes");
-  await tempPage.createNewTemp({
-    firstname: RandomUtil.generateRandomString(7),
-    lastname: RandomUtil.generateRandomString(7),
+  await clearConnectAPI.insertTempRecords({
+    firstName: RandomUtil.generateRandomString(7),
+    lastName: RandomUtil.generateRandomString(7),
   });
-  await loginPage.navigateToPage("clientmanager.cfm");
-  await clientPage.createNewClient({
-    clientname: RandomUtil.generateRandomString(10),
-    quickbooksid: RandomUtil.generateRandomAlphaNumeric(10),
+  await clearConnectAPI.insertClients({
+    clientName: RandomUtil.generateRandomString(10),
   });
   expect(testState.clientId).toMatch(/^\d+$/);
   const responseBody = await clearConnectAPI.insertOrder({
@@ -129,6 +112,7 @@ test("@regression Reconcile filled order", async ({
   });
   expect(responseBody[0]?.orderId).toBeTruthy();
   testState.orderId = responseBody[0]?.orderId;
+  await timecardPage.reconcileTimecard(testState.orderId ?? "", "withoutImage");
 });
 
 test("@regression Download Profitability Report", async ({

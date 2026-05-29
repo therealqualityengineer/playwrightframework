@@ -8,7 +8,6 @@ import { OrderPage } from "../pages/OrderPage";
 import { ClearConnectAPI } from "../pages/ClearConnectAPI";
 import { TimecardPage } from "../pages/TimecardPage";
 import { ReportPage } from "../pages/ReportPage";
-import { CommonPage } from "../pages/CommonPage";
 
 export type TestState = {
   tempId?: string;
@@ -38,8 +37,6 @@ type MyFixtures = {
   reportPage: ReportPage;
 
   cleanupDownloads: void;
-
-  commonPage: CommonPage;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -88,9 +85,7 @@ export const test = base.extend<MyFixtures>({
    await use();
   },
 
-  commonPage: async ({ page }, use) => {
-    await use(new CommonPage(page));
-  }
+
 });
 
 export { expect } from "@playwright/test";

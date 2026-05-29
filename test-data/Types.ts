@@ -64,3 +64,22 @@ type getCertsPayload = {
   certNameLike?: string;
   resultType?: string;
 };
+
+type TempRecord = {
+  tempId: string;
+  firstName?: string;
+  lastName?: string;
+};
+
+type ClientRecord = {
+  clientId: string;
+  clientname?: string;
+};
+
+type OrderRecord = {
+  orderId: string;
+};
+
+type CertRecord = {
+  certName: string;
+};

@@ -8,9 +8,9 @@ export default defineConfig({
 
   fullyParallel: false,
 
-  workers: 6,
+  workers: 4,
 
-  retries: 1,
+  retries: 0,
 
   reporter: [["list"], ["html", { open: "never" }], ["allure-playwright"]],
   use: {

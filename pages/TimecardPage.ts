@@ -105,7 +105,7 @@ export class TimecardPage extends BasePage {
     await dailyPayPopupPage.SelectOption("#bankAccount", "Dougs Bank");
     await dailyPayPopupPage.Click("#runDailyPay", "locator", { timeout: 15000 });
     await dailyPayPopupPage.Click("[value='Print Later']", "locator");
-    await dailyPayPopupPage.Click("//span[text()='OK']", "locator");
+    await dailyPayPopupPage.Click("button", "role", { name: "OK" });
     await timecardPopupPagetoPass.page.bringToFront();
     await timecardPopupPagetoPass.page.reload();
     await timecardPopupPagetoPass.ElementVisible("Paid", "text");
