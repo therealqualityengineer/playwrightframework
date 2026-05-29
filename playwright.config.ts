@@ -14,7 +14,7 @@ export default defineConfig({
 
   reporter: [["list"], ["html", { open: "never" }], ["allure-playwright"]],
   use: {
-    headless: false,
+    headless: true,
 
     screenshot: "only-on-failure",
 

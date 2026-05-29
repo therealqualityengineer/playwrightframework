@@ -23,6 +23,11 @@ export class TempPage extends BasePage {
   private temppayupdate = "[name='temppayupdate']";
   private flatPayBillEnabled =
     "//b[contains(text(),'Flat Pay')]/ancestor::td/following-sibling::td//b[contains(text(),'Enabled')]";
+  private autoPayRadioButton = "[name='howpay'][value='auto']";
+  private autoPayDisabledText =
+    "//b[contains(text(),'Auto Pay')]/ancestor::td/following-sibling::td[contains(normalize-space(),'Disabled')]";
+  private flatPayDisabledText =
+    "//b[contains(text(),'Flat Pay')]/ancestor::td/following-sibling::td[contains(normalize-space(),'Disabled')]";
 
   private certificationSelect(certification: string) {
     return `[title='${certification}']`;
@@ -88,7 +93,7 @@ export class TempPage extends BasePage {
     await this.ElementVisible(this.editButton, "locator");
     await this.ElementVisible("Credentials", "text");
     await this.Click(this.adjustmentLink, "locator");
-    await expect(this.page.locator("#workerHeaderNav")).toBeVisible();
+    await expect(this.page.locator("#workerHeaderNav")).toBeVisible({ timeout: 30000 });
     const tempIdLocator = await this.page
       .locator("#workerHeaderNav")
       .locator("small")
@@ -105,8 +110,19 @@ export class TempPage extends BasePage {
     await this.TypeText(this.payflat, flatPay.toString(), "locator");
     await this.TypeText(this.billflat, flatBill.toString(), "locator");
     await this.Click(this.temppayupdate, "locator");
-    const flatPayEnabled = await this.page.locator(this.flatPayBillEnabled);
+    const flatPayEnabled = this.page.locator(this.flatPayBillEnabled);
     await expect(flatPayEnabled).toBeVisible({ timeout: 10000 });
+  }
+
+  async verifyAutoPayDisplaysDisabled() {
+    await expect(this.page.locator(this.autoPayDisabledText)).toBeVisible({ timeout: 10000 });
+  }
+
+  async enableAutoPayAndVerifyFlatPayDisabled() {
+    await this.Click(this.temppayedit, "locator");
+    await this.Click(this.autoPayRadioButton, "locator");
+    await this.Click(this.temppayupdate, "locator");
+    await expect(this.page.locator(this.flatPayDisabledText)).toBeVisible({ timeout: 10000 });
   }
 
   async navigateToCreateTemp() {

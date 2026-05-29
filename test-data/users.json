@@ -22,5 +22,9 @@
   "validUser5": {
     "username": "testuser_05",
     "password": "Therealqaengineer@99"
+  },
+  "validUser6": {
+    "username": "testuser_06",
+    "password": "Therealqaengineer@99"
   }
 }

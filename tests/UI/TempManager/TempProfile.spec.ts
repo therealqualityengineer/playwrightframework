@@ -52,3 +52,21 @@ test("@regression Enable temp flat pay and bill", async ({
   });
   await tempPage.enableFlatPayBill(55, 125);
 });
+
+test("@regression Verify enabling Flat Pay disables Auto Pay in Temp Pay section", async ({
+  page,
+  loginPage,
+  tempPage,
+}) => {
+  await loginPage.defaultLogin();
+  await loginPage.navigateToPage("tempManagerClassicView.cfm");
+  await tempPage.navigateToCreateTemp();
+  await expect(page).toHaveURL("tempview.cfm?newtemp=yes");
+  await tempPage.createNewTemp({
+    firstname: RandomUtil.generateRandomString(7),
+    lastname: RandomUtil.generateRandomString(7),
+  });
+  await tempPage.enableFlatPayBill(55, 125);
+  await tempPage.verifyAutoPayDisplaysDisabled();
+  await tempPage.enableAutoPayAndVerifyFlatPayDisabled();
+});

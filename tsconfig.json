@@ -19,6 +19,7 @@
     "fixtures/**/*",
     "utils/**/*",
     "test-data/**/*",
+    "agent/**/*",
     "playwright.config.ts"
   ]
 }
