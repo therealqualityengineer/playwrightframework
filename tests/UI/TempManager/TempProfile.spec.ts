@@ -70,3 +70,35 @@ test("@regression Verify enabling Flat Pay disables Auto Pay in Temp Pay section
   await tempPage.verifyAutoPayDisplaysDisabled();
   await tempPage.enableAutoPayAndVerifyFlatPayDisabled();
 });
+
+test("@regression verify the driving distance between temp and client", async ({
+  page,
+  loginPage,
+  tempPage,
+  clearConnectAPI,
+  testState,
+}) => {
+  await loginPage.defaultLogin();
+  await clearConnectAPI.insertTempRecords({
+    firstName: RandomUtil.generateRandomString(7),
+    lastName: RandomUtil.generateRandomString(7),
+  });
+  await clearConnectAPI.insertClients({
+    clientName: RandomUtil.generateRandomString(8),
+    address: "765 Medical Center Court",
+    city: "Chula Vista",
+    state: "CA",
+    zip: "91911",
+  });
+  await loginPage.navigateToPage(`/wfportal/tempview.cfm?tempid=${testState.tempId}`);
+  await tempPage.clickFacilitiesTab();
+  await tempPage.selectRegionInFacilities("All Regions");
+  await tempPage.selectClientForFacilities(testState.clientName!);
+  await tempPage.clickFacilitiesFilterButton();
+  await tempPage.verifyClientFilteredInFacilities(testState.clientName!);
+  await tempPage.clickGetDrivingDistance();
+  await tempPage.verifyDrivingDistanceAndTime();
+  const distance = await tempPage.getDrivingDistanceMiles();
+  expect(distance).toBeGreaterThanOrEqual(1300);
+  expect(distance).toBeLessThanOrEqual(1450);
+});
