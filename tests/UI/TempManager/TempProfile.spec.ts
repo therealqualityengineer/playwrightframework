@@ -71,7 +71,7 @@ test("@regression Verify enabling Flat Pay disables Auto Pay in Temp Pay section
   await tempPage.enableAutoPayAndVerifyFlatPayDisabled();
 });
 
-test.only("@regression verify the driving distance between temp and client", async ({
+test("@regression verify the driving distance between temp and client", async ({
   page,
   loginPage,
   tempPage,
