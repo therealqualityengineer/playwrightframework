@@ -212,3 +212,17 @@ test("@regression verify the client name in downloaded Client Profiles Report", 
     await reportPage.downloadClientProfilesReport(testState.clientName);
     await reportPage.verifyDataInExcel(testState.fileName ?? "", testState.clientName ?? "");
 });
+
+test("@regression verify the temp name in downloaded Temp Profiles by Certification report", async ({
+  clearConnectAPI,
+  testState,
+  reportPage,
+}) => {
+    await clearConnectAPI.insertTempRecords({
+        firstName: RandomUtil.generateRandomString(7),
+        lastName: RandomUtil.generateRandomString(7),
+      });
+    await reportPage.navigateToReportPage();
+    await reportPage.downloadTempProfilesByCertificationReport(testState.temp_firstName, "RN");
+    await reportPage.verifyDataInExcel(testState.fileName ?? "", testState.temp_firstName ?? "");
+});

@@ -26,6 +26,16 @@ export class TempPage extends BasePage {
   private autoPayDisabledText = "td:has-text('Auto Pay') ~ td:has-text('Disabled')";
   private flatPayDisabledText = "td:has-text('Flat Pay') ~ td:has-text('Disabled')";
 
+  private facilitiesTab = "a:has-text('Facilities')";
+  private facilitiesRegionDropdown = "#search_region";
+  private selectClientsLink = "#cfobj_textItem0";
+  private facilitiesFilterButton = "#btnSubmit";
+  private facilitiesModalSearchInput = "#searchfor";
+  private facilitiesModalSearchButton = "input[name='search'][value='Search']";
+  private facilitiesModalCloseButton = "input[name='close'][value='Close']";
+  private permanentDrivingDistanceGetLink = "a[id^='getDrivingDistance_']";
+  private drivingDistanceResult = "td:has-text('Distance:')";
+
   private certificationSelect(certification: string) {
     return `[title='${certification}']`;
   }
@@ -124,6 +134,47 @@ export class TempPage extends BasePage {
 
   async navigateToCreateTemp() {
     await this.Click('a[href="/wfportal/tempview.cfm?newtemp=yes"]', "locator");
+  }
+
+  async clickFacilitiesTab() {
+    await this.Click(this.facilitiesTab, "locator");
+  }
+
+  async selectRegionInFacilities(region: string) {
+    await this.SelectOption(this.facilitiesRegionDropdown, region);
+  }
+
+  async selectClientForFacilities(clientName: string) {
+    await this.Click(this.selectClientsLink, "locator");
+    await expect(this.page.locator(this.facilitiesModalSearchInput)).toBeVisible({ timeout: 10000 });
+    await this.TypeText(this.facilitiesModalSearchInput, clientName, "locator");
+    await this.Click(this.facilitiesModalSearchButton, "locator");
+    await this.page.locator(`li.zuiBtn[title*="${clientName}"]`).first().click();
+    await this.Click(this.facilitiesModalCloseButton, "locator");
+  }
+
+  async clickFacilitiesFilterButton() {
+    await this.Click(this.facilitiesFilterButton, "locator");
+  }
+
+  async verifyClientFilteredInFacilities(clientName: string) {
+    await expect(this.page.getByText(clientName, { exact: false }).first()).toBeVisible({ timeout: 15000 });
+  }
+
+  async clickGetDrivingDistance() {
+    await this.Click(this.permanentDrivingDistanceGetLink, "locator");
+  }
+
+  async verifyDrivingDistanceAndTime() {
+    await expect(this.page.locator(this.drivingDistanceResult).first()).toBeVisible({ timeout: 30000 });
+    const text = await this.page.locator(this.drivingDistanceResult).first().textContent() ?? "";
+    expect(text).toMatch(/Time:/);
+  }
+
+  async getDrivingDistanceMiles(): Promise<number> {
+    const text = await this.page.locator(this.drivingDistanceResult).first().textContent() ?? "";
+    const match = text.match(/Distance:\s*(\d+)/);
+    return parseInt(match?.[1] ?? "0", 10);
   }
 
   async updateTemp(tempUpdateData: TempUpdateData) {

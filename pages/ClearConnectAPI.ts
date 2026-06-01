@@ -182,6 +182,7 @@ export class ClearConnectAPI {
           <clientName>${insertClientData.clientName ?? RandomUtil.generateRandomString(10)}</clientName>
           <Address>${insertClientData.address ?? "16801 Addison Road"}</Address>
           <City>${insertClientData.city ?? "Addison"}</City>
+          <State>${insertClientData.state ?? ""}</State>
           <Zip>${insertClientData.zip ?? "75001"}</Zip>
           <Status>${insertClientData.status ?? "Active"}</Status>
           <regionId>${insertClientData.regionId ?? "1"}</regionId>
