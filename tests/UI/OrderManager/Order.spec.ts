@@ -185,3 +185,30 @@ test("@regression verify the data in downloaded Profitability Report", async ({
     await reportPage.downloadProfitabilityReport(testState.temp_firstName);
     await reportPage.verifyDataInExcel(testState.fileName ?? "", testState.temp_firstName ?? "");
 });
+
+test("@regression verify the temp name in downloaded Temp Profiles Report", async ({
+  clearConnectAPI,
+  testState,
+  reportPage,
+}) => {
+    await clearConnectAPI.insertTempRecords({
+        firstName: RandomUtil.generateRandomString(7),
+        lastName: RandomUtil.generateRandomString(7),
+      });
+    await reportPage.navigateToReportPage();
+    await reportPage.downloadTempProfilesReport(testState.temp_firstName);
+    await reportPage.verifyDataInExcel(testState.fileName ?? "", testState.temp_firstName ?? "");
+});
+
+test("@regression verify the client name in downloaded Client Profiles Report", async ({
+  clearConnectAPI,
+  testState,
+  reportPage,
+}) => {
+    await clearConnectAPI.insertClients({
+        clientName: RandomUtil.generateRandomString(10),
+      });
+    await reportPage.navigateToReportPage();
+    await reportPage.downloadClientProfilesReport(testState.clientName);
+    await reportPage.verifyDataInExcel(testState.fileName ?? "", testState.clientName ?? "");
+});

@@ -73,16 +73,16 @@ export const test = base.extend<MyFixtures>({
   },
 
   cleanupDownloads: async ({}, use) => {
-    const downloadPath = "downloads";
-   if (fs.existsSync(downloadPath)) {
-      fs.readdirSync(downloadPath)
-         .forEach(file => {
-            fs.unlinkSync(
-               path.join(downloadPath, file)
-            );
-         });
-   }
-   await use();
+    await use();
+    const downloadPath = path.resolve("downloads");
+    if (fs.existsSync(downloadPath)) {
+      fs.readdirSync(downloadPath).forEach(file => {
+        const filePath = path.join(downloadPath, file);
+        if (fs.statSync(filePath).isFile()) {
+          fs.unlinkSync(filePath);
+        }
+      });
+    }
   },
 
 
