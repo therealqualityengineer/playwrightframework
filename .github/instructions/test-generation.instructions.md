@@ -159,25 +159,15 @@ Do not inline raw Playwright locator calls in test files. Use the page object me
 
 ---
 
-## Step 7 — Wrap actions in `test.step()`
+## Step 7 — Match the existing test structure
 
-Every test body must use `test.step()` to group actions into named phases. See `.github/skills/playwright-test-generation/SKILL.md` for the full naming convention and rules.
+**Read the existing tests in the target file before writing anything.**
 
-```ts
-await test.step("Seed temp record via API", async () => {
-  await clearConnectAPI.insertTempRecords({ ... });
-  expect(testState.tempId).toBeTruthy();
-});
-await test.step("Navigate to temp profile", async () => {
-  await loginPage.defaultLogin();
-  await loginPage.navigateToPage(`/wfportal/tempview.cfm?tempid=${testState.tempId}`);
-});
-await test.step("Verify flat pay is enabled", async () => {
-  await expect(page.locator("...")).toBeVisible();
-});
-```
+- If existing tests use `test.step()` blocks, add steps using the same naming pattern (seed → navigate → act → `'Verify …'`).
+- If existing tests use flat sequential `await` calls, use the same flat style.
+- **Do not add `test.step()` to a file whose existing tests do not use it.**
 
-Phases: seed → navigate → act → `'Verify …'` (always last, always has a specific assertion).
+When `test.step()` is used, follow the naming pattern in `.github/skills/playwright-test-generation/SKILL.md`.
 
 ---
 
@@ -295,8 +285,10 @@ The full checklist is in `.github/skills/playwright-test-generation/SKILL.md`. A
 - [ ] No `waitForTimeout` calls
 - [ ] No hardcoded names, IDs, or dates — all dynamic values use `RandomUtil`
 - [ ] No `import { test, expect } from '@playwright/test'` — must use the fixture re-export
-- [ ] Every test body uses `test.step()` with a final `'Verify …'` step
+- [ ] Test structure (flat calls vs `test.step()`) matches the existing tests in the file
 - [ ] Every test has exactly one tag (`@smoke`, `@regression`, or `@api`)
 - [ ] `test.setTimeout(120_000)` at file level when any test has more than two steps or API calls
 - [ ] File download tests have `afterEach` with `void cleanupDownloads`
 - [ ] API insert calls are `await`ed and IDs are guarded before use
+- [ ] Any new page object method uses a single selector — no fallback candidate arrays
+- [ ] Any new page object method uses one expected text — no multi-variant loops

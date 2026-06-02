@@ -76,6 +76,32 @@ PlaywrightFramework/
 - **Check `BasePage` before defining locators** in a subclass: `saveButton`, `addressTextbox`, `cityTextbox`, `stateTextbox`, `zipTextbox`, `statusDropdown` are already provided.
 - **`testState`** is per-test only — never use it to share state between tests.
 - Global payload types (`insertOrderPayload`, `TempData`, `TempRecord`, etc.) are ambient globals from `test-data/Types.ts` — no import needed.
+- **Match the existing test structure** in the target file — if existing tests use flat `await` calls, do not add `test.step()`.
+
+---
+
+## Page object rules (when writing or modifying `pages/*.ts`)
+
+- **One selector per element** — no candidate arrays, no fallback loops. If a selector doesn't work, fix it.
+  ```ts
+  // ✅ correct
+  private facilitiesSaveButton = "input[value='save']";
+
+  // ❌ wrong — hides the real problem
+  const candidates = ['#saveBtn', 'input[value="Save"]', 'input[value="save"]', ...];
+  ```
+- **One expected text per assertion** — no multi-variant loops. Use the exact text the app produces.
+  ```ts
+  // ✅ correct
+  await this.ElementVisible("Facilities Successfully Updated.", "text");
+
+  // ❌ wrong
+  for (const m of ['Facilities Successfully Updated.', 'Successfully Updated', ...]) { ... }
+  ```
+- **`waitForLoadState("load")`** — never wrap `"networkidle"` in `try/catch`.
+- **No `try/catch` that swallows selector failures** — let them fail loudly.
+- **Use BasePage wrappers** (`TypeText`, `Click`, `ElementVisible`, `SelectOption`) for all standard interactions. Use raw `this.page.locator()` only when wrappers cannot support the interaction (e.g. chained locators for row-scoped elements).
+- **No inline comments** explaining what code does — only add a comment when the WHY is non-obvious.
 
 ---
 

@@ -115,6 +115,15 @@ expect(testState.clientId).toMatch(/^\d+$/);
 - **No hardcoded wait times or polling loops.**
 - **No duplicate locators** — check `BasePage` for `saveButton`, `addressTextbox`, `cityTextbox`, `stateTextbox`, `zipTextbox`, `statusDropdown` before defining them in a subclass.
 - **No direct Playwright imports** — always use the fixture re-export.
+- **No `test.step()` unless the existing tests in the file already use it** — read the file first and match its structure.
+
+## Page object anti-patterns (when a test requires a new page method)
+
+- **No candidate selector arrays** — one selector per element. If a selector doesn't work, fix it; don't add fallbacks.
+- **No multi-variant text loops** — pick the single exact text the app produces for success messages.
+- **No `networkidle` wrapped in `try/catch`** — use `waitForLoadState("load")`.
+- **No `try/catch` that silently swallows failures** — selector and assertion errors must surface.
+- **No inline comments** explaining WHAT the code does — only comment the non-obvious WHY.
 
 ## Popup handling
 

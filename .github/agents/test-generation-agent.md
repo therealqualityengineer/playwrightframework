@@ -65,7 +65,7 @@ User:                                                     # optional — key fro
 | `Test Title` | Yes | Human-readable title without tag — agent prepends `Tag` |
 | `Tag` | Yes | `@smoke`, `@regression`, or `@api` — one per test |
 | `Instructions` | No | Free-form directives that override or extend defaults |
-| `Steps` | No | Ordered user actions — each maps to a `test.step()` block |
+| `Steps` | No | Ordered user actions — used to generate the test body; structure (flat vs `test.step()`) is determined by the existing file |
 | `Assert` | No | Observable outcome — becomes the final `'Verify …'` step |
 | `User` | No | `users.json` key. Omit for `defaultLogin()`. Combine with `storageState` instruction for `beforeAll`. |
 
@@ -104,10 +104,10 @@ User:                                                     # optional — key fro
 1. Parse the YAML input and extract all fields.
 2. Read all files listed in "Files to read before generating".
 3. Resolve auth pattern, seeding strategy, and fixture list from the decision logic.
-4. Read `playwright-test-generation` SKILL — apply `test.step()` naming rules and structure.
+4. Read `playwright-test-generation` SKILL — read the target file's existing tests and match their structure (flat sequential calls or `test.step()` blocks). Apply step naming rules only if `test.step()` is already used in the file.
 5. Read `test-data-management` SKILL — apply `RandomUtil`, ambient types, `TestState` guards.
 6. If storageState: read `storage-state-authentication` SKILL — apply `beforeAll` + `test.use()`.
-7. Map each `Steps` entry to a page object method call inside a named `test.step()` block.
+7. Map each `Steps` entry to a page object method call. Use `test.step()` blocks only if the existing tests in the target file already use them; otherwise use flat sequential `await` calls.
 8. Write the final `'Verify …'` step from the `Assert` field with a specific assertion.
 9. Run the pre-output checklist from `playwright-test-generation` SKILL before returning code.
 
@@ -253,7 +253,8 @@ test("@api Verify getClients returns the inserted client", async ({
 
 The full checklist is in `.github/skills/playwright-test-generation/SKILL.md`. Before returning code, verify these agent-specific items:
 
-- [ ] Every test body uses `test.step()` blocks with a final `'Verify …'` step
+- [ ] Test structure (flat calls vs `test.step()`) matches the existing tests in the target file
+- [ ] When `test.step()` is used, the final step is `'Verify …'` with at least one specific assertion
 - [ ] Each `Steps` field entry is mapped — none silently dropped
 - [ ] If `Target File` exists: only the new test is output — no existing code repeated
 - [ ] If `storageState`: `beforeAll` path and `test.use()` path are identical strings
