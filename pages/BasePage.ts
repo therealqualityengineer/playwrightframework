@@ -35,7 +35,7 @@ export class BasePage {
   }
 
   async SelectOption(locator: string, dropdownOption: string) {
-    await this.page.locator(locator).selectOption(dropdownOption);
+    await this.page.locator(locator).nth(0).selectOption(dropdownOption);
   }
 
   async Click(

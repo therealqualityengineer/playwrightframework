@@ -28,13 +28,14 @@ export class TempPage extends BasePage {
 
   private facilitiesTab = "a:has-text('Facilities')";
   private facilitiesRegionDropdown = "#search_region";
-  private selectClientsLink = "#cfobj_textItem0";
+  private selectClientsLink = "li:has-text('Select Clients')";
   private facilitiesFilterButton = "#btnSubmit";
   private facilitiesModalSearchInput = "#searchfor";
   private facilitiesModalSearchButton = "input[name='search'][value='Search']";
   private facilitiesModalCloseButton = "input[name='close'][value='Close']";
   private permanentDrivingDistanceGetLink = "a[id^='getDrivingDistance_']";
   private drivingDistanceResult = "td:has-text('Distance:')";
+  private facilitiesSaveButton = "input[value='save']";
 
   private certificationSelect(certification: string) {
     return `[title='${certification}']`;
@@ -149,8 +150,14 @@ export class TempPage extends BasePage {
     await expect(this.page.locator(this.facilitiesModalSearchInput)).toBeVisible({ timeout: 10000 });
     await this.TypeText(this.facilitiesModalSearchInput, clientName, "locator");
     await this.Click(this.facilitiesModalSearchButton, "locator");
-    await this.page.locator(`li.zuiBtn[title*="${clientName}"]`).first().click();
+    const result = this.page.locator(`li.zuiBtn[title*="${clientName}"]`).first();
+    await result.waitFor({ state: "visible", timeout: 10000 });
+    if (await this.page.locator(`li.zuiBtn.zuiSelected[title*="${clientName}"]`).count() > 0) {
+      await result.click(); // deselect before reselecting so the chip is added on close
+    }
+    await result.click();
     await this.Click(this.facilitiesModalCloseButton, "locator");
+    await expect(this.page.locator(this.facilitiesModalCloseButton)).not.toBeVisible({ timeout: 10000 });
   }
 
   async clickFacilitiesFilterButton() {
@@ -190,5 +197,28 @@ export class TempPage extends BasePage {
     }
     await this.Click(this.saveButton, "locator");
     await this.ElementVisible(this.editButton, "locator");
+  }
+
+  async setClientOriented(clientName: string) {
+    const clientRow = this.page.locator('tr', { hasText: clientName }).first();
+    const orientedCheckbox = clientRow.locator('input[type="checkbox"]').first();
+    await expect(orientedCheckbox).toBeVisible({ timeout: 10000 });
+    const checked = await orientedCheckbox.isChecked().catch(() => false);
+    if (!checked) await orientedCheckbox.click();
+  }
+
+  async isClientOriented(clientName: string): Promise<boolean> {
+    const clientRow = this.page.locator('tr', { hasText: clientName }).first();
+    const orientedCheckbox = clientRow.locator('input[type="checkbox"]').first();
+    return await orientedCheckbox.isChecked().catch(() => false);
+  }
+
+  async saveFacilities() {
+    await this.Click(this.facilitiesSaveButton, "locator");
+    await this.page.waitForLoadState("load");
+  }
+
+  async verifyFacilitiesSuccess() {
+    await this.ElementVisible("Facilities Successfully Updated.", "text");
   }
 }

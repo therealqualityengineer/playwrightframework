@@ -1,130 +1,27 @@
-````md id="ojjkba"
 ---
 applyTo: "**"
 ---
 
 # Playwright CTMS Framework — Design & Architecture
 
-This document teaches GitHub Copilot how to:
-- analyze the framework
-- explain architecture
-- visualize relationships
-- generate diagrams
-- summarize execution flows
-- explain framework design decisions
-- scaffold framework-aware responses
-
-Follow all response formatting and visualization rules exactly.
+Reference for understanding, explaining, and visualizing this framework's architecture. Apply these formatting rules when answering questions about how the framework works. **Do not apply them when generating production code** — production code follows the rules in `copilot-instructions.md` and the feature-specific instruction files.
 
 ---
 
-# Core Response Rule
+## Preferred response format for framework explanations
 
-When answering ANY framework-related question:
-
-- architecture
-- fixtures
-- page objects
-- APIs
-- TestState
-- execution flow
-- CI/CD
-- authentication
-- debugging
-- inheritance
-- test generation
-- framework conventions
-- navigation
-- reporting
-- environment handling
-
-ALWAYS respond using:
-1. Visual-first explanations
-2. Mermaid diagrams whenever possible
-3. Mapping tables
-4. Minimal prose
-5. Annotated examples when useful
-
-Never respond with plain paragraphs only.
-
----
-
-# Preferred Diagram Format
-
-## Primary Format — Mermaid Diagrams
-
-Always prefer Mermaid diagrams over ASCII diagrams whenever possible.
-
-Supported Mermaid types:
-- flowchart
-- classDiagram
-- sequenceDiagram
-- stateDiagram
-- graph TD/LR
-
-Example:
-
-```mermaid
-flowchart TD
-    Config[playwright.config.ts]
-    Fixture[testFixture.ts]
-    Pages[Page Objects]
-    API[API Layer]
-    Tests[Tests]
-
-    Config --> Fixture
-    Fixture --> Pages
-    Fixture --> API
-    Pages --> Tests
-    API --> Tests
-````
-
----
-
-## Fallback Format — ASCII Diagrams
-
-Use ASCII diagrams only when Mermaid is not suitable.
-
-Example:
-
-```text
-PLAYWRIGHT CONFIG
-        ↓
-FIXTURES
-   ↓         ↓
-PAGES      APIs
-   ↓         ↓
-     TESTS
-```
-
----
-
-# Mandatory Response Structure
-
-For every framework explanation:
-
-```text
-1. Mermaid diagram or visual
+1. Visual diagram (Mermaid preferred) or ASCII tree
 2. Short explanation
-3. Optional mapping table
-4. Optional annotated code
-```
+3. Mapping table where useful
+4. Annotated example only when illustrating a concept — never add inline comments to production code
 
-Never:
+### Mermaid diagram types
 
-* start with large prose
-* bury diagrams after paragraphs
-* answer using text only
+Use `flowchart`, `classDiagram`, `sequenceDiagram`, `stateDiagram`, or `graph TD/LR`.
 
 ---
 
-# Architecture Visualization Rules
-
-## Overall Framework Architecture
-
-Always show layer relationships.
-
-Preferred format:
+## Architecture
 
 ```mermaid
 flowchart TD
@@ -145,45 +42,48 @@ flowchart TD
 
 ---
 
-## Fixture & TestState Flow
+## Directory structure
 
-Always visualize TestState relationships.
-
-Preferred format:
-
-```mermaid
-flowchart LR
-    API[ClearConnectAPI]
-    TS[TestState]
-    TempPage[TempPage]
-    Tests[Tests]
-
-    API --> TS
-    TS --> TempPage
-    TempPage --> Tests
 ```
-
-or:
-
-```mermaid
-sequenceDiagram
-    participant Test
-    participant API
-    participant TestState
-    participant TempPage
-
-    Test->>API: insertTempRecords()
-    API->>TestState: tempId
-    Test->>TempPage: use tempId
+PlaywrightFramework/
+├── fixtures/testFixture.ts          # Custom typed fixtures (page objects + testState)
+├── pages/
+│   ├── BasePage.ts                  # Base class — common wrappers & shared locators
+│   ├── ClearConnectAPI.ts           # REST API layer
+│   └── [FeaturePage].ts            # Feature page objects extending BasePage
+├── utils/RandomUtil.ts              # Dynamic test data helpers
+├── test-data/
+│   ├── Types.ts                     # Ambient global types (no import needed)
+│   ├── AllverificationData.ts       # Static assertion strings
+│   ├── MultipleClientData.ts        # Data-driven arrays
+│   └── users.json                   # Named test user credentials
+└── tests/
+    ├── UI/<Feature>/                # UI specs (one file per feature area)
+    ├── API/ClearConnect.spec.ts     # API-only specs
+    └── seed.spec.ts
 ```
 
 ---
 
-## BasePage Inheritance
+## TestState flow
 
-Always show inheritance diagrams.
+```mermaid
+sequenceDiagram
+    participant Test
+    participant API as ClearConnectAPI
+    participant TS as TestState
+    participant PO as Page Object
 
-Preferred format:
+    Test->>API: insertTempRecords()
+    API->>TS: tempId, temp_firstName, temp_lastName
+    Test->>API: insertClients()
+    API->>TS: clientId, clientName
+    Test->>PO: use testState.tempId / clientId
+```
+
+---
+
+## BasePage inheritance
 
 ```mermaid
 classDiagram
@@ -192,342 +92,95 @@ classDiagram
     BasePage <|-- ClientPage
     BasePage <|-- OrderPage
     BasePage <|-- ReportPage
+    BasePage <|-- TimecardPage
 ```
+
+`BasePage` provides: `TypeText`, `Click`, `ElementVisible`, `SelectOption`, `TypeTextEnter`, plus protected locators `saveButton`, `addressTextbox`, `cityTextbox`, `stateTextbox`, `zipTextbox`, `statusDropdown`.
 
 ---
 
-## API Authentication Flow
-
-Always show token lifecycle visually.
-
-Preferred format:
+## API authentication flow
 
 ```mermaid
 flowchart TD
-    A[Test Calls API]
-    B[SessionManager]
-    C{Token Cached?}
-    D[Validate Token]
+    A[Test calls API method]
+    B[SessionManager.authHeader]
+    C{Token cached?}
+    D[Validate token]
     E{Valid?}
-    F[Return Token]
+    F[Return token]
     G[POST /auth]
-    H[Cache Token]
+    H[Cache token]
 
-    A --> B
-    B --> C
-    C -->|Yes| D
-    D --> E
+    A --> B --> C
+    C -->|Yes| D --> E
     E -->|Yes| F
     E -->|No| G
-    C -->|No| G
-    G --> H
-    H --> F
+    C -->|No| G --> H --> F
 ```
 
 ---
 
-## Test Execution Flow
+## Locator priority
 
-Always visualize execution order.
+```mermaid
+flowchart LR
+    A[getByTestId] --> B[getByRole] --> C[getByLabel] --> D[getByText] --> E[CSS] --> F[XPath — last resort]
+```
 
-Preferred format:
+---
+
+## Test execution flow
 
 ```mermaid
 flowchart TD
-    A[Load Environment]
-    B[Initialize Fixtures]
-    C[Create TestState]
-    D[Inject Page Objects]
-    E[Execute Test]
-    F[Cleanup Downloads]
+    A[Load .env.{NODE_ENV}]
+    B[Initialize fixtures]
+    C[Create TestState per test]
+    D[Inject page objects]
+    E[Execute test body]
+    F[Cleanup downloads if needed]
 
     A --> B --> C --> D --> E --> F
 ```
 
 ---
 
-## storageState Authentication Pattern
-
-Preferred format:
+## storageState pattern
 
 ```mermaid
 flowchart TD
-    A[beforeAll]
-    B[loginPage.login()]
-    C[Save storageState]
-    D[test.use(storageState)]
-    E[Authenticated Tests]
+    A[beforeAll: browser.newPage]
+    B[loginPage.login + verifySuccessfulLogin]
+    C[page.context.storageState — save to file]
+    D[test.use storageState — file level]
+    E[Tests run with pre-authenticated session]
 
     A --> B --> C --> D --> E
 ```
 
 ---
 
-## CI/CD Pipeline
-
-Always use flow diagrams.
-
-Preferred format:
+## CI/CD pipeline
 
 ```mermaid
 flowchart LR
-    A[workflow_dispatch]
-    B[npm run test]
-    C[Generate Allure]
-    D[Deploy GitHub Pages]
-    E[Slack Notification]
-
-    A --> B --> C --> D --> E
+    A[workflow_dispatch] --> B[npm run test]
+    B --> C[Generate Allure]
+    C --> D[Deploy GitHub Pages]
+    D --> E[Slack notification]
 ```
 
 ---
 
-# Folder Structure Rules
-
-When explaining folders, always use:
-
-* Mermaid graph
-  OR
-* ASCII tree
-
-Preferred format:
-
-```text
-tests/
-├── UI/
-│   ├── TempManager/
-│   ├── ClientManager/
-│   └── OrderManager/
-├── API/
-└── seed.spec.ts
-```
-
----
-
-# Mapping Table Rules
-
-Use tables for:
-
-* fixture mappings
-* locator priority
-* tag meanings
-* utility references
-* environment mappings
-* command mappings
-
-Example:
-
-| Fixture   | Purpose            |
-| --------- | ------------------ |
-| tempPage  | Temp UI operations |
-| orderPage | Order workflows    |
-
----
-
-# Locator Strategy Visualization
-
-Always visualize locator priority order.
-
-Preferred format:
-
-```mermaid
-flowchart LR
-    A[getByTestId]
-    B[getByRole]
-    C[getByLabel]
-    D[getByText]
-    E[CSS]
-    F[XPath]
-
-    A --> B --> C --> D --> E --> F
-```
-
----
-
-# Annotated Code Rules
-
-When generating framework examples:
-
-* annotate important lines
-* explain conventions inline
-* explain fixture usage
-* explain page object reuse
-
-Example:
-
-```ts
-await loginPage.defaultLogin(); // authenticate
-await loginPage.navigateToPage("/temp/profile"); // navigate using baseURL
-```
-
----
-
-# Response Depth Rules
-
-## Simple Questions
-
-Use:
-
-* one Mermaid diagram
-* short explanation
-* one mapping table if needed
-
----
-
-## Deep Analysis Questions
-
-Use:
-
-* multiple Mermaid diagrams
-* architecture breakdown
-* mappings
-* skeleton diagrams
-* annotated code
-* execution flowcharts
-
----
-
-# Skeleton & Relationship Visualization
-
-Always visualize:
-
-* inheritance
-* ownership
-* dependencies
-* flow relationships
-
-Example:
-
-```text
-BasePage
-   ↑
-TempPage
-   ↑
-TempProfile.spec.ts
-```
-
----
-
-# Framework Conventions
-
-## Imports
-
-Always recommend:
-
-```ts
-import { test, expect } from "../../fixtures/testFixture";
-```
-
-Never recommend:
-
-```ts
-import { test } from "@playwright/test";
-```
-
----
-
-## Wait Strategy
-
-Never recommend:
-
-* waitForTimeout
-* arbitrary sleeps
-
-Prefer:
-
-* Playwright auto-waiting
-* explicit waits
-* stable assertions
-
----
-
-## Assertions
-
-Keep assertions:
-
-* inside tests
-* reusable only when necessary
-
----
-
-## Navigation
-
-Always recommend:
-
-```ts
-await loginPage.navigateToPage(relativeUrl);
-```
-
----
-
-## Parallelism
-
-Remember:
-
-* fullyParallel = false
-* tests inside file run serially
-* workers run across files
-
-Visualize when explaining execution.
-
----
-
-# Prompt Interpretation Rules
-
-When prompts contain:
-
-* "summarize"
-* "analyze"
-* "explain"
-* "show architecture"
-* "show flow"
-* "show hierarchy"
-* "show mapping"
-* "show lifecycle"
-* "show structure"
-
-Automatically generate:
-
-* Mermaid diagrams
-* mappings
-* relationship charts
-* execution flows
-
-without requiring user to explicitly ask for visuals.
-
----
-
-# Expected Output Style
-
-GOOD:
-
-```text
-Mermaid Diagram
-    ↓
-Short explanation
-    ↓
-Mapping table
-    ↓
-Annotated example
-```
-
-BAD:
-
-```text
-Long paragraph-only explanation
-```
-
----
-
-# Final Rule
-
-If unsure which format to use:
-
-1. Prefer Mermaid flowchart
-2. Then mapping table
-3. Then minimal explanation
-
-Visual-first responses are mandatory.
-
-```
-```
+## Key conventions (quick reference)
+
+| Convention | Rule |
+|------------|------|
+| Import | Always from `fixtures/testFixture.ts`, never `@playwright/test` |
+| Dynamic data | `RandomUtil.generateRandomString/Number/AlphaNumeric/getDate` |
+| Waiting | Playwright auto-wait + explicit assertions — never `waitForTimeout` |
+| Navigation | `loginPage.navigateToPage(partialUrl)` — partial URL resolved against `baseURL` |
+| Tags | `@smoke` (critical path), `@regression` (full coverage), `@api` (API-only) |
+| Parallelism | `fullyParallel: false` — tests within a file run serially; workers run across files |
+| Comments | None in production code — only when the WHY is non-obvious |

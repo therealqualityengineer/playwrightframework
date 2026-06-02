@@ -19,9 +19,15 @@ Also read the relevant page object in `pages/` and any existing spec in the targ
 
 ---
 
-## `test.step()` — required in every test
+## `test.step()` — match the existing file
 
-Every test body must group its actions into named `test.step()` blocks. This makes Allure and HTML reports readable and pinpoints failures precisely. It is not optional.
+Read the existing tests in the target file first.
+
+- If they use `test.step()` blocks, add steps with the same structure.
+- If they use flat sequential `await` calls, keep the same flat style.
+- **Do not add `test.step()` to a file whose existing tests don't use it.**
+
+When `test.step()` is used, it groups actions into named phases for Allure and HTML reports.
 
 ### Naming convention
 
@@ -103,11 +109,18 @@ Verify every item before returning generated code. The agent's pre-output checkl
 - [ ] No raw `page.locator()` or `page.click()` calls in the test body
 
 **Structure**
-- [ ] Every test body has `test.step()` blocks
-- [ ] The final step in every test is `'Verify …'` with at least one specific assertion
+- [ ] Test structure (flat calls vs `test.step()`) matches the existing tests in the target file
+- [ ] When `test.step()` is used, the final step is `'Verify …'` with at least one specific assertion
 - [ ] Assertions are specific (value, ID, text content) — not just `.toBeVisible()` on an arbitrary element
 - [ ] `test.setTimeout(120_000)` at file level when test has more than two steps or any API call
 - [ ] `afterEach` with `void cleanupDownloads` when any test downloads a file
+
+**Page object methods (when adding new ones)**
+- [ ] Single selector — no candidate arrays or fallback loops
+- [ ] Single expected text per assertion — no multi-variant loops
+- [ ] BasePage locators (`saveButton`, `addressTextbox`, etc.) checked before adding to a subclass
+- [ ] No `networkidle` wait wrapped in try/catch — use `waitForLoadState("load")`
+- [ ] No try/catch that swallows selector failures
 
 **Data and auth**
 - [ ] Every `clearConnectAPI` insert is `await`ed and the `testState` ID is guarded before use

@@ -1,7 +1,6 @@
-```md id="5m0k1d"
 ---
 name: create-pr-agent
-description: Analyze repository changes, validate automation updates, generate a pull request summary, and create a clean production-ready PR.
+description: Analyze repository changes, validate automation quality, generate a pull request summary, and create a clean production-ready PR.
 ---
 
 # Purpose
@@ -30,18 +29,32 @@ Branch naming, title format, description structure, and excluded files →
 
 # Validation (must pass before PR creation)
 
-- No `test.only` in any file
-- No `waitForTimeout` calls introduced
-- No generated reports staged (`allure-results/`, `playwright-report/`, `test-output/`)
-- Imports use `fixtures/testFixture.ts`, not `@playwright/test` directly
-- No duplicate locators or methods already present in `BasePage`
-- No debug code or hardcoded values
+**Test files**
+- [ ] No `test.only` in any file
+- [ ] No `waitForTimeout` calls introduced
+- [ ] Imports use `fixtures/testFixture.ts`, not `@playwright/test` directly
+- [ ] All `clearConnectAPI` inserts are `await`ed and the resulting `testState` ID is guarded
+- [ ] No hardcoded names, IDs, or dates — all dynamic values use `RandomUtil`
+- [ ] Test structure (flat calls vs `test.step()`) matches the existing tests in the target file
+- [ ] Every test has exactly one tag: `@smoke`, `@regression`, or `@api`
+
+**Page object files**
+- [ ] No candidate selector arrays (multiple fallback selectors tried in a loop)
+- [ ] No multi-text loops for success message verification — one specific text per assertion
+- [ ] No `networkidle` waits wrapped in `try/catch`
+- [ ] No `try/catch` that swallows selector failures silently
+- [ ] No locators already present in `BasePage` redefined in a subclass
+- [ ] `waitForLoadState("load")` used, not `waitForLoadState("networkidle")` with swallowed exception
+
+**General**
+- [ ] No generated reports staged (`allure-results/`, `playwright-report/`, `test-output/`)
+- [ ] No debug code, `.env.*` files, or `node_modules/` staged
+- [ ] No inline comments added to production code that explain WHAT it does
 
 ---
 
 # Constraints
 
-- Do not create PR if any validation check above fails critically
+- Do not create PR if any critical validation check fails
 - Do not commit generated reports, debug code, or `.env.*` files
 - Prefer maintainable changes over quick fixes
-```
