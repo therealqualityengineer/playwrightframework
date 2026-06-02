@@ -213,6 +213,20 @@ export class TempPage extends BasePage {
     return await orientedCheckbox.isChecked().catch(() => false);
   }
 
+  async setClientPreferred(clientName: string) {
+    const clientRow = this.page.locator('tr', { hasText: clientName }).first();
+    const preferredRadio = clientRow.locator('input[type="radio"]').nth(1);
+    await expect(preferredRadio).toBeVisible({ timeout: 10000 });
+    const checked = await preferredRadio.isChecked().catch(() => false);
+    if (!checked) await preferredRadio.click();
+  }
+
+  async isClientPreferred(clientName: string): Promise<boolean> {
+    const clientRow = this.page.locator('tr', { hasText: clientName }).first();
+    const preferredRadio = clientRow.locator('input[type="radio"]').nth(1);
+    return await preferredRadio.isChecked().catch(() => false);
+  }
+
   async saveFacilities() {
     await this.Click(this.facilitiesSaveButton, "locator");
     await this.page.waitForLoadState("load");
