@@ -8,14 +8,91 @@ export class ClientPage extends BasePage {
     super(page);
   }
 
-  private newTempLink = 'a[href="/wfportal/clientview.cfm?newclient=yes"]';
+  private newClientLink = 'a[href="/wfportal/clientview.cfm?newclient=yes"]';
   private clientNameTextbox = "[id='clientname']";
   private regionDropdown = "#region";
   private quickBooksIdTextbox = "#quickbooksid";
-  private editButton = "input[name='back']";
+  private backButton = "input[name='back']";
+  private defaultLunchMinutesLabel = "Default Lunch Minutes";
+  private payOnlyLabel = "Pay Only";
+  private allowEarlyClockInsLabel = "Allow Early Clock-Ins";
+  private saveTimeEntryButton = "button:has-text('Save Settings')";
+
+  async clickTimeEntryAndApprovalTab() {
+    await this.Click('a:has-text("Time Entry and Approval")', "locator");
+    await expect(this.page.locator('text=Default Lunch Minutes')).toBeVisible({
+      timeout: 60000,
+    });
+  }
+
+  async saveTimeEntryApprovalSettings(settings: {
+    defaultLunchMinutes: string;
+    payOnly: string;
+    clientClockingData: string;
+    allowEarlyClockIns: string;
+  }) {
+    const defaultLunchSection = this.page
+      .locator(`text=${this.defaultLunchMinutesLabel}`)
+      .locator("..");
+    await defaultLunchSection
+      .locator("input[type='text']")
+      .fill(settings.defaultLunchMinutes);
+
+    const payOnlySection = this.page.locator(`text=${this.payOnlyLabel}`).locator("..");
+    await payOnlySection.locator(`label:has-text("${settings.payOnly}")`).click();
+
+    const clientClockingSelect = this.page.locator("#ClockingSource");
+    await clientClockingSelect.selectOption({ label: settings.clientClockingData });
+
+    const allowEarlyClockInsSection = this.page
+      .locator(`text=${this.allowEarlyClockInsLabel}`)
+      .locator("..");
+    await allowEarlyClockInsSection
+      .locator(`label:has-text("${settings.allowEarlyClockIns}")`)
+      .click();
+
+    const saveButtonLocator = this.page.locator(this.saveTimeEntryButton);
+    await expect(saveButtonLocator).toBeVisible({ timeout: 60000 });
+    await saveButtonLocator.scrollIntoViewIfNeeded();
+    await saveButtonLocator.click();
+  }
+
+  async verifyTimeEntryApprovalSettings(settings: {
+    defaultLunchMinutes: string;
+    payOnly: string;
+    clientClockingData: string;
+    allowEarlyClockIns: string;
+  }) {
+    const defaultLunchSection = this.page
+      .locator(`text=${this.defaultLunchMinutesLabel}`)
+      .locator("..");
+    await expect(defaultLunchSection.locator("input[type='text']")).toHaveValue(
+      settings.defaultLunchMinutes,
+      { timeout: 60000 },
+    );
+
+    const payOnlySection = this.page.locator(`text=${this.payOnlyLabel}`).locator("..");
+    await expect(
+      payOnlySection.getByRole("radio", { name: settings.payOnly }),
+    ).toBeChecked({ timeout: 60000 });
+
+    const clientClockingSelect = this.page.locator("#ClockingSource");
+    await expect(
+      clientClockingSelect.locator("option:checked"),
+    ).toHaveText(settings.clientClockingData, { timeout: 60000 });
+
+    const allowEarlyClockInsSection = this.page
+      .locator(`text=${this.allowEarlyClockInsLabel}`)
+      .locator("..");
+    await expect(
+      allowEarlyClockInsSection.getByRole("radio", {
+        name: settings.allowEarlyClockIns,
+      }),
+    ).toBeChecked({ timeout: 60000 });
+  }
 
   async createNewClient(clientData: ClientData) {
-    await this.Click(this.newTempLink, "locator");
+    await this.Click(this.newClientLink, "locator");
     await expect(this.page).toHaveURL("clientview.cfm?newclient=yes");
     await this.TypeText(
       this.clientNameTextbox,
@@ -46,7 +123,7 @@ export class ClientPage extends BasePage {
       "locator",
     );
     await this.saveClient();
-    await expect(this.page.locator(this.editButton)).toBeVisible({
+    await expect(this.page.locator(this.backButton)).toBeVisible({
       timeout: 60000,
     });
     const clientId = new URL(this.page.url()).searchParams.get("clientid");

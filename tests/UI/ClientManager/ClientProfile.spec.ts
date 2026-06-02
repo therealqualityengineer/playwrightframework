@@ -37,3 +37,36 @@ multipleClientData.forEach((data) => {
     });
   });
 });
+
+test("@regression Save Client Time Entry and Approval settings", async ({
+  loginPage,
+  clearConnectAPI,
+  clientPage,
+  testState,
+}) => {
+  await loginPage.login(users.validUser2.username, users.validUser2.password);
+  await loginPage.verifySuccessfulLogin();
+
+  await clearConnectAPI.insertClients({
+    clientName: RandomUtil.generateRandomString(10),
+  });
+
+  await loginPage.navigateToPage(
+    `/wfportal/clientview.cfm?clientid=${testState.clientId}`,
+  );
+  await clientPage.clickTimeEntryAndApprovalTab();
+
+  await clientPage.saveTimeEntryApprovalSettings({
+    defaultLunchMinutes: "30",
+    payOnly: "Yes",
+    clientClockingData: "Workforce Portal",
+    allowEarlyClockIns: "Yes",
+  });
+
+  await clientPage.verifyTimeEntryApprovalSettings({
+    defaultLunchMinutes: "30",
+    payOnly: "Yes",
+    clientClockingData: "Workforce Portal",
+    allowEarlyClockIns: "Yes",
+  });
+});

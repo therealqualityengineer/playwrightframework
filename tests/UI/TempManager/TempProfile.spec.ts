@@ -141,3 +141,43 @@ test("@regression Make temp Oriented with client and verify", async ({
   const oriented = await tempPage.isClientOriented(testState.clientName!);
   expect(oriented).toBe(true);
 });
+
+test("@regression Make temp Preferred with client and verify", async ({
+  page,
+  loginPage,
+  tempPage,
+  clearConnectAPI,
+  testState,
+}) => {
+  await loginPage.defaultLogin();
+  await clearConnectAPI.insertTempRecords({
+    firstName: RandomUtil.generateRandomString(7),
+    lastName: RandomUtil.generateRandomString(7),
+  });
+  expect(testState.tempId).toBeTruthy();
+
+  await clearConnectAPI.insertClients({
+    clientName: RandomUtil.generateRandomString(8),
+    address: "765 Medical Center Court",
+    city: "Chula Vista",
+    state: "CA",
+    zip: "91911",
+  });
+  expect(testState.clientId).toMatch(/^[0-9]+$/);
+
+  await loginPage.navigateToPage(`/wfportal/tempview.cfm?tempid=${testState.tempId}`);
+  await expect(page).toHaveURL(new RegExp(`tempview.cfm\\?tempid=${testState.tempId}`));
+
+  await tempPage.clickFacilitiesTab();
+  await tempPage.selectRegionInFacilities("All Regions");
+  await tempPage.selectClientForFacilities(testState.clientName!);
+  await tempPage.clickFacilitiesFilterButton();
+  await tempPage.verifyClientFilteredInFacilities(testState.clientName!);
+
+  await tempPage.setClientPreferred(testState.clientName!);
+  await tempPage.saveFacilities();
+  await tempPage.verifyFacilitiesSuccess();
+
+  const preferred = await tempPage.isClientPreferred(testState.clientName!);
+  expect(preferred).toBe(true);
+});
